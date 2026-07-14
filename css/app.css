@@ -1020,3 +1020,67 @@ h1 span {
         left: 3%;
     }
 }
+/* ==========================================
+   Mission Control – Orbit Rotation
+========================================== */
+
+.orbit-primary {
+    transform-origin: center;
+    animation: orbit-rotation 36s linear infinite;
+}
+
+/*
+ * Die Menüpunkte drehen sich entgegengesetzt,
+ * damit Texte und Satelliten aufrecht bleiben.
+ */
+.orbit-primary .orbit-item {
+    animation: orbit-item-counter-rotation 36s linear infinite;
+}
+
+.orbit-primary:hover,
+.orbit-primary:hover .orbit-item {
+    animation-play-state: paused;
+}
+
+.orbit-label,
+.orbit-dot {
+    transition:
+        transform 180ms ease,
+        filter 180ms ease;
+}
+
+.orbit-item:hover {
+    transform: translate(-50%, -50%);
+}
+
+.orbit-item:hover .orbit-label,
+.orbit-item:hover .orbit-dot {
+    transform: scale(1.1);
+}
+
+@keyframes orbit-rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes orbit-item-counter-rotation {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .orbit-primary,
+    .orbit-primary .orbit-item {
+        animation: none;
+    }
+}
