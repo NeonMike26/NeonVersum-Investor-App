@@ -140,4 +140,50 @@ document.addEventListener("DOMContentLoaded", () => {
             loginButton.disabled = false;
         }, 2000);
     });
+    /*
+ * Registrierung:
+ * Privatkunde und Firmenkunde umschalten
+ */
+const customerTypeInputs = document.querySelectorAll(
+    'input[name="customerType"]'
+);
+
+const companyFields = document.querySelector("#company-fields");
+
+const companyRequiredFields = [
+    document.querySelector("#company-name"),
+    document.querySelector("#legal-form"),
+    document.querySelector("#uid-number"),
+    document.querySelector("#contact-role")
+];
+
+if (customerTypeInputs.length > 0 && companyFields) {
+    const updateCustomerType = () => {
+        const selectedType = document.querySelector(
+            'input[name="customerType"]:checked'
+        );
+
+        const isCompany = selectedType?.value === "company";
+
+        companyFields.hidden = !isCompany;
+
+        companyRequiredFields.forEach((field) => {
+            if (!field) {
+                return;
+            }
+
+            field.required = isCompany;
+
+            if (!isCompany) {
+                field.value = "";
+            }
+        });
+    };
+
+    customerTypeInputs.forEach((input) => {
+        input.addEventListener("change", updateCustomerType);
+    });
+
+    updateCustomerType();
+}
 });
