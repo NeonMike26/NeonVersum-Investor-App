@@ -887,3 +887,136 @@ h1 span {
         animation: none;
     }
 }
+/* ==========================================
+   Mission Control – Primary Orbit
+========================================== */
+
+.mission-stage {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: min(92vw, 980px);
+    aspect-ratio: 1;
+    place-items: center;
+}
+
+.orbit-primary {
+    position: absolute;
+    inset: 8%;
+    z-index: 3;
+    border: 1px solid rgba(36, 215, 255, 0.22);
+    border-radius: 50%;
+    box-shadow:
+        0 0 30px rgba(36, 215, 255, 0.08),
+        inset 0 0 30px rgba(143, 77, 255, 0.05);
+}
+
+.orbit-primary::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border: 1px solid rgba(143, 77, 255, 0.12);
+    border-radius: inherit;
+    filter: blur(2px);
+}
+
+.orbit-item {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    transform: translate(-50%, -50%);
+    transition:
+        color 180ms ease,
+        transform 180ms ease,
+        filter 180ms ease;
+}
+
+.orbit-item:hover {
+    color: var(--text);
+    filter: drop-shadow(0 0 12px rgba(36, 215, 255, 0.65));
+    transform: translate(-50%, -50%) scale(1.08);
+}
+
+.orbit-dot {
+    display: block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.78);
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle at 35% 35%,
+            #ffffff 0%,
+            #7deaff 26%,
+            #7b46ff 62%,
+            #170b31 100%
+        );
+    box-shadow:
+        0 0 12px rgba(36, 215, 255, 0.85),
+        0 0 26px rgba(143, 77, 255, 0.55);
+}
+
+.orbit-item-1 {
+    top: 0;
+    left: 50%;
+    flex-direction: column;
+}
+
+.orbit-item-2 {
+    top: 50%;
+    left: 100%;
+}
+
+.orbit-item-3 {
+    top: 100%;
+    left: 50%;
+    flex-direction: column-reverse;
+}
+
+.orbit-item-4 {
+    top: 50%;
+    left: 0;
+    flex-direction: row-reverse;
+}
+
+.mission-stage .planet-center {
+    width: 58%;
+}
+
+@media (max-width: 700px) {
+    .mission-stage {
+        width: min(96vw, 620px);
+    }
+
+    .orbit-primary {
+        inset: 4%;
+    }
+
+    .mission-stage .planet-center {
+        width: 66%;
+    }
+
+    .orbit-item {
+        gap: 7px;
+        font-size: 12px;
+    }
+
+    .orbit-dot {
+        width: 15px;
+        height: 15px;
+    }
+
+    .orbit-item-2 {
+        left: 97%;
+    }
+
+    .orbit-item-4 {
+        left: 3%;
+    }
+}
