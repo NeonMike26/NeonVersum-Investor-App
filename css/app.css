@@ -510,3 +510,55 @@ h1 span {
         margin-top: -44px;
     }
 }
+/* ==========================================
+   Login Validation States
+========================================== */
+
+.form-error {
+    min-height: 18px;
+    color: #ff7a9a;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.form-status {
+    min-height: 20px;
+    color: var(--secondary);
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.form-group input.input-error {
+    border-color: rgba(255, 88, 128, 0.9);
+    box-shadow:
+        0 0 0 4px rgba(255, 88, 128, 0.10),
+        0 0 22px rgba(255, 88, 128, 0.12);
+}
+
+.auth-submit:disabled {
+    cursor: wait;
+    opacity: 0.78;
+    transform: none;
+}
+
+.button-loader {
+    display: none;
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: button-spin 700ms linear infinite;
+}
+
+.auth-submit:disabled .button-loader {
+    display: inline-block;
+}
+
+@keyframes button-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
