@@ -47,83 +47,95 @@
 
             </div>
 
-            <form class="auth-form">
+            <form class="auth-form" id="login-form" novalidate>
 
-                <div class="form-group">
+    <div class="form-group">
 
-                    <label for="email">
-                        E-Mail-Adresse
-                    </label>
+        <label for="email">
+            E-Mail-Adresse
+        </label>
 
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="name@beispiel.de"
-                        autocomplete="email"
-                        required
-                    >
+        <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="name@beispiel.de"
+            autocomplete="email"
+            required
+        >
 
-                </div>
+        <p class="form-error" id="email-error"></p>
 
-                <div class="form-group">
+    </div>
 
-                    <div class="label-row">
+    <div class="form-group">
 
-                        <label for="password">
-                            Passwort
-                        </label>
+        <div class="label-row">
 
-                        <a class="text-link" href="#">
-                            Passwort vergessen?
-                        </a>
+            <label for="password">
+                Passwort
+            </label>
 
-                    </div>
+            <a class="text-link" href="#">
+                Passwort vergessen?
+            </a>
 
-                    <div class="password-field">
+        </div>
 
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            placeholder="Dein Passwort"
-                            autocomplete="current-password"
-                            required
-                        >
+        <div class="password-field">
 
-                        <button
-                            class="password-toggle"
-                            type="button"
-                            aria-label="Passwort anzeigen"
-                        >
-                            Anzeigen
-                        </button>
+            <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Dein Passwort"
+                autocomplete="current-password"
+                minlength="8"
+                required
+            >
 
-                    </div>
+            <button
+                class="password-toggle"
+                type="button"
+                aria-label="Passwort anzeigen"
+            >
+                Anzeigen
+            </button>
 
-                </div>
+        </div>
 
-                <label class="checkbox-row">
+        <p class="form-error" id="password-error"></p>
 
-                    <input
-                        name="remember"
-                        type="checkbox"
-                    >
+    </div>
 
-                    <span>
-                        Auf diesem Gerät angemeldet bleiben
-                    </span>
+    <label class="checkbox-row">
 
-                </label>
+        <input
+            name="remember"
+            type="checkbox"
+        >
 
-                <button
-                    class="button button-primary auth-submit"
-                    type="submit"
-                >
-                    Sicher anmelden
-                </button>
+        <span>
+            Auf diesem Gerät angemeldet bleiben
+        </span>
 
-            </form>
+    </label>
+
+    <p class="form-status" id="form-status" aria-live="polite"></p>
+
+    <button
+        class="button button-primary auth-submit"
+        id="login-button"
+        type="submit"
+    >
+        <span class="button-text">
+            Sicher anmelden
+        </span>
+
+        <span class="button-loader" aria-hidden="true"></span>
+    </button>
+
+</form>
 
             <p class="auth-footer">
 
