@@ -734,3 +734,156 @@ h1 span {
         margin-top: 24px;
     }
 }
+/* ==========================================
+   Mission Control – Basisdesign
+========================================== */
+
+.mission-control {
+    position: relative;
+    display: grid;
+    min-height: 100vh;
+    place-items: center;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(143, 77, 255, 0.18),
+            transparent 26%
+        ),
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(36, 215, 255, 0.10),
+            transparent 24%
+        ),
+        linear-gradient(
+            180deg,
+            #020207 0%,
+            #060412 50%,
+            #020207 100%
+        );
+}
+
+.space-background {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.9) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(180, 124, 255, 0.7) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(36, 215, 255, 0.65) 1px,
+            transparent 1.5px
+        );
+    background-position:
+        20px 30px,
+        110px 160px,
+        210px 80px;
+    background-size:
+        180px 180px,
+        260px 260px,
+        340px 340px;
+    opacity: 0.5;
+    animation: stars-drift 28s linear infinite;
+}
+
+.planet-center {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: min(72vw, 680px);
+    aspect-ratio: 1;
+}
+
+.planet-center::before {
+    content: "";
+    position: absolute;
+    width: 72%;
+    height: 72%;
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(36, 215, 255, 0.26) 0%,
+            rgba(143, 77, 255, 0.20) 36%,
+            transparent 72%
+        );
+    filter: blur(34px);
+    animation: planet-glow 4.5s ease-in-out infinite;
+}
+
+.planet-logo {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    max-width: 680px;
+    height: auto;
+    filter:
+        drop-shadow(0 0 26px rgba(36, 215, 255, 0.32))
+        drop-shadow(0 0 48px rgba(143, 77, 255, 0.26));
+    animation: planet-float 5s ease-in-out infinite;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+@keyframes planet-float {
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-14px) scale(1.015);
+    }
+}
+
+@keyframes planet-glow {
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: scale(0.95);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.06);
+    }
+}
+
+@keyframes stars-drift {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(-80px, 40px, 0);
+    }
+}
+
+@media (max-width: 700px) {
+    .planet-center {
+        width: min(96vw, 560px);
+    }
+
+    .planet-logo {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .space-background,
+    .planet-logo,
+    .planet-center::before {
+        animation: none;
+    }
+}
