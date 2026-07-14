@@ -5,14 +5,40 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    const orbitItems = orbit.querySelectorAll(".orbit-item");
+    const orbitItems = Array.from(
+        orbit.querySelectorAll(".orbit-item")
+    );
+
+    const itemAngles = [-90, 0, 90, 180];
+
+    const descriptions = [
+        "Deine persönliche Übersicht und wichtigsten Kennzahlen.",
+        "Alle Investments, Beteiligungen und Holderinformationen.",
+        "Verträge, Bestätigungen und persönliche Unterlagen.",
+        "Neuigkeiten und exklusive Updates von NeonVersum."
+    ];
 
     let rotation = 0;
-    let velocity = 6;
+    let velocity = 0;
 
     let dragging = false;
+    let snapping = false;
+    let targetRotation = 0;
+
     let previousPointerAngle = 0;
     let previousTime = performance.now();
+
+    let descriptionElement =
+        document.querySelector(".orbit-description");
+
+    if (!descriptionElement) {
+        descriptionElement = document.createElement("div");
+        descriptionElement.className = "orbit-description";
+
+        document
+            .querySelector(".mission-stage")
+            ?.appendChild(descriptionElement);
+    }
 
     orbit.style.animation = "none";
     orbit.style.touchAction = "none";
@@ -22,16 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
         item.style.animation = "none";
     });
 
-    const normalizeAngleDifference = (difference) => {
-        if (difference > 180) {
-            return difference - 360;
-        }
-
-        if (difference < -180) {
-            return difference + 360;
-        }
-
-        return difference;
+    const normalizeAngle = (angle) => {
+        return ((angle + 180) % 360 + 360) % 360 - 180;
     };
 
     const getPointerAngle = (event) => {
@@ -46,6 +64,49 @@ document.addEventListener("DOMContentLoaded", () => {
         ) * (180 / Math.PI);
     };
 
+    const getActiveItemIndex = () => {
+        let activeIndex = 0;
+        let smallestDistance = Infinity;
+
+        itemAngles.forEach((itemAngle, index) => {
+            const currentAngle = normalizeAngle(
+                itemAngle + rotation
+            );
+
+            const distanceFromTop = Math.abs(
+                normalizeAngle(currentAngle - (-90))
+            );
+
+            if (distanceFromTop < smallestDistance) {
+                smallestDistance = distanceFromTop;
+                activeIndex = index;
+            }
+        });
+
+        return activeIndex;
+    };
+
+    const updateActiveItem = () => {
+        const activeIndex = getActiveItemIndex();
+
+        orbitItems.forEach((item, index) => {
+            const isActive = index === activeIndex;
+
+            item.classList.toggle("is-active", isActive);
+
+            if (isActive) {
+                item.setAttribute("aria-current", "page");
+            } else {
+                item.removeAttribute("aria-current");
+            }
+        });
+
+        descriptionElement.innerHTML = `
+            <strong>${orbitItems[activeIndex].textContent.trim()}</strong>
+            <span>${descriptions[activeIndex]}</span>
+        `;
+    };
+
     const renderOrbit = () => {
         orbit.style.transform =
             `rotate(${rotation}deg)`;
@@ -54,15 +115,30 @@ document.addEventListener("DOMContentLoaded", () => {
             item.style.transform =
                 `translate(-50%, -50%) rotate(${-rotation}deg)`;
         });
+
+        updateActiveItem();
+    };
+
+    const calculateSnapTarget = () => {
+        const activeIndex = getActiveItemIndex();
+
+        const desiredRotation =
+            -90 - itemAngles[activeIndex];
+
+        const difference = normalizeAngle(
+            desiredRotation - rotation
+        );
+
+        return rotation + difference;
     };
 
     orbit.addEventListener("pointerdown", (event) => {
         dragging = true;
+        snapping = false;
+        velocity = 0;
 
         previousPointerAngle = getPointerAngle(event);
         previousTime = performance.now();
-
-        velocity = 0;
 
         orbit.style.cursor = "grabbing";
         orbit.setPointerCapture(event.pointerId);
@@ -78,26 +154,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const currentTime = performance.now();
 
-        const angleDifference =
-            normalizeAngleDifference(
-                currentPointerAngle -
-                previousPointerAngle
-            );
+        const angleDifference = normalizeAngle(
+            currentPointerAngle - previousPointerAngle
+        );
 
-        const elapsedSeconds =
-            Math.max(
-                (currentTime - previousTime) / 1000,
-                0.016
-            );
+        const elapsedSeconds = Math.max(
+            (currentTime - previousTime) / 1000,
+            0.016
+        );
 
         rotation += angleDifference;
+        velocity = angleDifference / elapsedSeconds;
 
-        velocity =
-            angleDifference / elapsedSeconds;
-
-        previousPointerAngle =
-            currentPointerAngle;
-
+        previousPointerAngle = currentPointerAngle;
         previousTime = currentTime;
 
         renderOrbit();
@@ -117,39 +186,59 @@ document.addEventListener("DOMContentLoaded", () => {
         ) {
             orbit.releasePointerCapture(event.pointerId);
         }
+
+        rotation += velocity * 0.08;
+        targetRotation = calculateSnapTarget();
+        snapping = true;
     };
 
-    orbit.addEventListener(
-        "pointerup",
-        stopDragging
-    );
+    orbit.addEventListener("pointerup", stopDragging);
+    orbit.addEventListener("pointercancel", stopDragging);
 
-    orbit.addEventListener(
-        "pointercancel",
-        stopDragging
-    );
+    orbitItems.forEach((item, index) => {
+        item.addEventListener("click", (event) => {
+            const activeIndex = getActiveItemIndex();
 
-    const animate = (currentTime) => {
-        const elapsedSeconds =
-            Math.min(
-                (currentTime - previousTime) / 1000,
-                0.05
-            );
+            if (index !== activeIndex) {
+                event.preventDefault();
 
-        previousTime = currentTime;
+                targetRotation =
+                    rotation +
+                    normalizeAngle(
+                        -90 - itemAngles[index] - rotation
+                    );
 
-        if (!dragging) {
-            rotation +=
-                velocity * elapsedSeconds;
+                snapping = true;
+                return;
+            }
 
-            velocity *= Math.pow(
-                0.985,
-                elapsedSeconds * 60
-            );
+            if (item.getAttribute("href") === "#") {
+                event.preventDefault();
 
-            if (Math.abs(velocity) < 6) {
-                velocity =
-                    velocity < 0 ? -6 : 6;
+                descriptionElement.classList.add(
+                    "show-message"
+                );
+
+                window.setTimeout(() => {
+                    descriptionElement.classList.remove(
+                        "show-message"
+                    );
+                }, 800);
+            }
+        });
+    });
+
+    const animate = () => {
+        if (!dragging && snapping) {
+            const difference =
+                targetRotation - rotation;
+
+            rotation += difference * 0.12;
+
+            if (Math.abs(difference) < 0.08) {
+                rotation = targetRotation;
+                velocity = 0;
+                snapping = false;
             }
 
             renderOrbit();
