@@ -562,3 +562,175 @@ h1 span {
         transform: rotate(360deg);
     }
 }
+/* ==========================================
+   Registration Page
+========================================== */
+
+.register-card {
+    width: min(980px, 100%);
+}
+
+.register-form {
+    gap: 28px;
+}
+
+.account-type {
+    border: 0;
+}
+
+.account-type legend {
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.account-type-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.account-type-card {
+    position: relative;
+    display: grid;
+    gap: 8px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    cursor: pointer;
+    transition:
+        border-color 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
+
+.account-type-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(36, 215, 255, 0.35);
+}
+
+.account-type-card input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.account-type-card:has(input:checked) {
+    border-color: rgba(143, 77, 255, 0.82);
+    background: rgba(143, 77, 255, 0.10);
+    box-shadow:
+        0 0 0 4px rgba(143, 77, 255, 0.08),
+        0 0 26px rgba(143, 77, 255, 0.14);
+}
+
+.account-type-title {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.account-type-text {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.form-section {
+    display: grid;
+    gap: 18px;
+    padding-top: 6px;
+}
+
+.form-section-title {
+    font-size: 18px;
+    letter-spacing: -0.3px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.form-group-wide {
+    grid-column: 1 / -1;
+}
+
+.holder-info {
+    padding: 18px;
+    border: 1px solid rgba(36, 215, 255, 0.18);
+    border-radius: 16px;
+    background: rgba(36, 215, 255, 0.05);
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.holder-info-title {
+    margin-bottom: 6px;
+    color: var(--secondary);
+    font-weight: 800;
+}
+
+.register-consent {
+    align-items: flex-start;
+}
+
+.company-fields[hidden] {
+    display: none;
+}
+
+@media (max-width: 760px) {
+    .register-card {
+        padding: 26px 20px;
+    }
+
+    .account-type-options,
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group-wide {
+        grid-column: auto;
+    }
+}
+
+@media (min-width: 900px) {
+    .register-card {
+        display: block;
+        min-height: auto;
+        padding: 54px;
+    }
+
+    .register-card .auth-brand {
+        position: static;
+        margin-bottom: 34px;
+    }
+
+    .register-card .auth-heading {
+        margin-bottom: 30px;
+        padding-right: 0;
+    }
+
+    .register-card .auth-heading::after {
+        content: none;
+    }
+
+    .register-card .auth-title {
+        font-size: clamp(48px, 5vw, 70px);
+    }
+
+    .register-card .auth-form {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .register-card .auth-footer,
+    .register-card .back-link {
+        grid-column: auto;
+        margin-top: 24px;
+    }
+}
