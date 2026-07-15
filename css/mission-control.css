@@ -693,20 +693,34 @@ border-radius: 50%;
 }
 
 .energy-pulse.active {
-
-    animation:
-
-    energyBeam .65s ease-out;
-
+    animation: energy-pulse-travel 650ms ease-out;
 }
 
-@keyframes energyBeam{
+@keyframes energy-pulse-travel {
+    0% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            translateY(0)
+            scale(0.35);
+    }
 
-0%{
+    20% {
+        opacity: 1;
+    }
 
-opacity:0;
+    80% {
+        opacity: 1;
+    }
 
-scale:.2;
+    100% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            translateY(-190px)
+            scale(1.1);
+    }
+}
 
 }
 
