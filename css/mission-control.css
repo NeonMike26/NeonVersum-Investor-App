@@ -288,3 +288,47 @@
         padding: 13px 16px;
     }
 }
+/* ==========================================
+   Aktive Satelliten behalten ihre Neonfarbe
+========================================== */
+
+.orbit-item.orbit-item-1.is-active {
+    color: var(--mc-purple) !important;
+}
+
+.orbit-item.orbit-item-2.is-active {
+    color: var(--mc-cyan) !important;
+}
+
+.orbit-item.orbit-item-3.is-active {
+    color: var(--mc-blue) !important;
+}
+
+.orbit-item.orbit-item-4.is-active {
+    color: var(--mc-green) !important;
+}
+
+.orbit-item.is-active .orbit-dot {
+    border-color: currentColor !important;
+
+    background:
+        radial-gradient(
+            circle at 32% 28%,
+            rgba(255, 255, 255, 0.88) 0%,
+            currentColor 32%,
+            #0c0a20 76%
+        ) !important;
+
+    box-shadow:
+        0 0 20px currentColor,
+        0 0 48px currentColor,
+        0 0 90px currentColor,
+        inset 0 0 18px rgba(255, 255, 255, 0.24) !important;
+}
+
+.orbit-item.is-active .orbit-label {
+    color: currentColor !important;
+    text-shadow:
+        0 0 14px currentColor,
+        0 0 32px currentColor !important;
+}
