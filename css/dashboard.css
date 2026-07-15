@@ -1,53 +1,25 @@
-.dashboard{
+/* ==========================================
+   NeonVersum Dashboard
+========================================== */
 
-    min-height:100vh;
+.dashboard {
 
-    background:#050713;
+    min-height: 100vh;
 
-    color:white;
+    background: #050713;
 
-    display:flex;
+    color: white;
 
-    justify-content:center;
+    display: flex;
 
-    align-items:flex-start;
+    justify-content: center;
 
-    padding:60px 20px;
-
-}
-
-.dashboard-header{
-
-    text-align:center;
+    padding-top: 60px;
 
 }
 
-.dashboard-logo{
+.dashboard-header {
 
-    width:220px;
-
-    margin-bottom:25px;
-
-    filter:
-
-    drop-shadow(0 0 30px rgba(80,220,255,.35));
-
-}
-
-.dashboard h1{
-
-    color:#b55cff;
-
-    font-size:40px;
-
-    margin-bottom:15px;
-
-}
-
-.dashboard p{
-
-    color:#9ca8c7;
-
-    font-size:18px;
+    text-align: center;
 
 }
