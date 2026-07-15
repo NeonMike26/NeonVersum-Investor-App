@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const orbit = document.querySelector(".orbit-primary");
     const missionStage = document.querySelector(".mission-stage");
-    const energyBeam = document.querySelector(".energy-beam");
+    const energyPulse = document.querySelector(".energy-pulse");
 
     if (!orbit || !missionStage) {
         return;
