@@ -199,7 +199,7 @@ const updateActiveItem = () => {
         previousTime = performance.now();
 
         orbit.style.cursor = "grabbing";
-        orbit.setPointerCapture(event.pointerId);
+        
     });
 
     orbit.addEventListener("pointermove", (event) => {
@@ -238,12 +238,7 @@ const updateActiveItem = () => {
         dragging = false;
         orbit.style.cursor = "grab";
 
-        if (
-            event.pointerId !== undefined &&
-            orbit.hasPointerCapture(event.pointerId)
-        ) {
-            orbit.releasePointerCapture(event.pointerId);
-        }
+        
 
         rotation += velocity * 0.08;
         targetRotation = calculateSnapTarget();
