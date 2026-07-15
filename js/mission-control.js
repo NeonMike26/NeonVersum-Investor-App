@@ -108,9 +108,12 @@ const updateActiveItem = () => {
         missionStage.dataset.active = String(activeIndex + 1);
         
         if (activeIndex !== previousActiveIndex) {
-        previousActiveIndex = activeIndex;
-        triggerEnergyBeam();
-    }
+    previousActiveIndex = activeIndex;
+
+    console.log("Energieimpuls");
+
+    triggerEnergyBeam();
+}
 
         orbitItems.forEach((item, index) => {
             const isActive = index === activeIndex;
