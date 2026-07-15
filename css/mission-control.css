@@ -648,7 +648,7 @@
    Planet Energy Beam
 ========================================== */
 
-.energy-beam {
+.energy-pulse {
 
     position:absolute;
 
@@ -691,7 +691,7 @@
 
 }
 
-.energy-beam.active{
+.energy-pulse.active {
 
     animation:
 
