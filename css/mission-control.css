@@ -459,3 +459,93 @@
         animation: none;
     }
 }
+/* ==========================================
+   Satellite Icons and Energy Rings
+========================================== */
+
+.orbit-dot {
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: visible;
+}
+
+.orbit-dot::before {
+    position: relative;
+    z-index: 2;
+    font-size: 18px;
+    line-height: 1;
+    filter:
+        drop-shadow(0 0 8px currentColor)
+        drop-shadow(0 0 16px currentColor);
+}
+
+.orbit-item-1 .orbit-dot::before {
+    content: "◫";
+}
+
+.orbit-item-2 .orbit-dot::before {
+    content: "◆";
+}
+
+.orbit-item-3 .orbit-dot::before {
+    content: "▤";
+}
+
+.orbit-item-4 .orbit-dot::before {
+    content: "✦";
+}
+
+.orbit-dot::after {
+    content: "";
+    position: absolute;
+    inset: -11px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    scale: 0.82;
+    box-shadow:
+        0 0 14px currentColor,
+        0 0 26px currentColor;
+    transition:
+        opacity 220ms ease,
+        scale 220ms ease;
+}
+
+.orbit-item.is-active .orbit-dot::after {
+    opacity: 0.85;
+    scale: 1;
+    animation: active-satellite-ring 2.8s ease-in-out infinite;
+}
+
+.orbit-item:not(.is-active):hover .orbit-dot {
+    scale: 1.12;
+}
+
+.orbit-item:not(.is-active):hover .orbit-label {
+    scale: 1.05;
+    opacity: 1;
+}
+
+@keyframes active-satellite-ring {
+    0%,
+    100% {
+        opacity: 0.55;
+        scale: 0.92;
+    }
+
+    50% {
+        opacity: 1;
+        scale: 1.08;
+    }
+}
+
+@media (max-width: 700px) {
+    .orbit-dot::before {
+        font-size: 14px;
+    }
+
+    .orbit-dot::after {
+        inset: -8px;
+    }
+}
