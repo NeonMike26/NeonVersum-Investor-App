@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const orbit = document.querySelector(".orbit-primary");
+    const missionStage = document.querySelector(".mission-stage");
 
-    if (!orbit) {
+    if (!orbit || !missionStage) {
         return;
     }
 
@@ -34,10 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!descriptionElement) {
         descriptionElement = document.createElement("div");
         descriptionElement.className = "orbit-description";
-
-        document
-            .querySelector(".mission-stage")
-            ?.appendChild(descriptionElement);
+        missionStage.appendChild(descriptionElement);
     }
 
     orbit.style.animation = "none";
@@ -50,6 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const normalizeAngle = (angle) => {
         return ((angle + 180) % 360 + 360) % 360 - 180;
+    };
+
+    const degreesToRadians = (degrees) => {
+        return degrees * (Math.PI / 180);
     };
 
     const getPointerAngle = (event) => {
@@ -108,12 +110,44 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const renderOrbit = () => {
-        orbit.style.transform =
-            `rotate(${rotation}deg)`;
+        orbit.style.transform = `rotate(${rotation}deg)`;
 
-        orbitItems.forEach((item) => {
-            item.style.transform =
-                `translate(-50%, -50%) rotate(${-rotation}deg)`;
+        orbitItems.forEach((item, index) => {
+            const currentAngle =
+                itemAngles[index] + rotation;
+
+            const angleInRadians =
+                degreesToRadians(currentAngle);
+
+            /*
+             * Oben = nahe und groß
+             * Unten = weiter entfernt und klein
+             */
+            const depth =
+                (1 - Math.sin(angleInRadians)) / 2;
+
+            const depthScale =
+                0.72 + depth * 0.38;
+
+            const depthOpacity =
+                0.42 + depth * 0.58;
+
+            const depthLayer =
+                5 + Math.round(depth * 20);
+
+            item.style.transform = `
+                translate(-50%, -50%)
+                rotate(${-rotation}deg)
+                scale(${depthScale})
+            `;
+
+            item.style.opacity =
+                item.classList.contains("is-active")
+                    ? "1"
+                    : depthOpacity.toFixed(2);
+
+            item.style.zIndex =
+                String(depthLayer);
         });
 
         updateActiveItem();
@@ -205,7 +239,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 targetRotation =
                     rotation +
                     normalizeAngle(
-                        -90 - itemAngles[index] - rotation
+                        -90 -
+                        itemAngles[index] -
+                        rotation
                     );
 
                 snapping = true;
