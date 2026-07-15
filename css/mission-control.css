@@ -730,3 +730,42 @@ scale:1;
 }
 
 }
+/* ==========================================
+   Mission Control – Safe Screen Spacing
+========================================== */
+
+.mission-control {
+    padding: 36px 24px;
+}
+
+.mission-stage {
+    width: min(82vw, 860px);
+    max-height: calc(100vh - 72px);
+}
+
+.orbit-primary {
+    inset: 8%;
+}
+
+.orbit-description {
+    bottom: 7%;
+}
+
+@media (max-width: 700px) {
+    .mission-control {
+        padding: 24px 14px;
+    }
+
+    .mission-stage {
+        width: min(90vw, 560px);
+        max-height: calc(100vh - 48px);
+    }
+
+    .orbit-primary {
+        inset: 10%;
+    }
+
+    .orbit-description {
+        bottom: 3%;
+    }
+}
