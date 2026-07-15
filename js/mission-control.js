@@ -300,8 +300,11 @@ if (target === "#") {
     return;
 }
 
-window.location.href = target;
+item.classList.add("launching");
 
+window.setTimeout(() => {
+    window.location.href = target;
+}, 550);
 
         });
     });
