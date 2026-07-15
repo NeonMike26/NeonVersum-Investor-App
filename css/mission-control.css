@@ -784,3 +784,9 @@ scale:1;
         bottom: 3%;
     }
 }
+/* Logo in der Mission Control ohne Schriftzug anzeigen */
+
+.planet-logo {
+    clip-path: inset(0 0 20% 0);
+    margin-bottom: -20%;
+}
