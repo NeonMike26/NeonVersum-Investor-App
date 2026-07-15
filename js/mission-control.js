@@ -332,4 +332,12 @@ window.setTimeout(() => {
 
     renderOrbit();
     window.requestAnimationFrame(animate);
+
+    window.addEventListener("pageshow", () => {
+    orbitItems.forEach((item) => {
+        item.classList.remove("launching");
+    });
+
+    renderOrbit();
+});
 });
