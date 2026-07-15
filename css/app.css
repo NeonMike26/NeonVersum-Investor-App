@@ -1241,3 +1241,127 @@ transform:scale(1);
 transform:scale(1.08);
 
 }
+/* ==========================================
+   Mission Control – Neon Color Refinement
+========================================== */
+
+.mission-stage .planet-center {
+    width: 48%;
+}
+
+.orbit-primary {
+    inset: 5%;
+    border-color: rgba(36, 215, 255, 0.10);
+    box-shadow:
+        0 0 24px rgba(36, 215, 255, 0.05),
+        inset 0 0 22px rgba(143, 77, 255, 0.03);
+}
+
+.orbit-item {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    opacity: 0.72;
+    color: var(--satellite-color);
+}
+
+.orbit-item-1 {
+    --satellite-color: #c25cff;
+}
+
+.orbit-item-2 {
+    --satellite-color: #25ddff;
+}
+
+.orbit-item-3 {
+    --satellite-color: #3f8cff;
+}
+
+.orbit-item-4 {
+    --satellite-color: #48ff83;
+}
+
+.orbit-dot {
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--satellite-color);
+    background:
+        radial-gradient(
+            circle at 32% 28%,
+            #ffffff 0%,
+            var(--satellite-color) 30%,
+            rgba(12, 10, 32, 0.92) 76%
+        );
+    box-shadow:
+        0 0 14px var(--satellite-color),
+        0 0 34px color-mix(in srgb, var(--satellite-color) 70%, transparent),
+        inset 0 0 16px rgba(255, 255, 255, 0.24);
+}
+
+.orbit-label {
+    margin-top: 2px;
+    color: var(--satellite-color);
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    text-shadow:
+        0 0 10px color-mix(in srgb, var(--satellite-color) 80%, transparent),
+        0 0 22px color-mix(in srgb, var(--satellite-color) 45%, transparent);
+}
+
+.orbit-item.is-active {
+    color: var(--satellite-color);
+    opacity: 1;
+    filter: none;
+}
+
+.orbit-item.is-active .orbit-dot {
+    transform: scale(1.45);
+    border-color: var(--satellite-color);
+    box-shadow:
+        0 0 18px var(--satellite-color),
+        0 0 44px var(--satellite-color),
+        0 0 86px color-mix(in srgb, var(--satellite-color) 75%, transparent);
+}
+
+.orbit-item.is-active .orbit-label {
+    color: var(--satellite-color);
+    transform: scale(1.16);
+    text-shadow:
+        0 0 14px var(--satellite-color),
+        0 0 30px color-mix(in srgb, var(--satellite-color) 70%, transparent);
+}
+
+.orbit-description {
+    bottom: 9%;
+    width: min(400px, 80vw);
+    border-color: rgba(143, 77, 255, 0.28);
+    background: rgba(5, 4, 14, 0.82);
+}
+
+.orbit-description strong {
+    font-size: 17px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+    .mission-stage .planet-center {
+        width: 56%;
+    }
+
+    .orbit-dot {
+        width: 34px;
+        height: 34px;
+    }
+
+    .orbit-label {
+        font-size: 13px;
+        letter-spacing: 1.4px;
+    }
+
+    .orbit-description {
+        bottom: 4%;
+    }
+}
