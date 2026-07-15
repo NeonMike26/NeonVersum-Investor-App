@@ -90,6 +90,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateActiveItem = () => {
         const activeIndex = getActiveItemIndex();
+        
+        missionStage.dataset.active = String(activeIndex + 1);
 
         orbitItems.forEach((item, index) => {
             const isActive = index === activeIndex;
