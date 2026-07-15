@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let snapping = false;
     let targetRotation = 0;
 
-    let previousPointerAngle = 0;
+    let previousPointerX = 0;
     let previousTime = performance.now();
     let previousActiveIndex = -1;
 
@@ -191,44 +191,46 @@ const updateActiveItem = () => {
     };
 
     orbit.addEventListener("pointerdown", (event) => {
-        dragging = true;
-        snapping = false;
-        velocity = 0;
+    dragging = true;
+    snapping = false;
+    velocity = 0;
 
-        previousPointerAngle = getPointerAngle(event);
-        previousTime = performance.now();
+    previousPointerX = event.clientX;
+    previousTime = performance.now();
 
-        orbit.style.cursor = "grabbing";
-        
-    });
+    orbit.style.cursor = "grabbing";
+    orbit.setPointerCapture(event.pointerId);
+
+    event.preventDefault();
+});
 
     orbit.addEventListener("pointermove", (event) => {
-        if (!dragging) {
-            return;
-        }
+    if (!dragging) {
+        return;
+    }
 
-        const currentPointerAngle =
-            getPointerAngle(event);
+    const currentTime = performance.now();
+    const horizontalMovement =
+        event.clientX - previousPointerX;
 
-        const currentTime = performance.now();
+    const elapsedSeconds = Math.max(
+        (currentTime - previousTime) / 1000,
+        0.016
+    );
 
-        const angleDifference = normalizeAngle(
-            currentPointerAngle - previousPointerAngle
-        );
+    const rotationMovement =
+        horizontalMovement * 0.45;
 
-        const elapsedSeconds = Math.max(
-            (currentTime - previousTime) / 1000,
-            0.016
-        );
+    rotation += rotationMovement;
+    velocity = rotationMovement / elapsedSeconds;
 
-        rotation += angleDifference;
-        velocity = angleDifference / elapsedSeconds;
+    previousPointerX = event.clientX;
+    previousTime = currentTime;
 
-        previousPointerAngle = currentPointerAngle;
-        previousTime = currentTime;
+    renderOrbit();
 
-        renderOrbit();
-    });
+    event.preventDefault();
+});
 
     const stopDragging = (event) => {
         if (!dragging) {
@@ -237,6 +239,12 @@ const updateActiveItem = () => {
 
         dragging = false;
         orbit.style.cursor = "grab";
+        if (
+    event.pointerId !== undefined &&
+    orbit.hasPointerCapture(event.pointerId)
+) {
+    orbit.releasePointerCapture(event.pointerId);
+}
 
         
 
