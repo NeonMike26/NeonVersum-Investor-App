@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let targetRotation = 0;
 
     let previousPointerX = 0;
+    let dragDistance = 0;
     let previousTime = performance.now();
     let previousActiveIndex = -1;
 
@@ -194,6 +195,7 @@ const updateActiveItem = () => {
     dragging = true;
     snapping = false;
     velocity = 0;
+        dragDistance = 0;
 
     previousPointerX = event.clientX;
     previousTime = performance.now();
@@ -212,6 +214,7 @@ const updateActiveItem = () => {
     const currentTime = performance.now();
     const horizontalMovement =
         event.clientX - previousPointerX;
+        dragDistance += Math.abs(horizontalMovement);
 
     const elapsedSeconds = Math.max(
         (currentTime - previousTime) / 1000,
@@ -258,6 +261,10 @@ const updateActiveItem = () => {
 
     orbitItems.forEach((item, index) => {
         item.addEventListener("click", (event) => {
+            if (dragDistance > 8) {
+    event.preventDefault();
+    return;
+}
             const activeIndex = getActiveItemIndex();
 
             if (index !== activeIndex) {
