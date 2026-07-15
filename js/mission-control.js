@@ -300,6 +300,8 @@ if (target === "#") {
     return;
 }
 
+event.preventDefault();
+
 item.classList.add("launching");
 
 window.setTimeout(() => {
