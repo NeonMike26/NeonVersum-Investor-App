@@ -301,6 +301,17 @@ if (target === "#") {
 }
 
 window.location.href = target;
+
+item.addEventListener("dblclick", (event) => {
+    const target = item.getAttribute("href");
+
+    if (!target || target === "#") {
+        return;
+    }
+
+    event.preventDefault();
+    window.location.href = target;
+     
         });
     });
 
