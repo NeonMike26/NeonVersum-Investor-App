@@ -591,3 +591,56 @@
         font-size: 19px;
     }
 }
+/* ==========================================
+   Dynamic Active Satellite Color
+========================================== */
+
+.mission-stage {
+    --active-satellite-color: var(--mc-purple);
+}
+
+.mission-stage[data-active="1"] {
+    --active-satellite-color: var(--mc-purple);
+}
+
+.mission-stage[data-active="2"] {
+    --active-satellite-color: var(--mc-cyan);
+}
+
+.mission-stage[data-active="3"] {
+    --active-satellite-color: var(--mc-blue);
+}
+
+.mission-stage[data-active="4"] {
+    --active-satellite-color: var(--mc-green);
+}
+
+.orbit-description {
+    border-color: var(--active-satellite-color);
+    box-shadow:
+        0 14px 40px rgba(0, 0, 0, 0.4),
+        0 0 18px var(--active-satellite-color),
+        inset 0 0 18px rgba(255, 255, 255, 0.025);
+    transition:
+        border-color 260ms ease,
+        box-shadow 260ms ease;
+}
+
+.orbit-description strong {
+    color: var(--active-satellite-color);
+    text-shadow:
+        0 0 10px var(--active-satellite-color),
+        0 0 22px var(--active-satellite-color);
+    transition:
+        color 260ms ease,
+        text-shadow 260ms ease;
+}
+
+.orbit-description::before {
+    content: "AKTIVE MISSION";
+    color: var(--active-satellite-color);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 2.4px;
+    opacity: 0.75;
+}
