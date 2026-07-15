@@ -341,3 +341,121 @@
 .orbit-item.is-active .orbit-label {
     scale: 1.18 !important;
 }
+/* ==========================================
+   Planet Refinement
+========================================== */
+
+.planet-center {
+    width: 42%;
+    animation: planet-float-refined 5.5s ease-in-out infinite;
+}
+
+.planet-center::before {
+    width: 86%;
+    height: 86%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(36, 215, 255, 0.30) 0%,
+            rgba(194, 92, 255, 0.22) 34%,
+            rgba(63, 140, 255, 0.10) 54%,
+            transparent 74%
+        );
+    filter: blur(42px);
+    animation: planet-energy-pulse 4.8s ease-in-out infinite;
+}
+
+.planet-center::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 76%;
+    height: 76%;
+    border: 2px solid rgba(255, 211, 92, 0.72);
+    border-radius: 50%;
+    box-shadow:
+        0 0 18px rgba(255, 211, 92, 0.55),
+        0 0 42px rgba(255, 173, 51, 0.32),
+        inset 0 0 22px rgba(255, 211, 92, 0.16);
+    opacity: 0.82;
+    animation: holder-ring-pulse 3.8s ease-in-out infinite;
+}
+
+.planet-logo {
+    transform: scale(0.92);
+    animation: planet-breathe 6s ease-in-out infinite;
+}
+
+@keyframes planet-float-refined {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -10px;
+    }
+}
+
+@keyframes planet-energy-pulse {
+    0%,
+    100% {
+        opacity: 0.66;
+        scale: 0.94;
+    }
+
+    50% {
+        opacity: 1;
+        scale: 1.06;
+    }
+}
+
+@keyframes holder-ring-pulse {
+    0%,
+    100% {
+        opacity: 0.58;
+        scale: 0.96;
+    }
+
+    50% {
+        opacity: 0.96;
+        scale: 1.03;
+    }
+}
+
+@keyframes planet-breathe {
+    0%,
+    100% {
+        scale: 0.98;
+        filter:
+            drop-shadow(0 0 22px rgba(36, 215, 255, 0.28))
+            drop-shadow(0 0 42px rgba(194, 92, 255, 0.22));
+    }
+
+    50% {
+        scale: 1.02;
+        filter:
+            drop-shadow(0 0 30px rgba(36, 215, 255, 0.42))
+            drop-shadow(0 0 58px rgba(194, 92, 255, 0.34));
+    }
+}
+
+@media (max-width: 700px) {
+    .planet-center {
+        width: 50%;
+    }
+
+    .planet-center::after {
+        width: 80%;
+        height: 80%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .planet-center,
+    .planet-center::before,
+    .planet-center::after,
+    .planet-logo {
+        animation: none;
+    }
+}
