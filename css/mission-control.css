@@ -378,7 +378,9 @@
         0 0 42px rgba(255, 173, 51, 0.32),
         inset 0 0 22px rgba(255, 211, 92, 0.16);
     opacity: 0.82;
-    animation: holder-ring-pulse 3.8s ease-in-out infinite;
+    animation:
+    holder-ring-pulse 3.8s ease-in-out infinite,
+    holder-ring-rotate 45s linear infinite;
 }
 
 .planet-logo {
@@ -394,6 +396,16 @@
 
     50% {
         translate: 0 -10px;
+    }
+}
+
+@keyframes holder-ring-rotate {
+    from {
+        rotate: 0deg;
+    }
+
+    to {
+        rotate: 360deg;
     }
 }
 
