@@ -644,3 +644,89 @@
     letter-spacing: 2.4px;
     opacity: 0.75;
 }
+/* ==========================================
+   Planet Energy Beam
+========================================== */
+
+.energy-beam {
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:4px;
+    height:180px;
+
+    transform-origin:top center;
+
+    transform:
+        translate(-50%,-100%);
+
+    border-radius:999px;
+
+    background:
+
+    linear-gradient(
+
+    to top,
+
+    rgba(255,255,255,.05),
+
+    var(--active-satellite-color),
+
+    white
+
+    );
+
+    opacity:0;
+
+    filter:
+
+    blur(.5px)
+
+    drop-shadow(0 0 10px var(--active-satellite-color))
+
+    drop-shadow(0 0 30px var(--active-satellite-color));
+
+}
+
+.energy-beam.active{
+
+    animation:
+
+    energyBeam .65s ease-out;
+
+}
+
+@keyframes energyBeam{
+
+0%{
+
+opacity:0;
+
+scale:.2;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+70%{
+
+opacity:1;
+
+}
+
+100%{
+
+opacity:0;
+
+scale:1;
+
+}
+
+}
