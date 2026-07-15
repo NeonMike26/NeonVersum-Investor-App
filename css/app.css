@@ -1365,3 +1365,143 @@ transform:scale(1.08);
         bottom: 4%;
     }
 }
+/* ==========================================
+   Mission Control – Stable Neon Satellites
+========================================== */
+
+.mission-stage .planet-center {
+    width: 48%;
+}
+
+.orbit-primary {
+    inset: 5%;
+    border-color: rgba(36, 215, 255, 0.10);
+    box-shadow:
+        0 0 24px rgba(36, 215, 255, 0.05),
+        inset 0 0 22px rgba(143, 77, 255, 0.03);
+}
+
+.orbit-item {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    opacity: 0.72;
+}
+
+.orbit-item-1 {
+    color: #c25cff;
+}
+
+.orbit-item-2 {
+    color: #25ddff;
+}
+
+.orbit-item-3 {
+    color: #3f8cff;
+}
+
+.orbit-item-4 {
+    color: #48ff83;
+}
+
+.orbit-dot {
+    width: 44px;
+    height: 44px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle at 32% 28%,
+            #ffffff 0%,
+            currentColor 30%,
+            #0c0a20 76%
+        );
+    box-shadow:
+        0 0 14px currentColor,
+        0 0 34px currentColor,
+        inset 0 0 16px rgba(255, 255, 255, 0.24);
+}
+
+.orbit-label {
+    margin-top: 2px;
+    color: currentColor;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    text-shadow:
+        0 0 10px currentColor,
+        0 0 22px currentColor;
+}
+
+.orbit-item.is-active {
+    color: inherit;
+    opacity: 1;
+    filter: none;
+}
+
+.orbit-item-1.is-active {
+    color: #c25cff;
+}
+
+.orbit-item-2.is-active {
+    color: #25ddff;
+}
+
+.orbit-item-3.is-active {
+    color: #3f8cff;
+}
+
+.orbit-item-4.is-active {
+    color: #48ff83;
+}
+
+.orbit-item.is-active .orbit-dot {
+    transform: scale(1.45);
+    border-color: currentColor;
+    box-shadow:
+        0 0 18px currentColor,
+        0 0 44px currentColor,
+        0 0 86px currentColor;
+}
+
+.orbit-item.is-active .orbit-label {
+    color: currentColor;
+    transform: scale(1.16);
+    text-shadow:
+        0 0 14px currentColor,
+        0 0 30px currentColor;
+}
+
+.orbit-description {
+    bottom: 9%;
+    width: min(400px, 80vw);
+    border-color: rgba(143, 77, 255, 0.28);
+    background: rgba(5, 4, 14, 0.82);
+}
+
+.orbit-description strong {
+    font-size: 17px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+    .mission-stage .planet-center {
+        width: 56%;
+    }
+
+    .orbit-dot {
+        width: 34px;
+        height: 34px;
+    }
+
+    .orbit-label {
+        font-size: 13px;
+        letter-spacing: 1.4px;
+    }
+
+    .orbit-description {
+        bottom: 4%;
+    }
+}
