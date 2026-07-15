@@ -381,6 +381,10 @@
     animation:
     holder-ring-pulse 3.8s ease-in-out infinite,
     holder-ring-rotate 45s linear infinite;
+   border-top-color: #fff1a8;
+border-right-color: rgba(255, 211, 92, 0.25);
+border-bottom-color: rgba(255, 173, 51, 0.75);
+border-left-color: rgba(255, 211, 92, 0.18);
 }
 
 .planet-logo {
