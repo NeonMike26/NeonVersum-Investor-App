@@ -275,19 +275,25 @@ const updateActiveItem = () => {
                 return;
             }
 
-            if (item.getAttribute("href") === "#") {
-                event.preventDefault();
+            const target = item.getAttribute("href");
 
-                descriptionElement.classList.add(
-                    "show-message"
-                );
+if (target === "#") {
+    event.preventDefault();
 
-                window.setTimeout(() => {
-                    descriptionElement.classList.remove(
-                        "show-message"
-                    );
-                }, 800);
-            }
+    descriptionElement.classList.add(
+        "show-message"
+    );
+
+    window.setTimeout(() => {
+        descriptionElement.classList.remove(
+            "show-message"
+        );
+    }, 800);
+
+    return;
+}
+
+window.location.href = target;
         });
     });
 
