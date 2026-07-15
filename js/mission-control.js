@@ -91,15 +91,15 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const triggerEnergyBeam = () => {
-    if (!energyBeam) {
+    if (!energyPulse) {
         return;
     }
 
-    energyBeam.classList.remove("active");
+    energyPulse.classList.remove("active");
 
-    void energyBeam.offsetWidth;
+    void energyPulse.offsetWidth;
 
-    energyBeam.classList.add("active");
+    energyPulse.classList.add("active");
 };
 
 const updateActiveItem = () => {
