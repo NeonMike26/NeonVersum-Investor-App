@@ -788,5 +788,9 @@ scale:1;
 
 .planet-logo {
     clip-path: inset(0 0 20% 0);
+
     margin-bottom: -20%;
+    margin-top: -10%;
+
+    transform: scale(0.88);
 }
