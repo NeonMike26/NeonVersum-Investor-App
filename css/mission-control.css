@@ -717,7 +717,7 @@ border-radius: 50%;
         opacity: 0;
         transform:
             translate(-50%, -50%)
-            translateY(-190px)
+            translateY(-38vh)
             scale(1.1);
     }
 }
