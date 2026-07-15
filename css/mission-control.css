@@ -853,14 +853,14 @@ scale:1;
     }
 
     80% {
-        opacity: 1;
-        scale: 2.2;
-        filter: brightness(1.6);
-    }
+    opacity: 1;
+    scale: 1.55;
+    filter: brightness(1.35);
+}
 
-    100% {
-        opacity: 0;
-        scale: 3.2;
-        filter: brightness(2);
-    }
+100% {
+    opacity: 0;
+    scale: 1.9;
+    filter: brightness(1.55);
+}
 }
