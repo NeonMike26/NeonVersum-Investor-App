@@ -825,3 +825,28 @@ scale:1;
     user-select: none;
     -webkit-user-drag: none;
 }
+.orbit-item.launching {
+    z-index: 999;
+    pointer-events: none;
+    animation: satellite-launch 550ms cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes satellite-launch {
+    0% {
+        opacity: 1;
+        scale: 1;
+        filter: brightness(1);
+    }
+
+    60% {
+        opacity: 1;
+        scale: 2.8;
+        filter: brightness(1.8);
+    }
+
+    100% {
+        opacity: 0;
+        scale: 7;
+        filter: brightness(2.5);
+    }
+}
