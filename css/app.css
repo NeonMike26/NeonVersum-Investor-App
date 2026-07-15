@@ -945,21 +945,46 @@ h1 span {
 
 .orbit-dot {
     display: block;
-    width: 18px;
-    height: 18px;
-    border: 2px solid rgba(255, 255, 255, 0.78);
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.9);
+
     background:
-        radial-gradient(
-            circle at 35% 35%,
-            #ffffff 0%,
-            #7deaff 26%,
-            #7b46ff 62%,
-            #170b31 100%
-        );
+        radial-gradient(circle at 30% 30%,
+        #ffffff,
+        currentColor 45%,
+        rgba(0,0,0,.45) 100%);
+
     box-shadow:
-        0 0 12px rgba(36, 215, 255, 0.85),
-        0 0 26px rgba(143, 77, 255, 0.55);
+        0 0 18px currentColor,
+        0 0 38px currentColor,
+        inset 0 0 18px rgba(255,255,255,.25);
+
+    animation: satellitePulse 3s ease-in-out infinite;
+   .orbit-item-1 {
+
+    color:#b55cff;
+
+}
+
+.orbit-item-2 {
+
+    color:#2fdfff;
+
+}
+
+.orbit-item-3 {
+
+    color:#53b8ff;
+
+}
+
+.orbit-item-4 {
+
+    color:#48ff88;
+
+}
 }
 
 .orbit-item-1 {
@@ -1042,7 +1067,29 @@ h1 span {
     animation-play-state: paused;
 }
 
-.orbit-label,
+.orbit-item-1 {
+
+    color:#b55cff;
+
+}
+
+.orbit-item-2 {
+
+    color:#2fdfff;
+
+}
+
+.orbit-item-3 {
+
+    color:#53b8ff;
+
+}
+
+.orbit-item-4 {
+
+    color:#48ff88;
+
+}
 .orbit-dot {
     transition:
         transform 180ms ease,
@@ -1101,7 +1148,21 @@ h1 span {
         drop-shadow(0 0 24px rgba(143, 77, 255, 0.6));
 }
 
-.orbit-item.is-active .orbit-dot {
+.orbit-item.is-active .orbit-dot{
+
+    transform:scale(1.45);
+
+    border:4px solid white;
+
+    box-shadow:
+
+    0 0 25px currentColor,
+
+    0 0 60px currentColor,
+
+    0 0 120px currentColor;
+
+}
     transform: scale(1.5);
     border-color: #ffffff;
     box-shadow:
@@ -1166,4 +1227,17 @@ h1 span {
     .orbit-description span {
         font-size: 12px;
     }
+}
+@keyframes satellitePulse{
+
+0%,100%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.08);
+
 }
