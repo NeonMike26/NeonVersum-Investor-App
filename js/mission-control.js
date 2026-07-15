@@ -192,6 +192,9 @@ const updateActiveItem = () => {
     };
 
     orbit.addEventListener("pointerdown", (event) => {
+            if (event.target.closest(".orbit-item")) {
+        return;
+    }
     dragging = true;
     snapping = false;
     velocity = 0;
@@ -261,10 +264,7 @@ const updateActiveItem = () => {
 
     orbitItems.forEach((item, index) => {
         item.addEventListener("click", (event) => {
-            if (dragDistance > 8) {
-    event.preventDefault();
-    return;
-}
+            
             const activeIndex = getActiveItemIndex();
 
             if (index !== activeIndex) {
