@@ -787,10 +787,25 @@ scale:1;
 /* Logo in der Mission Control ohne Schriftzug anzeigen */
 
 .planet-logo {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: auto;
+
     clip-path: inset(0 0 20% 0);
 
+    margin-top: -16%;
+    margin-left: -8%;
     margin-bottom: -20%;
-    margin-top: -10%;
 
-    transform: scale(0.88);
+    transform: scale(0.90);
+    transform-origin: center center;
+
+    filter:
+        drop-shadow(0 0 26px rgba(36, 215, 255, 0.32))
+        drop-shadow(0 0 48px rgba(143, 77, 255, 0.26));
+
+    user-select: none;
+    -webkit-user-drag: none;
 }
