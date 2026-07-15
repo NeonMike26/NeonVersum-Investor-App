@@ -962,6 +962,9 @@ h1 span {
         inset 0 0 18px rgba(255,255,255,.25);
 
     animation: satellitePulse 3s ease-in-out infinite;
+
+   }
+
    .orbit-item-1 {
 
     color:#b55cff;
