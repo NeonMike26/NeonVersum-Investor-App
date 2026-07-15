@@ -828,25 +828,39 @@ scale:1;
 .orbit-item.launching {
     z-index: 999;
     pointer-events: none;
-    animation: satellite-launch 550ms cubic-bezier(.2,.8,.2,1) forwards;
 }
 
-@keyframes satellite-launch {
+.orbit-item.launching .orbit-dot,
+.orbit-item.launching .orbit-label {
+    animation:
+        satellite-launch-content
+        1200ms
+        cubic-bezier(.16, .84, .24, 1)
+        forwards;
+}
+
+@keyframes satellite-launch-content {
     0% {
         opacity: 1;
         scale: 1;
         filter: brightness(1);
     }
 
-    60% {
+    35% {
         opacity: 1;
-        scale: 2.8;
-        filter: brightness(1.8);
+        scale: 1.35;
+        filter: brightness(1.4);
+    }
+
+    70% {
+        opacity: 1;
+        scale: 3.2;
+        filter: brightness(2);
     }
 
     100% {
         opacity: 0;
-        scale: 7;
-        filter: brightness(2.5);
+        scale: 8;
+        filter: brightness(3);
     }
 }
