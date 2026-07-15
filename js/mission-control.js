@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const orbit = document.querySelector(".orbit-primary");
     const missionStage = document.querySelector(".mission-stage");
+    const energyBeam = document.querySelector(".energy-beam");
 
     if (!orbit || !missionStage) {
         return;
@@ -28,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let previousPointerAngle = 0;
     let previousTime = performance.now();
+    let previousActiveIndex = -1;
 
     let descriptionElement =
         document.querySelector(".orbit-description");
@@ -88,10 +90,27 @@ document.addEventListener("DOMContentLoaded", () => {
         return activeIndex;
     };
 
-    const updateActiveItem = () => {
-        const activeIndex = getActiveItemIndex();
+    const triggerEnergyBeam = () => {
+    if (!energyBeam) {
+        return;
+    }
+
+    energyBeam.classList.remove("active");
+
+    void energyBeam.offsetWidth;
+
+    energyBeam.classList.add("active");
+};
+
+const updateActiveItem = () => {
+    const activeIndex = getActiveItemIndex();
         
         missionStage.dataset.active = String(activeIndex + 1);
+        
+        if (activeIndex !== previousActiveIndex) {
+        previousActiveIndex = activeIndex;
+        triggerEnergyBeam();
+    }
 
         orbitItems.forEach((item, index) => {
             const isActive = index === activeIndex;
