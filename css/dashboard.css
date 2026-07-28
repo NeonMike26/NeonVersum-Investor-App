@@ -64,3 +64,69 @@
     font-size: 18px;
 
 }
+/* ==========================================
+   Dashboard Cards
+========================================== */
+
+.dashboard-grid {
+    display: grid;
+    width: min(1000px, 92vw);
+    margin-top: 48px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.dashboard-card {
+    min-height: 170px;
+    padding: 28px;
+    border: 1px solid currentColor;
+    border-radius: 22px;
+    background: rgba(8, 10, 24, 0.84);
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.35),
+        0 0 22px currentColor;
+    backdrop-filter: blur(14px);
+}
+
+.dashboard-card h2 {
+    margin: 0 0 12px;
+    color: currentColor;
+    font-size: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.dashboard-card p {
+    margin: 0;
+    color: #a8b0c8;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.dashboard-card-purple {
+    color: #c25cff;
+}
+
+.dashboard-card-cyan {
+    color: #25ddff;
+}
+
+.dashboard-card-blue {
+    color: #3f8cff;
+}
+
+.dashboard-card-green {
+    color: #48ff83;
+}
+
+@media (max-width: 700px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        margin-top: 36px;
+    }
+
+    .dashboard-card {
+        min-height: 145px;
+        padding: 22px;
+    }
+}
