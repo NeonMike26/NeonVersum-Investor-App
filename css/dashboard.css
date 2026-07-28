@@ -466,7 +466,9 @@ isolation: isolate;
     content: "";
 
     position: absolute;
-    inset: 18px;
+    inset: 6px;
+   
+    z-index: 0;
 
     border-radius: 50%;
 
