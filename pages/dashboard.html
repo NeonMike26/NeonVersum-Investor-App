@@ -2,144 +2,275 @@
 <html lang="de">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <title>Dashboard | NeonVersum</title>
+    <meta
+        name="theme-color"
+        content="#050713">
 
-    <link rel="stylesheet" href="../css/app.css?v=20">
-    <link rel="stylesheet" href="../css/mission-control.css?v=22">
-    <link rel="stylesheet" href="../css/dashboard.css?v=23">
+    <title>NeonVersum – Mission Dashboard</title>
 
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css?v=100">
 </head>
 
 <body>
 
-<main class="dashboard">
+    <main class="dashboard">
 
-    <header class="dashboard-header">
+        <!-- =====================================
+             HEADER
+        ====================================== -->
 
-        <img
-            src="../images/PNG LOGO.png"
-            alt="NeonVersum"
-            class="dashboard-logo">
+        <header class="dashboard-header">
 
-        <h1>MISSION DASHBOARD</h1>
+            <img
+                src="../images/PNG LOGO.png"
+                alt="NeonVersum"
+                class="dashboard-logo">
 
-        <p>
-            Willkommen zurück Investor.
-        </p>
+            <h1>MISSION DASHBOARD</h1>
 
-    </header>
-    <section class="dashboard-grid">
+            <p class="dashboard-welcome">
+                Willkommen zurück Investor.
+            </p>
 
-    <article class="dashboard-card dashboard-card-purple">
-        <div class="portfolio-left">
+        </header>
 
-    <div class="portfolio-title">
-        PORTFOLIO
-    </div>
 
-    <div class="portfolio-value">
-        12.450 €
-    </div>
+        <!-- =====================================
+             DASHBOARD CONTENT
+        ====================================== -->
 
-    <div class="portfolio-label">
-        Gesamtinvestment
-    </div>
+        <section class="dashboard-content">
 
-</div>
 
-<div class="portfolio-right">
+            <!-- PORTFOLIO -->
 
-    <div class="portfolio-orb">
-        <div class="portfolio-wave"></div>
-    </div>
+            <article class="card portfolio-card">
 
-</div>
-    </article>
+                <div class="portfolio-content">
 
-    <article class="dashboard-card dashboard-card-green">
+                    <span class="card-eyebrow">
+                        Portfolio
+                    </span>
 
-    <div class="news-left">
+                    <strong class="portfolio-value">
+                        12.450&nbsp;€
+                    </strong>
 
-        <div class="news-icon">
-            🔔
-        </div>
+                    <span class="portfolio-label">
+                        Gesamtinvestment
+                    </span>
 
-        <div class="news-info">
+                </div>
 
-            <div class="news-title">
-                NEWS
+                <div
+                    class="portfolio-orb"
+                    aria-hidden="true">
+
+                    <span class="orb-ring orb-ring-one"></span>
+                    <span class="orb-ring orb-ring-two"></span>
+
+                    <span class="orb-wave">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </span>
+
+                </div>
+
+                <span
+                    class="card-arrow"
+                    aria-hidden="true">
+                    ›
+                </span>
+
+            </article>
+
+
+            <!-- NEWS -->
+
+            <article class="news-card">
+
+                <div class="news-left">
+
+                    <div
+                        class="news-icon"
+                        aria-hidden="true">
+                        ♢
+                    </div>
+
+                    <div class="news-copy">
+
+                        <strong class="news-title">
+                            News
+                        </strong>
+
+                        <span class="news-update">
+                            Letztes Update: Heute 08:15 Uhr
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="news-right">
+
+                    <span class="news-badge">
+                        2 NEU
+                    </span>
+
+                    <span
+                        class="news-arrow"
+                        aria-hidden="true">
+                        ›
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- TOKEN + HOLDER -->
+
+            <div class="dashboard-row">
+
+
+                <!-- TOKENPREIS -->
+
+                <article class="card token-card">
+
+                    <div class="card-icon token-icon">
+                        ◒
+                    </div>
+
+                    <span class="card-eyebrow">
+                        Tokenpreis
+                    </span>
+
+                    <strong class="small-card-value">
+                        3,25&nbsp;€
+                    </strong>
+
+                    <span class="positive-badge">
+                        +4,8 % heute
+                    </span>
+
+                    <div
+                        class="token-chart"
+                        aria-hidden="true">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- HOLDER STATUS -->
+
+                <article class="card holder-card">
+
+                    <div class="card-icon holder-icon">
+                        ◈
+                    </div>
+
+                    <span class="card-eyebrow">
+                        Holder Status
+                    </span>
+
+                    <strong class="holder-rank">
+                        Gold Holder
+                    </strong>
+
+                    <span class="holder-position">
+                        Rang 27
+                    </span>
+
+                    <div
+                        class="holder-emblem"
+                        aria-hidden="true">
+
+                        <span class="emblem-core">
+                            NV
+                        </span>
+
+                    </div>
+
+                </article>
+
             </div>
 
-            <div class="news-time">
-                Letztes Update: Heute 08:15 Uhr
-            </div>
 
-        </div>
+            <!-- NÄCHSTE TOKENPHASE -->
 
-    </div>
+            <article class="card phase-card">
 
-    <div class="news-right">
+                <div class="phase-main">
 
-        <div class="news-badge">
-            2 NEU
-        </div>
+                    <span class="card-eyebrow">
+                        Nächste Tokenphase
+                    </span>
 
-        <div class="news-arrow">
-            ›
-        </div>
+                    <strong class="phase-title">
+                        PreLaunch
+                    </strong>
 
-    </div>
+                    <span class="phase-date">
+                        Start am 01.10.2026
+                    </span>
 
-</article>
+                </div>
 
-<div class="dashboard-row">
-        
-<article class="dashboard-card dashboard-card-token">
+                <div class="phase-status">
 
-    <div class="token-title">
-        TOKENPREIS
-    </div>
+                    <span class="phase-status-label">
+                        Startet in
+                    </span>
 
-    <div class="token-value">
-        3,25 €
-    </div>
+                    <strong class="phase-countdown">
+                        64 Tagen
+                    </strong>
 
-    <div class="token-change">
-        +4,8 % heute
-    </div>
+                </div>
 
-</article>    
+            </article>
 
-<article class="dashboard-card dashboard-card-holder">
 
-    <div class="holder-title">
-        HOLDER STATUS
-    </div>
+            <!-- ZURÜCK ZUR MISSION CONTROL -->
 
-    <div class="holder-rank">
-        GOLD HOLDER
-    </div>
+            <a
+                href="../index.html"
+                class="mission-control-link">
 
-    <div class="holder-position">
-        Rang 27
-    </div>
+                <span class="mission-control-icon">
+                    ◉
+                </span>
 
-</article>
+                <span>
+                    Zurück zur Mission Control
+                </span>
 
-</div>    
-        
-</section>
+            </a>
 
-</main>
+        </section>
 
-<script src="../js/dashboard.js?v=1"></script>
+    </main>
 
 </body>
 
