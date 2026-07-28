@@ -18,6 +18,33 @@ content="width=device-width, initial-scale=1.0">
 
 <body>
 
+<button
+    id="logout-button"
+    type="button"
+    onclick="
+        sessionStorage.removeItem('nvLoggedIn');
+        window.location.replace('login.html');
+    "
+    style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 2147483647;
+        padding: 12px 22px;
+        background: rgba(10,10,20,0.95);
+        color: #ffffff;
+        border: 1px solid rgba(255,255,255,0.30);
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        pointer-events: auto;
+        isolation: isolate;
+    "
+>
+    Abmelden
+</button>
+    
 <main class="mission-control">
 
     <div class="space-background"></div>
@@ -57,32 +84,7 @@ content="width=device-width, initial-scale=1.0">
         alt="NeonVersum"
         class="planet-logo">
 
-    <button
-    id="logout-button"
-    type="button"
-    onclick="
-        sessionStorage.removeItem('nvLoggedIn');
-        window.location.replace('login.html');
-    "
-    style="
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 2147483647;
-        padding: 12px 22px;
-        background: rgba(10,10,20,0.95);
-        color: #ffffff;
-        border: 1px solid rgba(255,255,255,0.30);
-        border-radius: 999px;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        pointer-events: auto;
-        isolation: isolate;
-    "
->
-    Abmelden
-</button>
+    
         
 </section>
 
