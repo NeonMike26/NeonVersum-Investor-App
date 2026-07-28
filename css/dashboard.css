@@ -409,3 +409,33 @@ align-self: start;
         width: 68px;
     }
 }
+@media (max-width: 700px) {
+
+    .dashboard-card-purple {
+        position: relative;
+        display: block;
+    }
+
+    .portfolio-right {
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+    }
+
+    .portfolio-orb {
+        width: 92px;
+        height: 92px;
+    }
+
+    .portfolio-wave {
+        width: 58px;
+    }
+
+    .portfolio-left {
+        padding-right: 0;
+    }
+
+    .portfolio-value {
+        font-size: 52px;
+    }
+}
