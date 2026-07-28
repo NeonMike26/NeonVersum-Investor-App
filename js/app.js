@@ -492,8 +492,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 window.setTimeout(() => {
                     statusElement.textContent =
-                        "Test erfolgreich. Später wird die Registrierung zur manuellen Freigabe übermittelt.";
-
+                       "Registrierung erfolgreich vorbereitet. Dein Zugang wird nach der Übermittlung geprüft und freigegeben.";
                     submitButton.textContent =
                         originalButtonText;
 
