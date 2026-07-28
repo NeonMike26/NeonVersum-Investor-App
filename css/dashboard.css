@@ -1357,3 +1357,23 @@ overflow: hidden;
     }
 
 }
+@keyframes energySweep {
+    0% {
+        transform: translateX(-140%) skewX(-25deg);
+        opacity: 0;
+    }
+
+    8% {
+        opacity: .18;
+    }
+
+    18% {
+        transform: translateX(160%) skewX(-25deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(160%) skewX(-25deg);
+        opacity: 0;
+    }
+}
