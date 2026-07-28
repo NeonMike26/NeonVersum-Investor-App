@@ -529,3 +529,62 @@ align-self: start;
         font-size: 34px;
     }
 }
+/* ==========================================
+   Token Card
+========================================== */
+
+.dashboard-card-token {
+
+    background: rgba(18, 30, 58, .92);
+
+    border: 1px solid #25ddff;
+
+    color: #25ddff;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 0 22px rgba(37,221,255,.28);
+
+}
+
+.token-title{
+
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:2px;
+    color:#25ddff;
+
+}
+
+.token-value{
+
+    margin-top:18px;
+
+    font-size:54px;
+
+    font-weight:800;
+
+    color:#ffffff;
+
+}
+
+.token-change{
+
+    margin-top:10px;
+
+    display:inline-block;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:rgba(72,255,131,.15);
+
+    color:#48ff83;
+
+    font-size:16px;
+
+    font-weight:700;
+
+}
