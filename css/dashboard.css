@@ -765,6 +765,8 @@ overflow: hidden;
         );
 
     transform-origin: bottom;
+
+   animation: tokenBars 3.5s ease-in-out infinite;
 }
 
 .token-chart span:nth-child(1) {
