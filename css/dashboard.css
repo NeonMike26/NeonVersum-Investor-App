@@ -270,7 +270,9 @@ body {
     );
 
 overflow: hidden;
-   
+
+ position: relative;
+isolation: isolate;  
 }
 
 .portfolio-card:hover {
