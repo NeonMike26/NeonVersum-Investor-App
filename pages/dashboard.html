@@ -37,8 +37,17 @@
             <h1>MISSION DASHBOARD</h1>
 
             <p class="dashboard-welcome">
-                Willkommen zurück Investor.
-            </p>
+    Willkommen zurück,
+    <span id="dashboard-user-name">Investor</span> 👋
+</p>
+
+<script>
+const userName = sessionStorage.getItem("nvUserName");
+
+if (userName) {
+    document.getElementById("dashboard-user-name").textContent = userName;
+}
+</script>
 
         </header>
 
