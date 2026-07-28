@@ -1,451 +1,453 @@
 /* ==========================================
-   NeonVersum Dashboard
+   NEONVERSUM MISSION DASHBOARD
+   Clean rebuild
 ========================================== */
 
-.dashboard {
 
-    min-height: 100vh;
-
-    background: #050713;
-
-    color: white;
-
-    display: flex;
-
-    justify-content: center;
-
-    padding-top: 60px;
-
-}
-
-.dashboard-header {
-
-    width: min(900px, 92vw);
-
-    text-align: center;
-
-    margin: 0 auto;
-
-}
-.dashboard-logo {
-
-    width: 320px;
-
-    height: auto;
-
-    margin-bottom: 30px;
-
-    clip-path: none;
-
-    filter:
-        drop-shadow(0 0 30px rgba(36,215,255,.35))
-        drop-shadow(0 0 55px rgba(143,77,255,.30));
-
-}
-
-.dashboard h1 {
-
-    margin-top: 20px;
-
-    color: #c25cff;
-
-    font-size: 42px;
-
-    letter-spacing: 3px;
-
-}
-
-.dashboard p {
-
-    margin-top: 12px;
-
-    color: #9aa5c7;
-
-    font-size: 18px;
-
-}
 /* ==========================================
-   Dashboard Cards
+   RESET
 ========================================== */
 
-.dashboard-grid {
-    width: 100%;
-    max-width: 1000px;
-    margin: 48px auto 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
+* {
     box-sizing: border-box;
 }
 
-.dashboard-card {
-    min-height: 170px;
-    padding: 28px;
-    border: 1px solid currentColor;
-    border-radius: 22px;
-    background: rgba(8, 10, 24, 0.84);
-    box-shadow:
-        0 16px 40px rgba(0, 0, 0, 0.35),
-        0 0 22px currentColor;
-    backdrop-filter: blur(14px);
+html {
+    min-height: 100%;
+    background: #050713;
 }
 
-.dashboard-card h2 {
-    margin: 0 0 12px;
-    color: currentColor;
-    font-size: 24px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.dashboard-card p {
+body {
+    min-height: 100%;
     margin: 0;
-    color: #a8b0c8;
-    font-size: 15px;
-    line-height: 1.6;
+    overflow-x: hidden;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(45, 67, 145, 0.17),
+            transparent 34%
+        ),
+        #050713;
+
+    color: #ffffff;
 }
 
-.dashboard-card-purple {
-    color: #c25cff;
-   grid-column: span 2;
-}
 
-.dashboard-card-cyan {
-    color: #25ddff;
-}
-
-.dashboard-card-blue {
-    color: #3f8cff;
-}
-
-.dashboard-card-green {
-    color: #0d0d0d;
-    background: #48ff83;
-    border-color: #48ff83;
-    box-shadow:
-        0 0 28px rgba(72,255,131,.75),
-        0 0 60px rgba(72,255,131,.35);
-    grid-column: span 2;
-   height: 65px;
-align-self: start;
-}
-
-@media (max-width: 700px) {
-    .dashboard-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        margin-top: 36px;
-    }
-
-    .dashboard-card {
-    min-height: 130px;
-    padding: 16px;
-}
-
-.dashboard-card h2 {
-    font-size: 17px;
-}
-
-.dashboard-card p {
-    font-size: 13px;
-    line-height: 1.4;
-}
-}
 /* ==========================================
-   Mobile Dashboard Width Fix
+   DASHBOARD BACKGROUND
 ========================================== */
 
-@media (max-width: 700px) {
-    .dashboard {
-        width: 100%;
-        overflow-x: hidden;
-        padding: 28px 14px 40px;
-    }
-
-    .dashboard-header,
-    .dashboard-grid {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .dashboard-grid {
-        margin-left: 0;
-        margin-right: 0;
-        gap: 16px;
-    }
-
-    .dashboard-card {
-        width: 100%;
-        min-width: 0;
-    }
-
-    .dashboard-logo {
-        width: min(280px, 88vw);
-    }
-
-    .dashboard h1 {
-        font-size: clamp(28px, 9vw, 40px);
-        letter-spacing: 1.6px;
-    }
-}
 .dashboard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+
+    padding:
+        max(34px, env(safe-area-inset-top))
+        24px
+        max(46px, env(safe-area-inset-bottom));
+
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+        );
+
+    background-size: 72px 72px;
 }
-.dashboard-card {
+
+.dashboard::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 22% 34%,
+            rgba(37, 221, 255, 0.05),
+            transparent 26%
+        ),
+        radial-gradient(
+            circle at 77% 48%,
+            rgba(194, 92, 255, 0.06),
+            transparent 30%
+        );
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.dashboard-header {
+    position: relative;
+    z-index: 1;
+
+    width: min(100%, 1050px);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.dashboard-logo {
+    display: block;
+
+    width: min(330px, 72vw);
+    height: auto;
+
+    margin: 0 auto 34px;
+
+    filter:
+        drop-shadow(0 0 24px rgba(37, 221, 255, 0.26))
+        drop-shadow(0 0 48px rgba(194, 92, 255, 0.22));
+
+    animation: logoFloat 7s ease-in-out infinite;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+
+    color: #c25cff;
+
+    font-size: clamp(32px, 5vw, 54px);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 20px rgba(194, 92, 255, 0.22);
+}
+
+.dashboard-welcome {
+    margin: 13px 0 0;
+
+    color: #9ba6c9;
+
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   CONTENT
+========================================== */
+
+.dashboard-content {
+    position: relative;
+    z-index: 1;
+
+    width: min(100%, 1050px);
+    margin: 50px auto 0;
+
+    display: grid;
+    gap: 20px;
+}
+
+
+/* ==========================================
+   SHARED CARDS
+========================================== */
+
+.card {
     position: relative;
     overflow: hidden;
-    cursor: pointer;
+
+    min-width: 0;
+
+    padding: 28px;
+
+    border-radius: 26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16, 19, 40, 0.96),
+            rgba(6, 8, 22, 0.96)
+        );
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
     transition:
         transform 0.35s ease,
         box-shadow 0.35s ease,
-        background 0.35s ease;
+        border-color 0.35s ease;
 }
 
-.dashboard-card::before {
+.card::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        135deg,
-        transparent 20%,
-        currentColor 150%
-    );
-    opacity: 0.08;
     pointer-events: none;
+
+    background:
+        linear-gradient(
+            125deg,
+            rgba(255, 255, 255, 0.055),
+            transparent 35%
+        );
 }
 
-.dashboard-card:hover {
-    transform: translateY(-6px);
-    background: rgba(13, 16, 35, 0.94);
-    box-shadow:
-        0 22px 50px rgba(0, 0, 0, 0.45),
-        0 0 32px currentColor;
+.card:hover {
+    transform: translateY(-5px);
 }
 
-.dashboard-card:active {
-    transform: scale(0.97);
-}
-@media (max-width:700px){
-
-    .dashboard-card-purple{
-        grid-column: span 2;
-    }
-
-}
-/* Neues Dashboard-Layout */
-
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
+.card:active {
+    transform: scale(0.985);
 }
 
-.dashboard-card-purple,
-.dashboard-card-green {
-    grid-column: 1 / -1;
+.card-eyebrow {
+    display: block;
+
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
 }
 
-.dashboard-card-purple {
-    min-height: 220px;
+.card-arrow {
+    position: absolute;
+    top: 24px;
+    right: 27px;
+
+    color: #c25cff;
+
+    font-size: 46px;
+    font-weight: 300;
+    line-height: 1;
 }
 
-.dashboard-card-green {
-    min-height: 0;
-    height: 72px;
-    padding: 0 24px;
+
+/* ==========================================
+   PORTFOLIO HERO
+========================================== */
+
+.portfolio-card {
+    min-height: 270px;
+
     display: flex;
     align-items: center;
-}
+    justify-content: space-between;
 
-@media (max-width: 700px) {
-    .dashboard-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
-    }
+    padding: 38px 42px;
 
-    .dashboard-card-purple {
-        min-height: 190px;
-    }
-
-    .dashboard-card-green {
-        height: 64px;
-        padding: 0 16px;
-    }
-}
-/* Feste Reihenfolge der Dashboard-Karten */
-
-.dashboard-grid {
-    grid-template-areas:
-        "portfolio portfolio"
-        "news news"
-        "investments documents";
-}
-
-.dashboard-card-purple {
-    grid-area: portfolio;
-}
-
-.dashboard-card-green {
-    grid-area: news;
-}
-
-.dashboard-card-blue {
-    grid-area: investments;
-}
-
-.dashboard-card-cyan {
-    grid-area: documents;
-}
-/* ==========================================
-   Portfolio Hero Card
-========================================== */
-
-.dashboard-card-purple{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.portfolio-title{
-    color:#c25cff;
-    font-size:34px;
-    font-weight:700;
-    letter-spacing:2px;
-}
-
-.portfolio-value{
-    margin-top:18px;
-    font-size:72px;
-    font-weight:800;
-    color:#ffffff;
-}
-
-.portfolio-label{
-    margin-top:10px;
-    color:#9aa5c7;
-    font-size:24px;
-}
-
-.portfolio-right{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.portfolio-orb{
-
-    width:190px;
-    height:190px;
-
-    border-radius:50%;
-
-    border:2px solid rgba(194,92,255,.8);
+    border: 1px solid rgba(194, 92, 255, 0.95);
 
     box-shadow:
-        0 0 30px rgba(194,92,255,.45),
-        inset 0 0 30px rgba(194,92,255,.25);
-
-    position:relative;
-
+        0 18px 55px rgba(0, 0, 0, 0.38),
+        0 0 24px rgba(194, 92, 255, 0.34),
+        inset 0 0 34px rgba(194, 92, 255, 0.06);
 }
 
-.portfolio-wave{
-
-    position:absolute;
-
-    top:50%;
-    left:50%;
-
-    width:120px;
-    height:2px;
-
-    background:#c25cff;
-
-    transform:translate(-50%,-50%);
-
-    box-shadow:0 0 14px #c25cff;
-
+.portfolio-card:hover {
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.48),
+        0 0 36px rgba(194, 92, 255, 0.48),
+        inset 0 0 40px rgba(194, 92, 255, 0.08);
 }
-@media (max-width: 700px) {
 
-    .dashboard-card-purple {
-        min-height: 210px;
-        padding: 22px;
-        gap: 12px;
-    }
+.portfolio-content {
+    position: relative;
+    z-index: 2;
 
-    .portfolio-left {
-        flex: 1;
-        min-width: 0;
-        position: relative;
-        z-index: 2;
-    }
-
-    .portfolio-title {
-        font-size: 24px;
-    }
-
-    .portfolio-value {
-        margin-top: 16px;
-        font-size: clamp(42px, 13vw, 58px);
-        white-space: nowrap;
-    }
-
-    .portfolio-label {
-        font-size: 17px;
-    }
-
-    .portfolio-right {
-        flex: 0 0 105px;
-    }
-
-    .portfolio-orb {
-        width: 105px;
-        height: 105px;
-    }
-
-    .portfolio-wave {
-        width: 68px;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
-@media (max-width: 700px) {
 
-    .dashboard-card-purple {
-        position: relative;
-        display: block;
-    }
-
-    .portfolio-right {
-        position: absolute;
-        right: 18px;
-        bottom: 18px;
-    }
-
-    .portfolio-orb {
-        width: 92px;
-        height: 92px;
-    }
-
-    .portfolio-wave {
-        width: 58px;
-    }
-
-    .portfolio-left {
-        padding-right: 0;
-    }
-
-    .portfolio-value {
-        font-size: 52px;
-    }
+.portfolio-card .card-eyebrow {
+    color: #c25cff;
+    font-size: 28px;
 }
+
+.portfolio-value {
+    margin-top: 20px;
+
+    color: #ffffff;
+
+    font-size: clamp(58px, 8vw, 86px);
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+
+    text-shadow:
+        0 0 22px rgba(255, 255, 255, 0.08);
+}
+
+.portfolio-label {
+    margin-top: 15px;
+
+    color: #9ba6c9;
+
+    font-size: 22px;
+}
+
+
 /* ==========================================
-   News Statusleiste
+   PORTFOLIO ORB
 ========================================== */
 
-.dashboard-card-green {
+.portfolio-orb {
+    position: relative;
+    flex: 0 0 auto;
+
+    width: 188px;
+    height: 188px;
+
+    margin-right: 45px;
+
+    border: 2px solid rgba(194, 92, 255, 0.85);
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(194, 92, 255, 0.13),
+            rgba(7, 8, 22, 0.85) 68%
+        );
+
+    box-shadow:
+        0 0 30px rgba(194, 92, 255, 0.35),
+        inset 0 0 28px rgba(194, 92, 255, 0.15);
+
+    animation: orbPulse 4s ease-in-out infinite;
+}
+
+.orb-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(194, 92, 255, 0.23);
+}
+
+.orb-ring-one {
+    inset: 18px;
+}
+
+.orb-ring-two {
+    inset: 38px;
+}
+
+.orb-wave {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.orb-wave i {
+    display: block;
+
+    width: 3px;
+    height: 35px;
+
+    border-radius: 10px;
+    background: #c25cff;
+
+    box-shadow:
+        0 0 10px #c25cff;
+
+    animation: waveMove 1.55s ease-in-out infinite;
+}
+
+.orb-wave i:nth-child(1) {
+    height: 18px;
+}
+
+.orb-wave i:nth-child(2) {
+    height: 34px;
+    animation-delay: 0.1s;
+}
+
+.orb-wave i:nth-child(3) {
+    height: 55px;
+    animation-delay: 0.2s;
+}
+
+.orb-wave i:nth-child(4) {
+    height: 82px;
+    animation-delay: 0.3s;
+}
+
+.orb-wave i:nth-child(5) {
+    height: 50px;
+    animation-delay: 0.4s;
+}
+
+.orb-wave i:nth-child(6) {
+    height: 30px;
+    animation-delay: 0.5s;
+}
+
+.orb-wave i:nth-child(7) {
+    height: 16px;
+    animation-delay: 0.6s;
+}
+
+
+/* ==========================================
+   NEWS BAR
+========================================== */
+
+.news-card {
+    min-height: 84px;
+
+    padding: 15px 24px;
+
+    display: flex;
+    align-items: center;
     justify-content: space-between;
-    gap: 18px;
+    gap: 20px;
+
+    border: 1px solid #48ff83;
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #38f978,
+            #55ff8e
+        );
+
+    color: #050713;
+
+    box-shadow:
+        0 0 25px rgba(72, 255, 131, 0.58),
+        0 0 55px rgba(72, 255, 131, 0.23);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 0 35px rgba(72, 255, 131, 0.72),
+        0 0 70px rgba(72, 255, 131, 0.3);
+}
+
+.news-card:active {
+    transform: scale(0.985);
 }
 
 .news-left,
@@ -455,198 +457,878 @@ align-self: start;
 }
 
 .news-left {
-    gap: 14px;
     min-width: 0;
+    gap: 15px;
 }
 
 .news-right {
-    gap: 16px;
-    margin-left: auto;
+    flex: 0 0 auto;
+    gap: 18px;
 }
 
 .news-icon {
-    width: 46px;
-    height: 46px;
-    flex: 0 0 46px;
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
+
     display: grid;
     place-items: center;
+
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.78);
-    font-size: 22px;
+
+    background: #050713;
+    color: #48ff83;
+
+    font-size: 28px;
+    line-height: 1;
+
+    box-shadow:
+        0 0 16px rgba(5, 7, 19, 0.32);
+}
+
+.news-copy {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .news-title {
-    color: #050713;
     font-size: 22px;
-    font-weight: 800;
+    font-weight: 900;
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-.news-time {
-    margin-top: 3px;
-    color: rgba(5, 7, 19, 0.78);
+.news-update {
+    margin-top: 2px;
+
+    color: rgba(5, 7, 19, 0.75);
+
     font-size: 14px;
+    font-weight: 600;
 }
 
 .news-badge {
-    padding: 10px 18px;
+    padding: 10px 19px;
+
     border-radius: 999px;
+
     background: #050713;
     color: #48ff83;
+
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 900;
     white-space: nowrap;
+
+    box-shadow:
+        0 0 16px rgba(5, 7, 19, 0.28);
 }
 
 .news-arrow {
-    color: #050713;
     font-size: 42px;
+    font-weight: 500;
     line-height: 1;
 }
 
+
+/* ==========================================
+   TOKEN + HOLDER ROW
+========================================== */
+
+.dashboard-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.dashboard-row .card {
+    min-height: 245px;
+}
+
+
+/* ==========================================
+   CARD ICONS
+========================================== */
+
+.card-icon {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+
+    width: 52px;
+    height: 52px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   TOKEN CARD
+========================================== */
+
+.token-card {
+    border: 1px solid #25ddff;
+
+    box-shadow:
+        0 16px 45px rgba(0, 0, 0, 0.34),
+        0 0 24px rgba(37, 221, 255, 0.25);
+}
+
+.token-card:hover {
+    box-shadow:
+        0 22px 58px rgba(0, 0, 0, 0.44),
+        0 0 34px rgba(37, 221, 255, 0.4);
+}
+
+.token-card .card-eyebrow {
+    color: #25ddff;
+}
+
+.token-icon {
+    border: 1px solid rgba(37, 221, 255, 0.7);
+
+    background: rgba(37, 221, 255, 0.1);
+    color: #25ddff;
+
+    box-shadow:
+        0 0 20px rgba(37, 221, 255, 0.22);
+}
+
+.small-card-value {
+    display: block;
+
+    margin-top: 24px;
+
+    color: #ffffff;
+
+    font-size: clamp(42px, 5vw, 60px);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.positive-badge {
+    display: inline-flex;
+
+    margin-top: 18px;
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    background: rgba(72, 255, 131, 0.13);
+    color: #48ff83;
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.token-chart {
+    position: absolute;
+    right: 25px;
+    bottom: 26px;
+    left: 25px;
+
+    height: 45px;
+
+    display: flex;
+    align-items: flex-end;
+    gap: 7px;
+
+    opacity: 0.44;
+}
+
+.token-chart span {
+    flex: 1;
+
+    border-radius: 6px 6px 2px 2px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(37, 221, 255, 0.12),
+            #25ddff
+        );
+}
+
+.token-chart span:nth-child(1) {
+    height: 22%;
+}
+
+.token-chart span:nth-child(2) {
+    height: 46%;
+}
+
+.token-chart span:nth-child(3) {
+    height: 31%;
+}
+
+.token-chart span:nth-child(4) {
+    height: 74%;
+}
+
+.token-chart span:nth-child(5) {
+    height: 54%;
+}
+
+.token-chart span:nth-child(6) {
+    height: 91%;
+}
+
+
+/* ==========================================
+   HOLDER CARD
+========================================== */
+
+.holder-card {
+    border: 1px solid #ffd34d;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(42, 32, 8, 0.96),
+            rgba(12, 10, 5, 0.98)
+        );
+
+    box-shadow:
+        0 16px 45px rgba(0, 0, 0, 0.34),
+        0 0 24px rgba(255, 211, 77, 0.24);
+}
+
+.holder-card:hover {
+    box-shadow:
+        0 22px 58px rgba(0, 0, 0, 0.44),
+        0 0 36px rgba(255, 211, 77, 0.38);
+}
+
+.holder-card .card-eyebrow {
+    color: #ffd34d;
+}
+
+.holder-icon {
+    border: 1px solid rgba(255, 211, 77, 0.72);
+
+    background: rgba(255, 211, 77, 0.09);
+    color: #ffd34d;
+
+    box-shadow:
+        0 0 20px rgba(255, 211, 77, 0.23);
+}
+
+.holder-rank {
+    display: block;
+
+    max-width: 65%;
+    margin-top: 24px;
+
+    color: #ffffff;
+
+    font-size: clamp(31px, 4vw, 47px);
+    font-weight: 800;
+    line-height: 1.07;
+    text-transform: uppercase;
+}
+
+.holder-position {
+    display: inline-flex;
+
+    margin-top: 18px;
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    background: rgba(255, 211, 77, 0.14);
+    color: #ffd34d;
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.holder-emblem {
+    position: absolute;
+    right: 27px;
+    bottom: 27px;
+
+    width: 84px;
+    height: 84px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid rgba(255, 211, 77, 0.75);
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 211, 77, 0.18),
+            transparent 66%
+        );
+
+    box-shadow:
+        0 0 24px rgba(255, 211, 77, 0.23),
+        inset 0 0 18px rgba(255, 211, 77, 0.12);
+
+    animation: emblemPulse 4.2s ease-in-out infinite;
+}
+
+.emblem-core {
+    color: #ffd34d;
+
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+
+/* ==========================================
+   NEXT TOKEN PHASE
+========================================== */
+
+.phase-card {
+    min-height: 145px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+
+    border: 1px solid rgba(143, 77, 255, 0.9);
+
+    box-shadow:
+        0 16px 45px rgba(0, 0, 0, 0.34),
+        0 0 24px rgba(143, 77, 255, 0.24);
+}
+
+.phase-card:hover {
+    box-shadow:
+        0 22px 58px rgba(0, 0, 0, 0.44),
+        0 0 36px rgba(143, 77, 255, 0.38);
+}
+
+.phase-card .card-eyebrow {
+    color: #9f6bff;
+}
+
+.phase-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.phase-title {
+    margin-top: 10px;
+
+    color: #ffffff;
+
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.phase-date {
+    margin-top: 5px;
+
+    color: #9ba6c9;
+
+    font-size: 16px;
+}
+
+.phase-status {
+    min-width: 180px;
+
+    padding: 16px 22px;
+
+    border: 1px solid rgba(143, 77, 255, 0.4);
+    border-radius: 18px;
+
+    background: rgba(143, 77, 255, 0.08);
+
+    text-align: center;
+}
+
+.phase-status-label {
+    display: block;
+
+    color: #9ba6c9;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.phase-countdown {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #ffffff;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+
+/* ==========================================
+   MISSION CONTROL LINK
+========================================== */
+
+.mission-control-link {
+    width: fit-content;
+    margin: 14px auto 0;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 18px;
+
+    border: 1px solid rgba(154, 165, 199, 0.22);
+    border-radius: 999px;
+
+    color: #9ba6c9;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.mission-control-link:hover {
+    color: #ffffff;
+    border-color: rgba(194, 92, 255, 0.7);
+
+    box-shadow:
+        0 0 20px rgba(194, 92, 255, 0.18);
+
+    transform: translateY(-2px);
+}
+
+.mission-control-icon {
+    color: #c25cff;
+}
+
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+@keyframes logoFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@keyframes orbPulse {
+    0%,
+    100% {
+        transform: scale(1);
+
+        box-shadow:
+            0 0 30px rgba(194, 92, 255, 0.35),
+            inset 0 0 28px rgba(194, 92, 255, 0.15);
+    }
+
+    50% {
+        transform: scale(1.035);
+
+        box-shadow:
+            0 0 45px rgba(194, 92, 255, 0.52),
+            inset 0 0 36px rgba(194, 92, 255, 0.22);
+    }
+}
+
+@keyframes waveMove {
+    0%,
+    100% {
+        transform: scaleY(0.55);
+        opacity: 0.62;
+    }
+
+    50% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+@keyframes emblemPulse {
+    0%,
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(4deg) scale(1.045);
+    }
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 850px) {
+
+    .dashboard {
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+
+    .portfolio-card {
+        min-height: 245px;
+        padding: 32px;
+    }
+
+    .portfolio-orb {
+        width: 155px;
+        height: 155px;
+        margin-right: 34px;
+    }
+
+    .dashboard-row .card {
+        min-height: 230px;
+    }
+
+    .holder-rank {
+        max-width: 70%;
+    }
+
+}
+
+
+/* ==========================================
+   SMARTPHONE
+========================================== */
+
 @media (max-width: 700px) {
-    .news-icon {
-        width: 38px;
-        height: 38px;
-        flex-basis: 38px;
+
+    .dashboard {
+        padding:
+            max(22px, env(safe-area-inset-top))
+            14px
+            max(38px, env(safe-area-inset-bottom));
+
+        background-size: 48px 48px;
+    }
+
+    .dashboard-logo {
+        width: min(285px, 86vw);
+        margin-bottom: 30px;
+    }
+
+    .dashboard-header h1 {
+        max-width: 360px;
+        margin: 0 auto;
+
+        font-size: clamp(34px, 10vw, 48px);
+        letter-spacing: 1.5px;
+    }
+
+    .dashboard-welcome {
+        font-size: 17px;
+    }
+
+    .dashboard-content {
+        margin-top: 40px;
+        gap: 15px;
+    }
+
+
+    /* Portfolio */
+
+    .portfolio-card {
+        min-height: 245px;
+
+        display: block;
+
+        padding: 27px 24px;
+    }
+
+    .portfolio-card .card-eyebrow {
+        font-size: 24px;
+    }
+
+    .portfolio-value {
+        margin-top: 22px;
+
+        font-size: clamp(46px, 14vw, 61px);
+    }
+
+    .portfolio-label {
+        margin-top: 13px;
         font-size: 18px;
+    }
+
+    .portfolio-orb {
+        position: absolute;
+        right: 19px;
+        bottom: 20px;
+
+        width: 93px;
+        height: 93px;
+
+        margin: 0;
+    }
+
+    .orb-ring-one {
+        inset: 10px;
+    }
+
+    .orb-ring-two {
+        inset: 22px;
+    }
+
+    .orb-wave {
+        gap: 3px;
+    }
+
+    .orb-wave i {
+        width: 2px;
+    }
+
+    .orb-wave i:nth-child(1),
+    .orb-wave i:nth-child(7) {
+        height: 10px;
+    }
+
+    .orb-wave i:nth-child(2),
+    .orb-wave i:nth-child(6) {
+        height: 18px;
+    }
+
+    .orb-wave i:nth-child(3),
+    .orb-wave i:nth-child(5) {
+        height: 28px;
+    }
+
+    .orb-wave i:nth-child(4) {
+        height: 42px;
+    }
+
+    .card-arrow {
+        top: 21px;
+        right: 22px;
+
+        font-size: 36px;
+    }
+
+
+    /* News */
+
+    .news-card {
+        min-height: 68px;
+
+        padding: 10px 13px;
+        gap: 9px;
+
+        border-radius: 20px;
+    }
+
+    .news-left {
+        gap: 10px;
+    }
+
+    .news-right {
+        gap: 8px;
+    }
+
+    .news-icon {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+
+        font-size: 21px;
     }
 
     .news-title {
-        font-size: 18px;
+        font-size: 17px;
     }
 
-    .news-time {
+    .news-update {
         display: none;
     }
 
     .news-badge {
-        padding: 8px 12px;
-        font-size: 14px;
+        padding: 8px 11px;
+
+        font-size: 13px;
     }
 
     .news-arrow {
-        font-size: 34px;
+        font-size: 31px;
     }
+
+
+    /* Token + Holder */
+
+    .dashboard-row {
+        gap: 12px;
+    }
+
+    .dashboard-row .card {
+        min-height: 205px;
+        padding: 19px 16px;
+        border-radius: 21px;
+    }
+
+    .dashboard-row .card-eyebrow {
+        max-width: calc(100% - 42px);
+
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    .card-icon {
+        top: 15px;
+        right: 14px;
+
+        width: 36px;
+        height: 36px;
+
+        font-size: 18px;
+    }
+
+    .small-card-value {
+        margin-top: 24px;
+
+        font-size: clamp(32px, 9vw, 43px);
+    }
+
+    .positive-badge,
+    .holder-position {
+        margin-top: 14px;
+        padding: 7px 10px;
+
+        font-size: 12px;
+    }
+
+    .token-chart {
+        right: 16px;
+        bottom: 17px;
+        left: 16px;
+
+        height: 31px;
+        gap: 4px;
+    }
+
+    .holder-rank {
+        max-width: 100%;
+        margin-top: 24px;
+
+        font-size: clamp(22px, 6vw, 30px);
+    }
+
+    .holder-emblem {
+        right: 14px;
+        bottom: 15px;
+
+        width: 54px;
+        height: 54px;
+    }
+
+    .emblem-core {
+        font-size: 14px;
+    }
+
+
+    /* Phase */
+
+    .phase-card {
+        min-height: 150px;
+
+        padding: 22px;
+
+        gap: 15px;
+    }
+
+    .phase-card .card-eyebrow {
+        font-size: 15px;
+    }
+
+    .phase-title {
+        font-size: 25px;
+    }
+
+    .phase-date {
+        font-size: 14px;
+    }
+
+    .phase-status {
+        min-width: 114px;
+
+        padding: 13px 10px;
+    }
+
+    .phase-status-label {
+        font-size: 10px;
+    }
+
+    .phase-countdown {
+        font-size: 18px;
+    }
+
 }
+
+
 /* ==========================================
-   Token Card
+   VERY SMALL SMARTPHONES
 ========================================== */
 
-.dashboard-card-token {
+@media (max-width: 390px) {
 
-    background: rgba(18, 30, 58, .92);
+    .dashboard-row {
+        grid-template-columns: 1fr;
+    }
 
-    border: 1px solid #25ddff;
+    .dashboard-row .card {
+        min-height: 190px;
+    }
 
-    color: #25ddff;
+    .portfolio-value {
+        font-size: 45px;
+    }
 
-    border-radius: 22px;
+    .phase-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 
-    box-shadow:
-        0 0 22px rgba(37,221,255,.28);
-
-}
-
-.token-title{
-
-    font-size:18px;
-    font-weight:700;
-    letter-spacing:2px;
-    color:#25ddff;
-
-}
-
-.token-value{
-
-    margin-top:18px;
-
-    font-size:54px;
-
-    font-weight:800;
-
-    color:#ffffff;
+    .phase-status {
+        width: 100%;
+    }
 
 }
 
-.token-change{
 
-    margin-top:10px;
-
-    display:inline-block;
-
-    padding:8px 14px;
-
-    border-radius:999px;
-
-    background:rgba(72,255,131,.15);
-
-    color:#48ff83;
-
-    font-size:16px;
-
-    font-weight:700;
-
-}
 /* ==========================================
-   Holder Status Card
+   REDUCED MOTION
 ========================================== */
 
-.dashboard-card-holder {
+@media (prefers-reduced-motion: reduce) {
 
-    background: rgba(32, 24, 10, .92);
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
 
-    border: 1px solid #ffd34d;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
 
-    color: #ffd34d;
-
-    border-radius: 22px;
-
-    box-shadow:
-        0 0 24px rgba(255,211,77,.30);
-
-}
-
-.holder-title{
-
-    font-size:18px;
-
-    font-weight:700;
-
-    letter-spacing:2px;
-
-    color:#ffd34d;
-
-}
-
-.holder-rank{
-
-    margin-top:18px;
-
-    font-size:34px;
-
-    font-weight:800;
-
-    color:#ffffff;
-
-}
-
-.holder-position{
-
-    margin-top:10px;
-
-    display:inline-block;
-
-    padding:8px 14px;
-
-    border-radius:999px;
-
-    background:rgba(255,211,77,.15);
-
-    color:#ffd34d;
-
-    font-size:16px;
-
-    font-weight:700;
+        transition-duration: 0.01ms !important;
+    }
 
 }
