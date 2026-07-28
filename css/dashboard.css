@@ -542,8 +542,9 @@ body {
     gap: 20px;
 }
 
-.dashboard-row .card {
+..dashboard-row .card {
     min-height: 245px;
+    height: 245px;
 }
 
 
