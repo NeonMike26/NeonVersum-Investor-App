@@ -367,3 +367,45 @@ align-self: start;
     box-shadow:0 0 14px #c25cff;
 
 }
+@media (max-width: 700px) {
+
+    .dashboard-card-purple {
+        min-height: 210px;
+        padding: 22px;
+        gap: 12px;
+    }
+
+    .portfolio-left {
+        flex: 1;
+        min-width: 0;
+        position: relative;
+        z-index: 2;
+    }
+
+    .portfolio-title {
+        font-size: 24px;
+    }
+
+    .portfolio-value {
+        margin-top: 16px;
+        font-size: clamp(42px, 13vw, 58px);
+        white-space: nowrap;
+    }
+
+    .portfolio-label {
+        font-size: 17px;
+    }
+
+    .portfolio-right {
+        flex: 0 0 105px;
+    }
+
+    .portfolio-orb {
+        width: 105px;
+        height: 105px;
+    }
+
+    .portfolio-wave {
+        width: 68px;
+    }
+}
