@@ -107,6 +107,7 @@
 
 .dashboard-card-purple {
     color: #c25cff;
+   grid-column: span 2;
 }
 
 .dashboard-card-cyan {
@@ -216,4 +217,11 @@
 
 .dashboard-card:active {
     transform: scale(0.97);
+}
+@media (max-width:700px){
+
+    .dashboard-card-purple{
+        grid-column: span 2;
+    }
+
 }
