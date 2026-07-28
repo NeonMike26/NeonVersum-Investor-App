@@ -488,6 +488,26 @@ isolation: isolate;
 /* ==========================================
    NEWS BAR
 ========================================== */
+.news-card::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        110deg,
+        transparent 0%,
+        rgba(255,255,255,.10) 46%,
+        rgba(255,255,255,.30) 50%,
+        rgba(255,255,255,.10) 54%,
+        transparent 100%
+    );
+
+    transform: translateX(-120%);
+    animation: newsSweep 12s linear infinite;
+
+    pointer-events: none;
+}
 
 .news-card {
     min-height: 84px;
