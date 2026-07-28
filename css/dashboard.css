@@ -1041,6 +1041,21 @@ overflow: hidden;
     }
 }
 
+@keyframes orbCoreGlow {
+
+    0%,
+    100% {
+        transform: scale(.92);
+        opacity: .45;
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: .95;
+    }
+
+}
+
 @keyframes waveMove {
     0%,
     100% {
