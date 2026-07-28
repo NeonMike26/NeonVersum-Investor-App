@@ -368,11 +368,21 @@ isolation: isolate;
     border-radius: 50%;
 
     background:
-        radial-gradient(
-            circle,
-            rgba(194, 92, 255, 0.13),
-            rgba(7, 8, 22, 0.85) 68%
-        );
+    radial-gradient(
+        circle at 35% 30%,
+        rgba(255,255,255,.16),
+        transparent 18%
+    ),
+    radial-gradient(
+        circle at 65% 70%,
+        rgba(37,221,255,.12),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle,
+        rgba(194,92,255,.22),
+        rgba(7,8,22,.88) 68%
+    );
 
     box-shadow:
         0 0 30px rgba(194, 92, 255, 0.35),
