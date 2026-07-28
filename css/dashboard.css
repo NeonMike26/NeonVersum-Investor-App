@@ -297,3 +297,73 @@ align-self: start;
 .dashboard-card-cyan {
     grid-area: documents;
 }
+/* ==========================================
+   Portfolio Hero Card
+========================================== */
+
+.dashboard-card-purple{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.portfolio-title{
+    color:#c25cff;
+    font-size:34px;
+    font-weight:700;
+    letter-spacing:2px;
+}
+
+.portfolio-value{
+    margin-top:18px;
+    font-size:72px;
+    font-weight:800;
+    color:#ffffff;
+}
+
+.portfolio-label{
+    margin-top:10px;
+    color:#9aa5c7;
+    font-size:24px;
+}
+
+.portfolio-right{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.portfolio-orb{
+
+    width:190px;
+    height:190px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(194,92,255,.8);
+
+    box-shadow:
+        0 0 30px rgba(194,92,255,.45),
+        inset 0 0 30px rgba(194,92,255,.25);
+
+    position:relative;
+
+}
+
+.portfolio-wave{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    width:120px;
+    height:2px;
+
+    background:#c25cff;
+
+    transform:translate(-50%,-50%);
+
+    box-shadow:0 0 14px #c25cff;
+
+}
