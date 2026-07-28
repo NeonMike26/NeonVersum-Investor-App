@@ -183,3 +183,37 @@
     flex-direction: column;
     align-items: center;
 }
+.dashboard-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        background 0.35s ease;
+}
+
+.dashboard-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        transparent 20%,
+        currentColor 150%
+    );
+    opacity: 0.08;
+    pointer-events: none;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    background: rgba(13, 16, 35, 0.94);
+    box-shadow:
+        0 22px 50px rgba(0, 0, 0, 0.45),
+        0 0 32px currentColor;
+}
+
+.dashboard-card:active {
+    transform: scale(0.97);
+}
