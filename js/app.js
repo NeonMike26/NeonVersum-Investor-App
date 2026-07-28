@@ -486,6 +486,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Deine Angaben werden vorbereitet.";
 
                window.setTimeout(() => {
+    const firstNameInput =
+        registerForm.querySelector("#first-name");
+
+    sessionStorage.setItem(
+        "nvUserName",
+        firstNameInput.value.trim()
+    );
+
     window.location.href = "login.html";
 }, 2000);
             }
