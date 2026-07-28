@@ -178,3 +178,8 @@
         letter-spacing: 1.6px;
     }
 }
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
