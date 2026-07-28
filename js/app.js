@@ -175,14 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Deine Eingaben werden geprüft.";
 
             window.setTimeout(() => {
-                formStatus.textContent =
-                    "Test erfolgreich. Die echte Anmeldung folgt später.";
-
-                buttonText.textContent =
-                    "Sicher anmelden";
-
-                loginButton.disabled = false;
-            }, 2000);
+    window.location.href = "mission-control.html";
+}, 2000);
         });
     }
 
