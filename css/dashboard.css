@@ -1499,3 +1499,15 @@ overflow: hidden;
     }
 
 }
+@keyframes tokenBars {
+
+    0%,
+    100%{
+        transform: scaleY(0.92);
+    }
+
+    50%{
+        transform: scaleY(1.08);
+    }
+
+}
