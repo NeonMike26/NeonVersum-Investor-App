@@ -304,8 +304,6 @@ isolation: isolate;
     pointer-events: none;
     z-index: 1;
 }
-}
-
 
 .portfolio-card:hover {
     box-shadow:
