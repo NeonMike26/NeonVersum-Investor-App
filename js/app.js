@@ -175,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Deine Eingaben werden geprüft.";
 
             window.setTimeout(() => {
+    sessionStorage.setItem("nvLoggedIn", "true");
     window.location.href = "mission-control.html";
 }, 2000);
         });
