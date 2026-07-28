@@ -762,6 +762,11 @@ overflow: hidden;
             to top,
             rgba(37, 221, 255, 0.12),
             #25ddff
+
+   animation: tokenBars 3.5s ease-in-out infinite;
+   
+   transform-origin: bottom;
+   
         );
 }
 
