@@ -57,6 +57,10 @@ content="width=device-width, initial-scale=1.0">
         alt="NeonVersum"
         class="planet-logo">
 
+    <button id="logout-button" class="logout-button">
+    Abmelden
+</button>
+        
 </section>
 
 </section>
@@ -69,6 +73,15 @@ content="width=device-width, initial-scale=1.0">
 <script>
 if (sessionStorage.getItem("nvLoggedIn") !== "true") {
     window.location.replace("login.html");
+}
+
+const logoutButton = document.getElementById("logout-button");
+
+if (logoutButton) {
+    logoutButton.addEventListener("click", () => {
+        sessionStorage.removeItem("nvLoggedIn");
+        window.location.replace("login.html");
+    });
 }
 </script>
     
