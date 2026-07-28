@@ -273,3 +273,27 @@ align-self: start;
         padding: 0 16px;
     }
 }
+/* Feste Reihenfolge der Dashboard-Karten */
+
+.dashboard-grid {
+    grid-template-areas:
+        "portfolio portfolio"
+        "news news"
+        "investments documents";
+}
+
+.dashboard-card-purple {
+    grid-area: portfolio;
+}
+
+.dashboard-card-green {
+    grid-area: news;
+}
+
+.dashboard-card-blue {
+    grid-area: investments;
+}
+
+.dashboard-card-cyan {
+    grid-area: documents;
+}
