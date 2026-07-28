@@ -588,3 +588,65 @@ align-self: start;
     font-weight:700;
 
 }
+/* ==========================================
+   Holder Status Card
+========================================== */
+
+.dashboard-card-holder {
+
+    background: rgba(32, 24, 10, .92);
+
+    border: 1px solid #ffd34d;
+
+    color: #ffd34d;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 0 24px rgba(255,211,77,.30);
+
+}
+
+.holder-title{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    color:#ffd34d;
+
+}
+
+.holder-rank{
+
+    margin-top:18px;
+
+    font-size:34px;
+
+    font-weight:800;
+
+    color:#ffffff;
+
+}
+
+.holder-position{
+
+    margin-top:10px;
+
+    display:inline-block;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:rgba(255,211,77,.15);
+
+    color:#ffd34d;
+
+    font-size:16px;
+
+    font-weight:700;
+
+}
