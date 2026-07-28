@@ -490,14 +490,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 statusElement.textContent =
                     "Deine Angaben werden vorbereitet.";
 
-                window.setTimeout(() => {
-                    statusElement.textContent =
-                       "Registrierung erfolgreich vorbereitet. Dein Zugang wird nach der Übermittlung geprüft und freigegeben.";
-                    submitButton.textContent =
-                        originalButtonText;
-
-                    submitButton.disabled = false;
-                }, 2000);
+               window.setTimeout(() => {
+    window.location.href = "login.html";
+}, 2000);
             }
         );
     }
