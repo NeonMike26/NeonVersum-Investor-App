@@ -275,6 +275,34 @@ overflow: hidden;
 isolation: isolate;  
 }
 
+.portfolio-card::before {
+    content: "";
+
+    position: absolute;
+    top: -20%;
+    bottom: -20%;
+    left: -35%;
+
+    width: 80px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.12),
+        rgba(194,92,255,.25),
+        rgba(255,255,255,.12),
+        transparent
+    );
+
+    transform: translateX(-180%) skewX(-25deg);
+
+    animation: energySweep 15s linear infinite;
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+
 .portfolio-card:hover {
     box-shadow:
         0 24px 70px rgba(0, 0, 0, 0.48),
