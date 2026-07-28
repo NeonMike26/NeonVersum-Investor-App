@@ -1480,3 +1480,18 @@ overflow: hidden;
         opacity: 0;
     }
 }
+@keyframes newsSweep {
+
+    0% {
+        transform: translateX(-120%);
+    }
+
+    18% {
+        transform: translateX(120%);
+    }
+
+    100% {
+        transform: translateX(120%);
+    }
+
+}
