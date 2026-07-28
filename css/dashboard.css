@@ -439,3 +439,93 @@ align-self: start;
         font-size: 52px;
     }
 }
+/* ==========================================
+   News Statusleiste
+========================================== */
+
+.dashboard-card-green {
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.news-left,
+.news-right {
+    display: flex;
+    align-items: center;
+}
+
+.news-left {
+    gap: 14px;
+    min-width: 0;
+}
+
+.news-right {
+    gap: 16px;
+    margin-left: auto;
+}
+
+.news-icon {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.78);
+    font-size: 22px;
+}
+
+.news-title {
+    color: #050713;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.news-time {
+    margin-top: 3px;
+    color: rgba(5, 7, 19, 0.78);
+    font-size: 14px;
+}
+
+.news-badge {
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: #050713;
+    color: #48ff83;
+    font-size: 16px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.news-arrow {
+    color: #050713;
+    font-size: 42px;
+    line-height: 1;
+}
+
+@media (max-width: 700px) {
+    .news-icon {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+        font-size: 18px;
+    }
+
+    .news-title {
+        font-size: 18px;
+    }
+
+    .news-time {
+        display: none;
+    }
+
+    .news-badge {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .news-arrow {
+        font-size: 34px;
+    }
+}
