@@ -95,6 +95,7 @@ const logoutButton = document.getElementById("logout-button");
 
 if (logoutButton) {
     logoutButton.addEventListener("click", () => {
+        alert("Logout geklickt");
         sessionStorage.removeItem("nvLoggedIn");
         window.location.replace("login.html");
     });
