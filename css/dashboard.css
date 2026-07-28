@@ -130,3 +130,40 @@
         padding: 22px;
     }
 }
+/* ==========================================
+   Mobile Dashboard Width Fix
+========================================== */
+
+@media (max-width: 700px) {
+    .dashboard {
+        width: 100%;
+        overflow-x: hidden;
+        padding: 28px 14px 40px;
+    }
+
+    .dashboard-header,
+    .dashboard-grid {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .dashboard-grid {
+        margin-left: 0;
+        margin-right: 0;
+        gap: 16px;
+    }
+
+    .dashboard-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .dashboard-logo {
+        width: min(280px, 88vw);
+    }
+
+    .dashboard h1 {
+        font-size: clamp(28px, 9vw, 40px);
+        letter-spacing: 1.6px;
+    }
+}
