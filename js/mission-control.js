@@ -31,6 +31,16 @@ document.addEventListener("DOMContentLoaded", () => {
     let dragDistance = 0;
     let previousTime = performance.now();
     let previousActiveIndex = -1;
+    let savedIndex = parseInt(
+    sessionStorage.getItem("nvOrbitIndex") ?? "0",
+    10
+);
+
+if (isNaN(savedIndex)) {
+    savedIndex = 0;
+}
+
+rotation = -itemAngles[savedIndex] - 90;
 
     let descriptionElement =
         document.querySelector(".orbit-description");
