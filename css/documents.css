@@ -45,10 +45,7 @@
 }
 
 .document-row::after {
-    content: "›";
-    color: rgba(217, 167, 255, 0.72);
-    font-size: 28px;
-    line-height: 1;
+    content: "";
 }
 
 .document-row:hover {
