@@ -262,8 +262,7 @@ const updateActiveItem = () => {
     orbit.addEventListener("pointerup", stopDragging);
     orbit.addEventListener("pointercancel", stopDragging);
     orbit.addEventListener("wheel", (event) => {
-    console.log("Mausrad erkannt");    
-    event.preventDefault();
+        event.preventDefault();
 
     if (dragging || snapping) {
         return;
