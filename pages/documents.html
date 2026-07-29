@@ -21,6 +21,31 @@
 
 </head>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("documentSearch");
+    const documentRows = document.querySelectorAll(".document-row");
+
+    if (!searchInput) {
+        return;
+    }
+
+    searchInput.addEventListener("input", () => {
+        const searchTerm = searchInput.value
+            .trim()
+            .toLowerCase();
+
+        documentRows.forEach((row) => {
+            const rowText = row.textContent.toLowerCase();
+
+            row.style.display = rowText.includes(searchTerm)
+                ? ""
+                : "none";
+        });
+    });
+});
+</script>
+    
 <body>
 
 <script>
