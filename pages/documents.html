@@ -67,12 +67,14 @@ if (sessionStorage.getItem("nvLoggedIn") !== "true") {
 
         <div class="document-search">
 
-            <input
-                type="text"
-                placeholder="Dokument suchen..."
-                disabled>
+    <input
+        id="documentSearch"
+        type="search"
+        placeholder="Dokument suchen..."
+        autocomplete="off"
+        aria-label="Dokument suchen">
 
-        </div>
+</div>
 
         <div class="document-table">
 
