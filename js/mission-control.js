@@ -261,6 +261,37 @@ const updateActiveItem = () => {
 
     orbit.addEventListener("pointerup", stopDragging);
     orbit.addEventListener("pointercancel", stopDragging);
+    orbit.addEventListener("wheel", (event) => {
+    event.preventDefault();
+
+    if (dragging || snapping) {
+        return;
+    }
+
+    const direction = event.deltaY > 0 ? 1 : -1;
+
+    const activeIndex = getActiveItemIndex();
+
+    let nextIndex = activeIndex + direction;
+
+    if (nextIndex < 0) {
+        nextIndex = orbitItems.length - 1;
+    }
+
+    if (nextIndex >= orbitItems.length) {
+        nextIndex = 0;
+    }
+
+    targetRotation =
+        rotation +
+        normalizeAngle(
+            -90 -
+            itemAngles[nextIndex] -
+            rotation
+        );
+
+    snapping = true;
+}, { passive: false });
 
     orbitItems.forEach((item, index) => {
         item.addEventListener("click", (event) => {
