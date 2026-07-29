@@ -121,7 +121,10 @@ const updateActiveItem = () => {
         if (activeIndex !== previousActiveIndex) {
     previousActiveIndex = activeIndex;
 
-    console.log("Energieimpuls");
+    sessionStorage.setItem(
+        "nvOrbitIndex",
+        String(activeIndex)
+    );
 
     triggerEnergyBeam();
 }
