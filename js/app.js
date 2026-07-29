@@ -175,9 +175,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Deine Eingaben werden geprüft.";
 
             window.setTimeout(() => {
-    sessionStorage.setItem("nvLoggedIn", "true");
-    window.location.href = "mission-control.html";
-}, 2000);
+                sessionStorage.setItem(
+                    "nvLoggedIn",
+                    "true"
+                );
+
+                window.location.href =
+                    "mission-control.html";
+            }, 2000);
         });
     }
 
@@ -185,9 +190,10 @@ document.addEventListener("DOMContentLoaded", () => {
      * Registrierung:
      * Privatkunde und Firmenkunde umschalten
      */
-    const customerTypeInputs = document.querySelectorAll(
-        'input[name="customerType"]'
-    );
+    const customerTypeInputs =
+        document.querySelectorAll(
+            'input[name="customerType"]'
+        );
 
     const companyFields =
         document.querySelector("#company-fields");
@@ -199,11 +205,15 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#contact-role")
     ];
 
-    if (customerTypeInputs.length > 0 && companyFields) {
+    if (
+        customerTypeInputs.length > 0 &&
+        companyFields
+    ) {
         const updateCustomerType = () => {
-            const selectedType = document.querySelector(
-                'input[name="customerType"]:checked'
-            );
+            const selectedType =
+                document.querySelector(
+                    'input[name="customerType"]:checked'
+                );
 
             const isCompany =
                 selectedType?.value === "company";
@@ -239,27 +249,43 @@ document.addEventListener("DOMContentLoaded", () => {
      * Passwort-Schaltflächen automatisch ergänzen
      */
     const registerPasswordInputs = [
-        document.querySelector("#register-password"),
-        document.querySelector("#password-confirmation")
+        document.querySelector(
+            "#register-password"
+        ),
+        document.querySelector(
+            "#password-confirmation"
+        )
     ];
 
     registerPasswordInputs.forEach((input) => {
-        if (!input || input.closest(".password-field")) {
+        if (
+            !input ||
+            input.closest(".password-field")
+        ) {
             return;
         }
 
-        const wrapper = document.createElement("div");
+        const wrapper =
+            document.createElement("div");
+
         wrapper.className = "password-field";
 
-        input.parentNode.insertBefore(wrapper, input);
+        input.parentNode.insertBefore(
+            wrapper,
+            input
+        );
+
         wrapper.appendChild(input);
 
         const toggleButton =
             document.createElement("button");
 
-        toggleButton.className = "password-toggle";
+        toggleButton.className =
+            "password-toggle";
+
         toggleButton.type = "button";
         toggleButton.textContent = "Anzeigen";
+
         toggleButton.setAttribute(
             "aria-label",
             "Passwort anzeigen"
@@ -267,120 +293,138 @@ document.addEventListener("DOMContentLoaded", () => {
 
         wrapper.appendChild(toggleButton);
 
-        toggleButton.addEventListener("click", () => {
-            const passwordIsHidden =
-                input.type === "password";
+        toggleButton.addEventListener(
+            "click",
+            () => {
+                const passwordIsHidden =
+                    input.type === "password";
 
-            input.type = passwordIsHidden
-                ? "text"
-                : "password";
+                input.type = passwordIsHidden
+                    ? "text"
+                    : "password";
 
-            toggleButton.textContent =
-                passwordIsHidden
-                    ? "Verbergen"
-                    : "Anzeigen";
+                toggleButton.textContent =
+                    passwordIsHidden
+                        ? "Verbergen"
+                        : "Anzeigen";
 
-            toggleButton.setAttribute(
-                "aria-label",
-                passwordIsHidden
-                    ? "Passwort verbergen"
-                    : "Passwort anzeigen"
-            );
-        });
+                toggleButton.setAttribute(
+                    "aria-label",
+                    passwordIsHidden
+                        ? "Passwort verbergen"
+                        : "Passwort anzeigen"
+                );
+            }
+        );
     });
 
     /*
- * Registrierung:
- * Formular prüfen und Kontakt in Odoo anlegen
- */
-const registerForm =
-    document.querySelector("#register-form");
+     * Registrierung:
+     * Formular prüfen und Kontakt in Odoo anlegen
+     */
+    const registerForm =
+        document.querySelector("#register-form");
 
-if (registerForm) {
-    const REGISTER_API_URL =
-        "https://neonversum-api.m-fehringer.workers.dev/register";
+    if (registerForm) {
+        const REGISTER_API_URL =
+            "https://neonversum-api.m-fehringer.workers.dev/register";
 
-    const registerEmail =
-        registerForm.querySelector("#register-email");
+        const registerEmail =
+            registerForm.querySelector(
+                "#register-email"
+            );
 
-    const registerPassword =
-        registerForm.querySelector("#register-password");
+        const registerPassword =
+            registerForm.querySelector(
+                "#register-password"
+            );
 
-    const passwordConfirmation =
-        registerForm.querySelector("#password-confirmation");
+        const passwordConfirmation =
+            registerForm.querySelector(
+                "#password-confirmation"
+            );
 
-    const uidInput =
-        registerForm.querySelector("#uid-number");
+        const uidInput =
+            registerForm.querySelector(
+                "#uid-number"
+            );
 
-    const privacyCheckbox =
-        registerForm.querySelector(
-            'input[name="privacy"]'
+        const privacyCheckbox =
+            registerForm.querySelector(
+                'input[name="privacy"]'
+            );
+
+        const submitButton =
+            registerForm.querySelector(
+                'button[type="submit"]'
+            );
+
+        const statusElement =
+            document.createElement("p");
+
+        statusElement.className =
+            "form-status";
+
+        statusElement.setAttribute(
+            "aria-live",
+            "polite"
         );
 
-    const submitButton =
-        registerForm.querySelector(
-            'button[type="submit"]'
+        submitButton.parentNode.insertBefore(
+            statusElement,
+            submitButton
         );
 
-    const statusElement =
-        document.createElement("p");
+        const originalButtonText =
+            submitButton.textContent.trim();
 
-    statusElement.className = "form-status";
-    statusElement.setAttribute(
-        "aria-live",
-        "polite"
-    );
+        const clearRegistrationErrors = () => {
+            registerForm
+                .querySelectorAll(".input-error")
+                .forEach((input) => {
+                    clearFieldError(input);
+                });
 
-    submitButton.parentNode.insertBefore(
-        statusElement,
-        submitButton
-    );
+            statusElement.textContent = "";
+        };
 
-    const originalButtonText =
-        submitButton.textContent.trim();
+        const resetSubmitButton = () => {
+            submitButton.disabled = false;
 
-    const clearRegistrationErrors = () => {
+            submitButton.textContent =
+                originalButtonText;
+        };
+
         registerForm
-            .querySelectorAll(".input-error")
+            .querySelectorAll("input")
             .forEach((input) => {
-                clearFieldError(input);
+                input.addEventListener(
+                    "input",
+                    () => {
+                        clearFieldError(input);
+                        statusElement.textContent = "";
+                    }
+                );
+
+                input.addEventListener(
+                    "change",
+                    () => {
+                        clearFieldError(input);
+                        statusElement.textContent = "";
+                    }
+                );
             });
-
-        statusElement.textContent = "";
-    };
-
-    const resetSubmitButton = () => {
-        submitButton.disabled = false;
-        submitButton.textContent =
-            originalButtonText;
-    };
-
-    registerForm
-        .querySelectorAll("input")
-        .forEach((input) => {
-            input.addEventListener("input", () => {
-                clearFieldError(input);
-                statusElement.textContent = "";
-            });
-
-            input.addEventListener("change", () => {
-                clearFieldError(input);
-                statusElement.textContent = "";
-            });
-        
 
         registerForm.addEventListener(
             "submit",
-            (event) => {
+            async (event) => {
                 event.preventDefault();
 
-                statusElement.textContent = "";
+                if (submitButton.disabled) {
+                    return;
+                }
 
-                registerForm
-                    .querySelectorAll(".input-error")
-                    .forEach((input) => {
-                        clearFieldError(input);
-                    });
+                clearRegistrationErrors();
 
                 let formIsValid = true;
                 let firstInvalidField = null;
@@ -390,29 +434,35 @@ if (registerForm) {
                         "input[required]"
                     );
 
-                currentlyRequiredInputs.forEach((input) => {
-                    if (
-                        input.type !== "checkbox" &&
-                        input.value.trim() === ""
-                    ) {
-                        setFieldError(
-                            input,
-                            "Dieses Feld ist erforderlich."
-                        );
+                currentlyRequiredInputs.forEach(
+                    (input) => {
+                        if (
+                            input.type !== "checkbox" &&
+                            input.value.trim() === ""
+                        ) {
+                            setFieldError(
+                                input,
+                                "Dieses Feld ist erforderlich."
+                            );
 
-                        formIsValid = false;
+                            formIsValid = false;
 
-                        if (!firstInvalidField) {
-                            firstInvalidField = input;
+                            if (!firstInvalidField) {
+                                firstInvalidField =
+                                    input;
+                            }
                         }
                     }
-                });
+                );
+
+                const email =
+                    registerEmail.value
+                        .trim()
+                        .toLowerCase();
 
                 if (
-                    registerEmail.value.trim() !== "" &&
-                    !emailIsValid(
-                        registerEmail.value.trim()
-                    )
+                    email !== "" &&
+                    !emailIsValid(email)
                 ) {
                     setFieldError(
                         registerEmail,
@@ -420,7 +470,9 @@ if (registerForm) {
                     );
 
                     formIsValid = false;
-                    firstInvalidField ??= registerEmail;
+
+                    firstInvalidField ??=
+                        registerEmail;
                 }
 
                 if (
@@ -433,7 +485,9 @@ if (registerForm) {
                     );
 
                     formIsValid = false;
-                    firstInvalidField ??= registerPassword;
+
+                    firstInvalidField ??=
+                        registerPassword;
                 }
 
                 if (
@@ -447,6 +501,7 @@ if (registerForm) {
                     );
 
                     formIsValid = false;
+
                     firstInvalidField ??=
                         passwordConfirmation;
                 }
@@ -456,9 +511,14 @@ if (registerForm) {
                         'input[name="customerType"]:checked'
                     );
 
-                const isCompany =
+                const customerType =
                     selectedCustomerType?.value ===
-                    "company";
+                    "company"
+                        ? "company"
+                        : "private";
+
+                const isCompany =
+                    customerType === "company";
 
                 if (
                     isCompany &&
@@ -471,7 +531,9 @@ if (registerForm) {
                     );
 
                     formIsValid = false;
-                    firstInvalidField ??= uidInput;
+
+                    firstInvalidField ??=
+                        uidInput;
                 }
 
                 if (!privacyCheckbox.checked) {
@@ -498,24 +560,163 @@ if (registerForm) {
                     return;
                 }
 
+                const firstName =
+                    registerForm
+                        .querySelector("#first-name")
+                        .value
+                        .trim();
+
+                const lastName =
+                    registerForm
+                        .querySelector("#last-name")
+                        .value
+                        .trim();
+
+                const phone =
+                    registerForm
+                        .querySelector("#phone")
+                        .value
+                        .trim();
+
+                const street =
+                    registerForm
+                        .querySelector("#street")
+                        .value
+                        .trim();
+
+                const zip =
+                    registerForm
+                        .querySelector("#postal-code")
+                        .value
+                        .trim();
+
+                const city =
+                    registerForm
+                        .querySelector("#city")
+                        .value
+                        .trim();
+
+                const companyName =
+                    registerForm
+                        .querySelector("#company-name")
+                        ?.value
+                        .trim() || "";
+
+                const vat =
+                    uidInput?.value.trim() || "";
+
+                const registrationData = {
+                    name:
+                        `${firstName} ${lastName}`.trim(),
+                    email,
+                    phone,
+                    street,
+                    zip,
+                    city,
+                    customerType,
+                    companyName,
+                    vat
+                };
+
                 submitButton.disabled = true;
+
                 submitButton.textContent =
-                    "Registrierung wird geprüft...";
+                    "Registrierung wird gespeichert...";
 
                 statusElement.textContent =
-                    "Deine Angaben werden vorbereitet.";
+                    "Deine Daten werden sicher an NeonVersum übermittelt.";
 
-               window.setTimeout(() => {
-    const firstNameInput =
-        registerForm.querySelector("#first-name");
+                try {
+                    const response = await fetch(
+                        REGISTER_API_URL,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+                            body: JSON.stringify(
+                                registrationData
+                            )
+                        }
+                    );
 
-    sessionStorage.setItem(
-        "nvUserName",
-        firstNameInput.value.trim()
-    );
+                    let result;
 
-    window.location.href = "login.html";
-}, 2000);
+                    try {
+                        result =
+                            await response.json();
+                    } catch {
+                        throw new Error(
+                            "Die Antwort des Servers konnte nicht verarbeitet werden."
+                        );
+                    }
+
+                    if (!response.ok) {
+                        if (
+                            response.status === 409 ||
+                            result.code ===
+                                "EMAIL_EXISTS"
+                        ) {
+                            setFieldError(
+                                registerEmail,
+                                result.message ||
+                                    "Für diese E-Mail-Adresse existiert bereits ein Benutzer."
+                            );
+
+                            registerEmail.focus();
+
+                            throw new Error(
+                                result.message ||
+                                    "Diese E-Mail-Adresse ist bereits registriert."
+                            );
+                        }
+
+                        throw new Error(
+                            result.message ||
+                                "Die Registrierung konnte nicht gespeichert werden."
+                        );
+                    }
+
+                    sessionStorage.setItem(
+                        "nvUserName",
+                        firstName
+                    );
+
+                    sessionStorage.setItem(
+                        "nvRegisteredEmail",
+                        email
+                    );
+
+                    statusElement.textContent =
+                        "Registrierung erfolgreich. Dein Kontakt wurde in Odoo angelegt.";
+
+                    submitButton.textContent =
+                        "Registrierung erfolgreich";
+
+                    window.setTimeout(() => {
+                        window.location.href =
+                            "login.html";
+                    }, 1500);
+                } catch (error) {
+                    console.error(
+                        "Registrierungsfehler:",
+                        error
+                    );
+
+                    if (
+                        statusElement.textContent === "" ||
+                        !statusElement.textContent.includes(
+                            "existiert bereits"
+                        )
+                    ) {
+                        statusElement.textContent =
+                            error.message ||
+                            "Die Registrierung ist momentan nicht möglich. Bitte versuche es erneut.";
+                    }
+
+                    resetSubmitButton();
+                }
             }
         );
     }
