@@ -660,7 +660,7 @@ if (registerForm) {
         }
     );
 }
-        });
+});
 
         registerForm.addEventListener(
             "submit",
