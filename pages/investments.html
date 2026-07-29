@@ -19,6 +19,12 @@
 
 <body>
 
+<script>
+if (sessionStorage.getItem("nvLoggedIn") !== "true") {
+    window.location.replace("login.html");
+}
+</script>
+    
     <main class="dashboard">
 
         <header class="dashboard-header">
