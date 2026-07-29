@@ -80,14 +80,30 @@
 
 .document-status {
     flex-shrink: 0;
-    padding: 8px 12px;
+    padding: 8px 14px;
     border-radius: 999px;
-    border: 1px solid rgba(186, 85, 255, 0.35);
-    background: rgba(186, 85, 255, 0.1);
-    color: #d9a7ff;
     font-size: 13px;
     font-weight: 700;
     text-align: center;
+    border: 1px solid transparent;
+}
+
+.status-pending {
+    background: rgba(186, 85, 255, 0.12);
+    border-color: rgba(186, 85, 255, 0.35);
+    color: #d9a7ff;
+}
+
+.status-processing {
+    background: rgba(255, 180, 0, 0.12);
+    border-color: rgba(255, 180, 0, 0.35);
+    color: #ffd56b;
+}
+
+.status-ready {
+    background: rgba(0, 255, 170, 0.12);
+    border-color: rgba(0, 255, 170, 0.35);
+    color: #6dffd1;
 }
 
 @media (max-width: 700px) {
