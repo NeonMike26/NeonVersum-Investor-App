@@ -41,105 +41,93 @@
                 </h1>
 
                 <p class="auth-description">
-                    Melde dich an, um deine Investments,
-                    Dokumente und Updates aufzurufen.
+                    Gib deine E-Mail-Adresse ein.
+                    Du erhältst anschließend einen Sicherheitscode.
                 </p>
 
             </div>
 
-            <form class="auth-form" id="login-form" novalidate>
-
-    <div class="form-group">
-
-        <label for="email">
-            E-Mail-Adresse
-        </label>
-
-        <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="name@beispiel.de"
-            autocomplete="email"
-            required
-        >
-
-        <p class="form-error" id="email-error"></p>
-
-    </div>
-
-    
-
-            
-
-        </div>
-
-        <div class="password-field">
-
-            <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Dein Passwort"
-                autocomplete="current-password"
-                minlength="8"
-                required
+            <form
+                class="auth-form"
+                id="login-form"
+                novalidate
             >
 
-            <button
-                class="password-toggle"
-                type="button"
-                aria-label="Passwort anzeigen"
-            >
-                Anzeigen
-            </button>
+                <div class="form-group">
 
-        </div>
+                    <label for="email">
+                        E-Mail-Adresse
+                    </label>
 
-        <p class="form-error" id="password-error"></p>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="name@beispiel.de"
+                        autocomplete="email"
+                        required
+                    >
 
-    </div>
+                    <p
+                        class="form-error"
+                        id="email-error"
+                    ></p>
 
-    <label class="checkbox-row">
+                </div>
 
-        <input
-            name="remember"
-            type="checkbox"
-        >
+                <label class="checkbox-row">
 
-        <span>
-            Auf diesem Gerät angemeldet bleiben
-        </span>
+                    <input
+                        name="remember"
+                        type="checkbox"
+                    >
 
-    </label>
+                    <span>
+                        Auf diesem Gerät angemeldet bleiben
+                    </span>
 
-    <p class="form-status" id="form-status" aria-live="polite"></p>
+                </label>
 
-    <button
-        class="button button-primary auth-submit"
-        id="login-button"
-        type="submit"
-    >
-        <span class="button-text">
-            Sicher anmelden
-        </span>
+                <p
+                    class="form-status"
+                    id="form-status"
+                    aria-live="polite"
+                ></p>
 
-        <span class="button-loader" aria-hidden="true"></span>
-    </button>
+                <button
+                    class="button button-primary auth-submit"
+                    id="login-button"
+                    type="submit"
+                >
+                    <span class="button-text">
+                        Code anfordern
+                    </span>
 
-</form>
+                    <span
+                        class="button-loader"
+                        aria-hidden="true"
+                    ></span>
+                </button>
+
+            </form>
 
             <p class="auth-footer">
 
                 Noch keinen Zugang?
 
-                <a class="text-link" href="#">
+                <a
+                    class="text-link"
+                    href="register.html"
+                >
                     Registrierung anfragen
                 </a>
 
             </p>
 
-            <a class="back-link" href="../index.html">
+            <a
+                class="back-link"
+                href="../index.html"
+            >
                 ← Zurück zur Startseite
             </a>
 
@@ -147,7 +135,7 @@
 
     </main>
 
-    <script src="../js/app.js?v=12"></script>
+    <script src="../js/app.js?v=13"></script>
 
 </body>
 
