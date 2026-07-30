@@ -87,168 +87,167 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /*
- * Login: E-Mail in Odoo prüfen
- */
-const loginForm = document.querySelector("#login-form");
+       /*
+     * Login: Sicherheitscode per E-Mail anfordern
+     */
+    const loginForm =
+        document.querySelector("#login-form");
 
-if (loginForm) {
-    const LOGIN_API_URL =
-        "https://neonversum-api.m-fehringer.workers.dev/login";
+    if (loginForm) {
+        const REQUEST_CODE_API_URL =
+            "https://neonversum-api.m-fehringer.workers.dev/request-code";
 
-    const emailInput =
-        loginForm.querySelector("#email");
+        const emailInput =
+            loginForm.querySelector("#email");
 
-    const passwordInput =
-        loginForm.querySelector("#password");
+        const emailError =
+            loginForm.querySelector("#email-error");
 
-    const emailError =
-        loginForm.querySelector("#email-error");
+        const formStatus =
+            loginForm.querySelector("#form-status");
 
-    const passwordError =
-        loginForm.querySelector("#password-error");
+        const loginButton =
+            loginForm.querySelector("#login-button");
 
-    const formStatus =
-        loginForm.querySelector("#form-status");
+        const buttonText =
+            loginForm.querySelector(".button-text");
 
-    const loginButton =
-        loginForm.querySelector("#login-button");
+        const clearLoginMessages = () => {
+            emailError.textContent = "";
+            formStatus.textContent = "";
 
-    const buttonText =
-        loginForm.querySelector(".button-text");
+            emailInput.classList.remove(
+                "input-error"
+            );
+        };
 
-    const clearLoginMessages = () => {
-        emailError.textContent = "";
-        passwordError.textContent = "";
-        formStatus.textContent = "";
+        loginForm.addEventListener(
+            "submit",
+            async (event) => {
+                event.preventDefault();
 
-        emailInput.classList.remove("input-error");
-        passwordInput.classList.remove("input-error");
-    };
-
-    loginForm.addEventListener(
-        "submit",
-        async (event) => {
-            event.preventDefault();
-
-            if (loginButton.disabled) {
-                return;
-            }
-
-            clearLoginMessages();
-
-            const email =
-                emailInput.value.trim().toLowerCase();
-
-            let formIsValid = true;
-
-            if (email === "") {
-                emailError.textContent =
-                    "Bitte gib deine E-Mail-Adresse ein.";
-
-                emailInput.classList.add("input-error");
-                formIsValid = false;
-            } else if (!emailIsValid(email)) {
-                emailError.textContent =
-                    "Bitte gib eine gültige E-Mail-Adresse ein.";
-
-                emailInput.classList.add("input-error");
-                formIsValid = false;
-            }
-
-            if (!formIsValid) {
-                formStatus.textContent =
-                    "Bitte überprüfe deine Eingabe.";
-
-                return;
-            }
-
-            loginButton.disabled = true;
-            buttonText.textContent =
-                "E-Mail wird geprüft...";
-
-            formStatus.textContent =
-                "Wir prüfen, ob dein Zugang vorhanden ist.";
-
-            try {
-                const response = await fetch(
-                    LOGIN_API_URL,
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-                        body: JSON.stringify({
-                            email
-                        })
-                    }
-                );
-
-                const result =
-                    await response.json();
-
-                if (!response.ok) {
-                    throw new Error(
-                        result.message ||
-                        "Die E-Mail-Adresse konnte nicht geprüft werden."
-                    );
+                if (loginButton.disabled) {
+                    return;
                 }
 
-                sessionStorage.setItem(
-                    "nvContactId",
-                    String(result.contact.id)
-                );
+                clearLoginMessages();
 
-                sessionStorage.setItem(
-                    "nvUserName",
-                    result.contact.name || ""
-                );
+                const email =
+                    emailInput.value
+                        .trim()
+                        .toLowerCase();
 
-                sessionStorage.setItem(
-                    "nvRegisteredEmail",
-                    result.contact.email || email
-                );
+                if (email === "") {
+                    emailError.textContent =
+                        "Bitte gib deine E-Mail-Adresse ein.";
 
-                formStatus.textContent =
-    "Zugang gefunden. Du wirst weitergeleitet.";
+                    emailInput.classList.add(
+                        "input-error"
+                    );
 
-buttonText.textContent =
-    "Zugang gefunden";
+                    formStatus.textContent =
+                        "Bitte überprüfe deine Eingabe.";
 
-window.setTimeout(() => {
-    sessionStorage.setItem(
-        "nvLoggedIn",
-        "true"
-    );
+                    return;
+                }
 
-    window.location.href =
-        "mission-control.html";
-}, 1200);
-                    "Zugang gefunden";
-            } catch (error) {
-                console.error(
-                    "Login-Prüfung fehlgeschlagen:",
-                    error
-                );
+                if (!emailIsValid(email)) {
+                    emailError.textContent =
+                        "Bitte gib eine gültige E-Mail-Adresse ein.";
 
-                emailError.textContent =
-                    error.message;
+                    emailInput.classList.add(
+                        "input-error"
+                    );
 
-                emailInput.classList.add(
-                    "input-error"
-                );
+                    formStatus.textContent =
+                        "Bitte überprüfe deine Eingabe.";
 
-                formStatus.textContent =
-                    "Eine Anmeldung ist mit dieser E-Mail-Adresse noch nicht möglich.";
+                    return;
+                }
 
-                loginButton.disabled = false;
+                loginButton.disabled = true;
+
                 buttonText.textContent =
-                    "Sicher anmelden";
+                    "Code wird gesendet...";
+
+                formStatus.textContent =
+                    "Deine E-Mail-Adresse wird geprüft.";
+
+                try {
+                    const response = await fetch(
+                        REQUEST_CODE_API_URL,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+                            body: JSON.stringify({
+                                email
+                            })
+                        }
+                    );
+
+                    let result;
+
+                    try {
+                        result =
+                            await response.json();
+                    } catch {
+                        throw new Error(
+                            "Die Serverantwort konnte nicht verarbeitet werden."
+                        );
+                    }
+
+                    if (!response.ok) {
+                        throw new Error(
+                            result.message ||
+                            "Der Sicherheitscode konnte nicht angefordert werden."
+                        );
+                    }
+
+                    sessionStorage.setItem(
+                        "nvPendingEmail",
+                        email
+                    );
+
+                    formStatus.textContent =
+                        result.message ||
+                        "Der Sicherheitscode wurde per E-Mail versendet.";
+
+                    buttonText.textContent =
+                        "Code wurde gesendet";
+
+                    window.setTimeout(() => {
+                        loginButton.disabled = false;
+
+                        buttonText.textContent =
+                            "Code erneut anfordern";
+                    }, 3000);
+                } catch (error) {
+                    console.error(
+                        "Code-Anforderung fehlgeschlagen:",
+                        error
+                    );
+
+                    emailError.textContent =
+                        error.message;
+
+                    emailInput.classList.add(
+                        "input-error"
+                    );
+
+                    formStatus.textContent =
+                        "Der Sicherheitscode konnte nicht gesendet werden.";
+
+                    loginButton.disabled = false;
+
+                    buttonText.textContent =
+                        "Code anfordern";
+                }
             }
-        }
-    );
-}
+        );
+    }
 
     /*
      * Registrierung:
