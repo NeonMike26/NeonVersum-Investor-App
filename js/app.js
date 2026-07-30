@@ -211,9 +211,20 @@ if (loginForm) {
                 );
 
                 formStatus.textContent =
-                    "Zugang gefunden. Die E-Mail-Adresse ist registriert.";
+    "Zugang gefunden. Du wirst weitergeleitet.";
 
-                buttonText.textContent =
+buttonText.textContent =
+    "Zugang gefunden";
+
+window.setTimeout(() => {
+    sessionStorage.setItem(
+        "nvLoggedIn",
+        "true"
+    );
+
+    window.location.href =
+        "mission-control.html";
+}, 1200);
                     "Zugang gefunden";
             } catch (error) {
                 console.error(
