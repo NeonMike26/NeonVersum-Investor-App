@@ -673,9 +673,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
 
                         throw new Error(
-                            result.message ||
-                                "Die Registrierung konnte nicht gespeichert werden."
-                        );
+    result.details ||
+    result.message ||
+    "Die Registrierung konnte nicht gespeichert werden."
+);
                     }
 
                     sessionStorage.setItem(
