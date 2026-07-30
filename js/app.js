@@ -88,48 +88,57 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-     * Login: Formularprüfung
-     */
-    const loginForm = document.querySelector("#login-form");
+ * Login: E-Mail in Odoo prüfen
+ */
+const loginForm = document.querySelector("#login-form");
 
-    if (loginForm) {
-        const emailInput =
-            loginForm.querySelector("#email");
+if (loginForm) {
+    const LOGIN_API_URL =
+        "https://neonversum-api.m-fehringer.workers.dev/login";
 
-        const passwordInput =
-            loginForm.querySelector("#password");
+    const emailInput =
+        loginForm.querySelector("#email");
 
-        const emailError =
-            loginForm.querySelector("#email-error");
+    const passwordInput =
+        loginForm.querySelector("#password");
 
-        const passwordError =
-            loginForm.querySelector("#password-error");
+    const emailError =
+        loginForm.querySelector("#email-error");
 
-        const formStatus =
-            loginForm.querySelector("#form-status");
+    const passwordError =
+        loginForm.querySelector("#password-error");
 
-        const loginButton =
-            loginForm.querySelector("#login-button");
+    const formStatus =
+        loginForm.querySelector("#form-status");
 
-        const buttonText =
-            loginForm.querySelector(".button-text");
+    const loginButton =
+        loginForm.querySelector("#login-button");
 
-        const clearLoginMessages = () => {
-            emailError.textContent = "";
-            passwordError.textContent = "";
-            formStatus.textContent = "";
+    const buttonText =
+        loginForm.querySelector(".button-text");
 
-            emailInput.classList.remove("input-error");
-            passwordInput.classList.remove("input-error");
-        };
+    const clearLoginMessages = () => {
+        emailError.textContent = "";
+        passwordError.textContent = "";
+        formStatus.textContent = "";
 
-        loginForm.addEventListener("submit", (event) => {
+        emailInput.classList.remove("input-error");
+        passwordInput.classList.remove("input-error");
+    };
+
+    loginForm.addEventListener(
+        "submit",
+        async (event) => {
             event.preventDefault();
+
+            if (loginButton.disabled) {
+                return;
+            }
 
             clearLoginMessages();
 
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
+            const email =
+                emailInput.value.trim().toLowerCase();
 
             let formIsValid = true;
 
@@ -147,44 +156,88 @@ document.addEventListener("DOMContentLoaded", () => {
                 formIsValid = false;
             }
 
-            if (password === "") {
-                passwordError.textContent =
-                    "Bitte gib dein Passwort ein.";
-
-                passwordInput.classList.add("input-error");
-                formIsValid = false;
-            } else if (password.length < 8) {
-                passwordError.textContent =
-                    "Das Passwort muss mindestens 8 Zeichen haben.";
-
-                passwordInput.classList.add("input-error");
-                formIsValid = false;
-            }
-
             if (!formIsValid) {
                 formStatus.textContent =
-                    "Bitte überprüfe deine Eingaben.";
+                    "Bitte überprüfe deine Eingabe.";
 
                 return;
             }
 
             loginButton.disabled = true;
-            buttonText.textContent = "Anmeldung läuft...";
+            buttonText.textContent =
+                "E-Mail wird geprüft...";
 
             formStatus.textContent =
-                "Deine Eingaben werden geprüft.";
+                "Wir prüfen, ob dein Zugang vorhanden ist.";
 
-            window.setTimeout(() => {
-                sessionStorage.setItem(
-                    "nvLoggedIn",
-                    "true"
+            try {
+                const response = await fetch(
+                    LOGIN_API_URL,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+                        body: JSON.stringify({
+                            email
+                        })
+                    }
                 );
 
-                window.location.href =
-                    "mission-control.html";
-            }, 2000);
-        });
-    }
+                const result =
+                    await response.json();
+
+                if (!response.ok) {
+                    throw new Error(
+                        result.message ||
+                        "Die E-Mail-Adresse konnte nicht geprüft werden."
+                    );
+                }
+
+                sessionStorage.setItem(
+                    "nvContactId",
+                    String(result.contact.id)
+                );
+
+                sessionStorage.setItem(
+                    "nvUserName",
+                    result.contact.name || ""
+                );
+
+                sessionStorage.setItem(
+                    "nvRegisteredEmail",
+                    result.contact.email || email
+                );
+
+                formStatus.textContent =
+                    "Zugang gefunden. Die E-Mail-Adresse ist registriert.";
+
+                buttonText.textContent =
+                    "Zugang gefunden";
+            } catch (error) {
+                console.error(
+                    "Login-Prüfung fehlgeschlagen:",
+                    error
+                );
+
+                emailError.textContent =
+                    error.message;
+
+                emailInput.classList.add(
+                    "input-error"
+                );
+
+                formStatus.textContent =
+                    "Eine Anmeldung ist mit dieser E-Mail-Adresse noch nicht möglich.";
+
+                loginButton.disabled = false;
+                buttonText.textContent =
+                    "Sicher anmelden";
+            }
+        }
+    );
+}
 
     /*
      * Registrierung:
