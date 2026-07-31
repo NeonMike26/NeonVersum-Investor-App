@@ -103,16 +103,14 @@ if (!isLoggedIn) {
 <script src="../js/mission-control.js?v=23"></script>
 
 <script>
-if (sessionStorage.getItem("nvLoggedIn") !== "true") {
-    window.location.replace("login.html");
-}
-
 const logoutButton =
     document.getElementById("logout-button");
 
 if (logoutButton) {
     logoutButton.addEventListener("click", () => {
         sessionStorage.clear();
+        localStorage.clear();
+
         window.location.replace("login.html");
     });
 }
