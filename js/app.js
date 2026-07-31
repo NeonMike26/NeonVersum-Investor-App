@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-       /*
-     * Login: Sicherheitscode per E-Mail anfordern
+           /*
+     * Login: Sicherheitscode anfordern und bestätigen
      */
     const loginForm =
         document.querySelector("#login-form");
@@ -96,6 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loginForm) {
         const REQUEST_CODE_API_URL =
             "https://neonversum-api.m-fehringer.workers.dev/request-code";
+
+        const VERIFY_CODE_API_URL =
+            "https://neonversum-api.m-fehringer.workers.dev/verify-code";
 
         const emailInput =
             loginForm.querySelector("#email");
@@ -112,6 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const buttonText =
             loginForm.querySelector(".button-text");
 
+        let codeInput = null;
+        let codeError = null;
+        let codeWasRequested = false;
+
         const clearLoginMessages = () => {
             emailError.textContent = "";
             formStatus.textContent = "";
@@ -119,52 +126,126 @@ document.addEventListener("DOMContentLoaded", () => {
             emailInput.classList.remove(
                 "input-error"
             );
+
+            if (codeInput) {
+                codeInput.classList.remove(
+                    "input-error"
+                );
+            }
+
+            if (codeError) {
+                codeError.textContent = "";
+            }
         };
 
-        loginForm.addEventListener(
-            "submit",
-            async (event) => {
-                event.preventDefault();
+        const showCodeInput = () => {
+            if (codeInput) {
+                codeInput.focus();
+                return;
+            }
 
-                if (loginButton.disabled) {
-                    return;
-                }
+            const codeGroup =
+                document.createElement("div");
 
-                clearLoginMessages();
+            codeGroup.className =
+                "form-group";
 
-                const email =
-                    emailInput.value
-                        .trim()
-                        .toLowerCase();
+            codeGroup.id =
+                "security-code-group";
 
-                if (email === "") {
-                    emailError.textContent =
-                        "Bitte gib deine E-Mail-Adresse ein.";
+            const codeLabel =
+                document.createElement("label");
 
-                    emailInput.classList.add(
+            codeLabel.setAttribute(
+                "for",
+                "security-code"
+            );
+
+            codeLabel.textContent =
+                "Sicherheitscode";
+
+            codeInput =
+                document.createElement("input");
+
+            codeInput.id =
+                "security-code";
+
+            codeInput.name =
+                "security-code";
+
+            codeInput.type =
+                "text";
+
+            codeInput.inputMode =
+                "numeric";
+
+            codeInput.autocomplete =
+                "one-time-code";
+
+            codeInput.placeholder =
+                "6-stelligen Code eingeben";
+
+            codeInput.maxLength =
+                6;
+
+            codeInput.setAttribute(
+                "aria-describedby",
+                "security-code-error"
+            );
+
+            codeError =
+                document.createElement("p");
+
+            codeError.className =
+                "form-error";
+
+            codeError.id =
+                "security-code-error";
+
+            codeGroup.appendChild(
+                codeLabel
+            );
+
+            codeGroup.appendChild(
+                codeInput
+            );
+
+            codeGroup.appendChild(
+                codeError
+            );
+
+            const checkboxRow =
+                loginForm.querySelector(
+                    ".checkbox-row"
+                );
+
+            loginForm.insertBefore(
+                codeGroup,
+                checkboxRow
+            );
+
+            codeInput.addEventListener(
+                "input",
+                () => {
+                    codeInput.value =
+                        codeInput.value
+                            .replace(/\D/g, "")
+                            .slice(0, 6);
+
+                    codeInput.classList.remove(
                         "input-error"
                     );
 
-                    formStatus.textContent =
-                        "Bitte überprüfe deine Eingabe.";
-
-                    return;
+                    codeError.textContent = "";
+                    formStatus.textContent = "";
                 }
+            );
 
-                if (!emailIsValid(email)) {
-                    emailError.textContent =
-                        "Bitte gib eine gültige E-Mail-Adresse ein.";
+            codeInput.focus();
+        };
 
-                    emailInput.classList.add(
-                        "input-error"
-                    );
-
-                    formStatus.textContent =
-                        "Bitte überprüfe deine Eingabe.";
-
-                    return;
-                }
-
+        const requestSecurityCode =
+            async (email) => {
                 loginButton.disabled = true;
 
                 buttonText.textContent =
@@ -211,19 +292,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         email
                     );
 
+                    codeWasRequested = true;
+
+                    showCodeInput();
+
                     formStatus.textContent =
                         result.message ||
                         "Der Sicherheitscode wurde per E-Mail versendet.";
 
                     buttonText.textContent =
-                        "Code wurde gesendet";
+                        "Code bestätigen";
 
-                    window.setTimeout(() => {
-                        loginButton.disabled = false;
-
-                        buttonText.textContent =
-                            "Code erneut anfordern";
-                    }, 3000);
+                    loginButton.disabled = false;
                 } catch (error) {
                     console.error(
                         "Code-Anforderung fehlgeschlagen:",
@@ -245,6 +325,177 @@ document.addEventListener("DOMContentLoaded", () => {
                     buttonText.textContent =
                         "Code anfordern";
                 }
+            };
+
+        const verifySecurityCode =
+            async (email, code) => {
+                loginButton.disabled = true;
+
+                buttonText.textContent =
+                    "Code wird geprüft...";
+
+                formStatus.textContent =
+                    "Dein Sicherheitscode wird geprüft.";
+
+                try {
+                    const response = await fetch(
+                        VERIFY_CODE_API_URL,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+                            body: JSON.stringify({
+                                email,
+                                code
+                            })
+                        }
+                    );
+
+                    let result;
+
+                    try {
+                        result =
+                            await response.json();
+                    } catch {
+                        throw new Error(
+                            "Die Serverantwort konnte nicht verarbeitet werden."
+                        );
+                    }
+
+                    if (!response.ok) {
+                        throw new Error(
+                            result.message ||
+                            "Der Sicherheitscode konnte nicht bestätigt werden."
+                        );
+                    }
+
+                    sessionStorage.setItem(
+                        "nvLoggedIn",
+                        "true"
+                    );
+
+                    sessionStorage.setItem(
+                        "nvRegisteredEmail",
+                        result.contact?.email || email
+                    );
+
+                    if (result.contact?.id) {
+                        sessionStorage.setItem(
+                            "nvContactId",
+                            String(result.contact.id)
+                        );
+                    }
+
+                    sessionStorage.removeItem(
+                        "nvPendingEmail"
+                    );
+
+                    formStatus.textContent =
+                        "Anmeldung erfolgreich. Du wirst weitergeleitet.";
+
+                    buttonText.textContent =
+                        "Anmeldung erfolgreich";
+
+                    window.setTimeout(() => {
+                        window.location.href =
+                            "mission-control.html";
+                    }, 1000);
+                } catch (error) {
+                    console.error(
+                        "Code-Prüfung fehlgeschlagen:",
+                        error
+                    );
+
+                    codeError.textContent =
+                        error.message;
+
+                    codeInput.classList.add(
+                        "input-error"
+                    );
+
+                    formStatus.textContent =
+                        "Bitte überprüfe den eingegebenen Sicherheitscode.";
+
+                    loginButton.disabled = false;
+
+                    buttonText.textContent =
+                        "Code bestätigen";
+                }
+            };
+
+        loginForm.addEventListener(
+            "submit",
+            async (event) => {
+                event.preventDefault();
+
+                if (loginButton.disabled) {
+                    return;
+                }
+
+                clearLoginMessages();
+
+                const email =
+                    emailInput.value
+                        .trim()
+                        .toLowerCase();
+
+                if (email === "") {
+                    emailError.textContent =
+                        "Bitte gib deine E-Mail-Adresse ein.";
+
+                    emailInput.classList.add(
+                        "input-error"
+                    );
+
+                    formStatus.textContent =
+                        "Bitte überprüfe deine Eingabe.";
+
+                    return;
+                }
+
+                if (!emailIsValid(email)) {
+                    emailError.textContent =
+                        "Bitte gib eine gültige E-Mail-Adresse ein.";
+
+                    emailInput.classList.add(
+                        "input-error"
+                    );
+
+                    formStatus.textContent =
+                        "Bitte überprüfe deine Eingabe.";
+
+                    return;
+                }
+
+                if (!codeWasRequested) {
+                    await requestSecurityCode(email);
+                    return;
+                }
+
+                const code =
+                    codeInput.value.trim();
+
+                if (!/^\d{6}$/.test(code)) {
+                    codeError.textContent =
+                        "Bitte gib den vollständigen 6-stelligen Code ein.";
+
+                    codeInput.classList.add(
+                        "input-error"
+                    );
+
+                    formStatus.textContent =
+                        "Bitte überprüfe den Sicherheitscode.";
+
+                    codeInput.focus();
+                    return;
+                }
+
+                await verifySecurityCode(
+                    email,
+                    code
+                );
             }
         );
     }
