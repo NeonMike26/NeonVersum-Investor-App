@@ -115,6 +115,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const buttonText =
             loginForm.querySelector(".button-text");
 
+        const rememberCheckbox =
+    loginForm.querySelector(
+        'input[name="remember"]'
+    );
+
         let codeInput = null;
         let codeError = null;
         let codeWasRequested = false;
@@ -371,10 +376,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         );
                     }
 
-                    sessionStorage.setItem(
-                        "nvLoggedIn",
-                        "true"
-                    );
+                    const storage =
+    rememberCheckbox?.checked
+        ? localStorage
+        : sessionStorage;
+
+storage.setItem(
+    "nvLoggedIn",
+    "true"
+);
 
                     sessionStorage.setItem(
                         "nvRegisteredEmail",
