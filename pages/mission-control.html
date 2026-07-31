@@ -27,10 +27,6 @@ if (sessionStorage.getItem("nvLoggedIn") !== "true") {
 <button
     id="logout-button"
     type="button"
-    onclick="
-        sessionStorage.removeItem('nvLoggedIn');
-        window.location.replace('login.html');
-    "
     style="
         position: fixed;
         top: 20px;
@@ -106,12 +102,12 @@ if (sessionStorage.getItem("nvLoggedIn") !== "true") {
     window.location.replace("login.html");
 }
 
-const logoutButton = document.getElementById("logout-button");
+const logoutButton =
+    document.getElementById("logout-button");
 
 if (logoutButton) {
     logoutButton.addEventListener("click", () => {
-        alert("Logout geklickt");
-        sessionStorage.removeItem("nvLoggedIn");
+        sessionStorage.clear();
         window.location.replace("login.html");
     });
 }
