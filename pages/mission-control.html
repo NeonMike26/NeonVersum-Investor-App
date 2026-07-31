@@ -10,7 +10,12 @@ name="viewport"
 content="width=device-width, initial-scale=1.0">
 
 <script>
-if (sessionStorage.getItem("nvLoggedIn") !== "true") {
+<script>
+const isLoggedIn =
+    sessionStorage.getItem("nvLoggedIn") === "true" ||
+    localStorage.getItem("nvLoggedIn") === "true";
+
+if (!isLoggedIn) {
     window.location.replace("login.html");
 }
 </script>
