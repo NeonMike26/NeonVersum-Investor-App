@@ -558,6 +558,13 @@ const formatCurrency = (value) => {
                 );
 
                 setText(
+    "portfolio-value",
+    formatCurrency(
+        portfolio.currentPortfolioValue
+    )
+);
+                
+                setText(
                     "investor-id",
                     displayValue(
                         investor.x_studio_investor_id
