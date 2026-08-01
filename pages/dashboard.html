@@ -459,6 +459,25 @@
             return rawValue;
         };
 
+const formatCurrency = (value) => {
+    const numberValue =
+        Number(value);
+
+    if (!Number.isFinite(numberValue)) {
+        return "Noch nicht hinterlegt";
+    }
+
+    return new Intl.NumberFormat(
+        "de-AT",
+        {
+            style: "currency",
+            currency: "EUR",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    ).format(numberValue);
+};
+        
         const setText = (id, value) => {
             const element =
                 document.getElementById(id);
