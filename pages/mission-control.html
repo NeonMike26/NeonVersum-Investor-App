@@ -130,72 +130,18 @@ if (logoutButton) {
     });
 }
 
-async function loadInvestorData() {
+const welcomeMessage =
+    document.getElementById("welcome-message");
 
-    const email =
-    sessionStorage.getItem("nvRegisteredEmail") ||
-    localStorage.getItem("nvRegisteredEmail");
+const storedName =
+    sessionStorage.getItem("nvUserName") ||
+    localStorage.getItem("nvUserName");
 
-    if (!email) {
-        return;
-    }
-
-    const info =
-        document.getElementById("investor-info");
-
-    try {
-
-        const response = await fetch(
-            "https://neonversum-api.m-fehringer.workers.dev/investor",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: email
-                })
-            }
-        );
-
-        const result =
-            await response.json();
-
-        if (!result.success) {
-            info.innerHTML =
-                "Investor konnte nicht geladen werden.";
-            return;
-        }
-
-        const investor =
-            result.investor;
-
-        info.innerHTML = `
-            <strong>${investor.name}</strong><br><br>
-
-            Investor-ID<br>
-            ${investor.x_studio_investor_id}<br><br>
-
-            Status<br>
-            ${investor.x_studio_investor_status}<br><br>
-
-            Token<br>
-            ${investor.x_studio_token_bestand}<br><br>
-
-            Investiert<br>
-            ${investor.x_studio_investierter_betrag}<br><br>
-
-            Referral<br>
-            ${investor.x_studio_referral_code}
-        `;
-
-    } catch (error) {
-
-        info.innerHTML =
-            "Fehler beim Laden der Investor-Daten.";
-
-    }
-
+if (welcomeMessage) {
+    welcomeMessage.textContent =
+        storedName
+            ? `Herzlich willkommen zurück, ${storedName}.`
+            : "Herzlich willkommen zurück.";
 }
 
 loadInvestorData();
