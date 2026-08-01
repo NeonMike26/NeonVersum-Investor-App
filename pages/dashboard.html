@@ -570,6 +570,18 @@ setText(
         portfolio.currentTokenPrice
     )
 );
+
+setText(
+    "token-balance",
+    new Intl.NumberFormat(
+        "de-AT",
+        {
+            maximumFractionDigits: 0
+        }
+    ).format(
+        Number(portfolio.tokenBalance)
+    )
+);
                 
                 setText(
     "value-increase",
