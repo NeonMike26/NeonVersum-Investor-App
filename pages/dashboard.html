@@ -571,6 +571,16 @@ const formatCurrency = (value) => {
         portfolio.valueIncrease
     )
 );
+
+    setText(
+    "value-increase-percent",
+    "+" +
+    Number(
+        portfolio.valueIncreasePercent
+    ).toFixed(2)
+        .replace(".", ",") +
+    " %"
+);
                 
                 setText(
                     "investor-id",
