@@ -568,6 +568,13 @@ const formatCurrency = (value) => {
 );
 
 setText(
+    "portfolio-invested",
+    formatCurrency(
+        portfolio.investmentAmount
+    )
+);
+                
+setText(
     "current-token-price",
     formatCurrency(
         portfolio.currentTokenPrice
