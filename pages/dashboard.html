@@ -6,61 +6,67 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
     <meta
         name="theme-color"
-        content="#050713">
+        content="#050713"
+    >
+
+    <script>
+        const isLoggedIn =
+            sessionStorage.getItem("nvLoggedIn") === "true" ||
+            localStorage.getItem("nvLoggedIn") === "true";
+
+        if (!isLoggedIn) {
+            window.location.replace("login.html");
+        }
+    </script>
 
     <title>NeonVersum – Mission Dashboard</title>
 
     <link
         rel="stylesheet"
-        href="../css/dashboard.css?v=112">
+        href="../css/dashboard.css?v=112"
+    >
 </head>
 
 <body>
 
-    
     <main class="dashboard">
-
-        <!-- =====================================
-             HEADER
-        ====================================== -->
 
         <header class="dashboard-header">
 
             <img
                 src="../images/PNG LOGO.png"
                 alt="NeonVersum"
-                class="dashboard-logo">
+                class="dashboard-logo"
+            >
 
             <h1>MISSION DASHBOARD</h1>
 
             <p class="dashboard-welcome">
-    Willkommen zurück,
-    <span id="dashboard-user-name">Investor</span> 👋
-</p>
+                Willkommen zurück,
+                <span id="dashboard-user-name">
+                    Investor
+                </span>
+                👋
+            </p>
 
-<script>
-const userName = sessionStorage.getItem("nvUserName");
-
-if (userName) {
-    document.getElementById("dashboard-user-name").textContent = userName;
-}
-</script>
+            <p
+                id="dashboard-status"
+                class="dashboard-welcome"
+                aria-live="polite"
+            >
+                Investor-Daten werden geladen...
+            </p>
 
         </header>
 
-
-        <!-- =====================================
-             DASHBOARD CONTENT
-        ====================================== -->
-
         <section class="dashboard-content">
 
-
-            <!-- PORTFOLIO -->
+            <!-- GESAMTINVESTMENT -->
 
             <article class="card portfolio-card">
 
@@ -70,8 +76,11 @@ if (userName) {
                         Portfolio
                     </span>
 
-                    <strong class="portfolio-value">
-                        12.450&nbsp;€
+                    <strong
+                        class="portfolio-value"
+                        id="invested-amount"
+                    >
+                        —
                     </strong>
 
                     <span class="portfolio-label">
@@ -82,8 +91,8 @@ if (userName) {
 
                 <div
                     class="portfolio-orb"
-                    aria-hidden="true">
-
+                    aria-hidden="true"
+                >
                     <span class="orb-ring orb-ring-one"></span>
                     <span class="orb-ring orb-ring-two"></span>
 
@@ -96,19 +105,11 @@ if (userName) {
                         <i></i>
                         <i></i>
                     </span>
-
                 </div>
-
-                <span
-                    class="card-arrow"
-                    aria-hidden="true">
-                    ›
-                </span>
 
             </article>
 
-
-            <!-- NEWS -->
+            <!-- INVESTOR-ID -->
 
             <article class="news-card">
 
@@ -116,18 +117,22 @@ if (userName) {
 
                     <div
                         class="news-icon"
-                        aria-hidden="true">
-                        ♢
+                        aria-hidden="true"
+                    >
+                        ◇
                     </div>
 
                     <div class="news-copy">
 
                         <strong class="news-title">
-                            News
+                            Investor-ID
                         </strong>
 
-                        <span class="news-update">
-                            Letztes Update: Heute 08:15 Uhr
+                        <span
+                            class="news-update"
+                            id="investor-id"
+                        >
+                            —
                         </span>
 
                     </div>
@@ -137,26 +142,16 @@ if (userName) {
                 <div class="news-right">
 
                     <span class="news-badge">
-                        2 NEU
-                    </span>
-
-                    <span
-                        class="news-arrow"
-                        aria-hidden="true">
-                        ›
+                        VERIFIZIERT
                     </span>
 
                 </div>
 
             </article>
 
-
-            <!-- TOKEN + HOLDER -->
+            <!-- TOKENBESTAND UND STATUS -->
 
             <div class="dashboard-row">
-
-
-                <!-- TOKENPREIS -->
 
                 <article class="card token-card">
 
@@ -165,34 +160,33 @@ if (userName) {
                     </div>
 
                     <span class="card-eyebrow">
-                        Tokenpreis
+                        Tokenbestand
                     </span>
 
-                    <strong class="small-card-value">
-                        3,25&nbsp;€
+                    <strong
+                        class="small-card-value"
+                        id="token-balance"
+                    >
+                        —
                     </strong>
 
                     <span class="positive-badge">
-                        +4,8 % heute
+                        NeonVersum Token
                     </span>
 
                     <div
                         class="token-chart"
-                        aria-hidden="true">
-
+                        aria-hidden="true"
+                    >
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
-
                     </div>
 
                 </article>
-
-
-                <!-- HOLDER STATUS -->
 
                 <article class="card holder-card">
 
@@ -201,48 +195,52 @@ if (userName) {
                     </div>
 
                     <span class="card-eyebrow">
-                        Holder Status
+                        Investor-Status
                     </span>
 
-                    <strong class="holder-rank">
-                        Gold Holder
+                    <strong
+                        class="holder-rank"
+                        id="investor-status"
+                    >
+                        —
                     </strong>
 
                     <span class="holder-position">
-                        Rang 27
+                        NeonVersum Investor
                     </span>
 
                     <div
                         class="holder-emblem"
-                        aria-hidden="true">
-
+                        aria-hidden="true"
+                    >
                         <span class="emblem-core">
                             NV
                         </span>
-
                     </div>
 
                 </article>
 
             </div>
 
-
-            <!-- NÄCHSTE TOKENPHASE -->
+            <!-- REFERRAL -->
 
             <article class="card phase-card">
 
                 <div class="phase-main">
 
                     <span class="card-eyebrow">
-                        Nächste Tokenphase
+                        Persönlicher Referral-Code
                     </span>
 
-                    <strong class="phase-title">
-                        PreLaunch
+                    <strong
+                        class="phase-title"
+                        id="referral-code"
+                    >
+                        —
                     </strong>
 
                     <span class="phase-date">
-                        Start am 01.10.2026
+                        Für persönliche Einladungen
                     </span>
 
                 </div>
@@ -250,24 +248,21 @@ if (userName) {
                 <div class="phase-status">
 
                     <span class="phase-status-label">
-                        Startet in
+                        Status
                     </span>
 
                     <strong class="phase-countdown">
-                        64 Tagen
+                        Aktiv
                     </strong>
 
                 </div>
 
             </article>
 
-
-            <!-- ZURÜCK ZUR MISSION CONTROL -->
-
             <a
                 href="mission-control.html"
-                class="mission-control-link">
-
+                class="mission-control-link"
+            >
                 <span class="mission-control-icon">
                     ◉
                 </span>
@@ -275,12 +270,207 @@ if (userName) {
                 <span>
                     Zurück zur Mission Control
                 </span>
-
             </a>
 
         </section>
 
     </main>
+
+    <script>
+        const INVESTOR_API_URL =
+            "https://neonversum-api.m-fehringer.workers.dev/investor";
+
+        const readStoredValue = (key) => {
+            return (
+                sessionStorage.getItem(key) ||
+                localStorage.getItem(key) ||
+                ""
+            );
+        };
+
+        const displayValue = (value) => {
+            if (
+                value === false ||
+                value === null ||
+                value === undefined ||
+                String(value).trim() === ""
+            ) {
+                return "Noch nicht hinterlegt";
+            }
+
+            return String(value);
+        };
+
+        const formatInvestment = (value) => {
+            if (
+                value === false ||
+                value === null ||
+                value === undefined ||
+                String(value).trim() === ""
+            ) {
+                return "Noch nicht hinterlegt";
+            }
+
+            const rawValue = String(value).trim();
+
+            if (rawValue.includes("€")) {
+                return rawValue;
+            }
+
+            const normalizedValue = rawValue
+                .replace(/\./g, "")
+                .replace(",", ".");
+
+            const numberValue =
+                Number(normalizedValue);
+
+            if (Number.isFinite(numberValue)) {
+                return new Intl.NumberFormat(
+                    "de-AT",
+                    {
+                        style: "currency",
+                        currency: "EUR",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 2
+                    }
+                ).format(numberValue);
+            }
+
+            return rawValue;
+        };
+
+        const setText = (id, value) => {
+            const element =
+                document.getElementById(id);
+
+            if (element) {
+                element.textContent = value;
+            }
+        };
+
+        const loadInvestorDashboard = async () => {
+            const email =
+                readStoredValue("nvRegisteredEmail");
+
+            const storedName =
+                readStoredValue("nvUserName");
+
+            if (storedName) {
+                setText(
+                    "dashboard-user-name",
+                    storedName
+                );
+            }
+
+            if (!email) {
+                setText(
+                    "dashboard-status",
+                    "Die angemeldete E-Mail-Adresse wurde nicht gefunden."
+                );
+
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    INVESTOR_API_URL,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+                        body: JSON.stringify({
+                            email
+                        })
+                    }
+                );
+
+                let result;
+
+                try {
+                    result =
+                        await response.json();
+                } catch {
+                    throw new Error(
+                        "Die Serverantwort konnte nicht verarbeitet werden."
+                    );
+                }
+
+                if (!response.ok || !result.success) {
+                    throw new Error(
+                        result.message ||
+                        "Die Investor-Daten konnten nicht geladen werden."
+                    );
+                }
+
+                const investor =
+                    result.investor;
+
+                const fullName =
+                    displayValue(investor.name);
+
+                setText(
+                    "dashboard-user-name",
+                    fullName
+                );
+
+                setText(
+                    "investor-id",
+                    displayValue(
+                        investor.x_studio_investor_id
+                    )
+                );
+
+                setText(
+                    "investor-status",
+                    displayValue(
+                        investor.x_studio_investor_status
+                    )
+                );
+
+                setText(
+                    "token-balance",
+                    displayValue(
+                        investor.x_studio_token_bestand
+                    )
+                );
+
+                setText(
+                    "invested-amount",
+                    formatInvestment(
+                        investor.x_studio_investierter_betrag
+                    )
+                );
+
+                setText(
+                    "referral-code",
+                    displayValue(
+                        investor.x_studio_referral_code
+                    )
+                );
+
+                setText(
+                    "dashboard-status",
+                    "Deine Daten wurden aktuell aus Odoo geladen."
+                );
+
+            } catch (error) {
+                console.error(
+                    "Dashboard-Fehler:",
+                    error
+                );
+
+                setText(
+                    "dashboard-status",
+                    error.message ||
+                    "Die Investor-Daten konnten nicht geladen werden."
+                );
+            }
+        };
+
+        loadInvestorDashboard();
+    </script>
 
 </body>
 
