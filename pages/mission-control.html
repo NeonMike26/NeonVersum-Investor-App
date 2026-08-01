@@ -133,8 +133,8 @@ if (logoutButton) {
 async function loadInvestorData() {
 
     const email =
-        sessionStorage.getItem("nvEmail") ||
-        localStorage.getItem("nvEmail");
+    sessionStorage.getItem("nvRegisteredEmail") ||
+    localStorage.getItem("nvRegisteredEmail");
 
     if (!email) {
         return;
