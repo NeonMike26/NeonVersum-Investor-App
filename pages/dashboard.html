@@ -66,213 +66,333 @@
 
         <section class="dashboard-content">
 
-            <!-- GESAMTINVESTMENT -->
+    <!-- PORTFOLIOWERT -->
 
-            <article class="card portfolio-card">
+    <article class="card portfolio-card">
 
-                <div class="portfolio-content">
+        <div class="portfolio-content">
 
-                    <span class="card-eyebrow">
-                        Portfolio
-                    </span>
+            <span class="card-eyebrow">
+                Dein Portfolio
+            </span>
 
-                    <strong
-                        class="portfolio-value"
-                        id="invested-amount"
-                    >
-                        —
-                    </strong>
+            <strong
+                class="portfolio-value"
+                id="portfolio-value"
+            >
+                —
+            </strong>
 
-                    <span class="portfolio-label">
-                        Gesamtinvestment
-                    </span>
+            <span class="portfolio-label">
+                Aktueller Gesamtwert
+            </span>
 
-                </div>
+            <div
+                id="value-increase"
+                style="
+                    margin-top:18px;
+                    color:#48ff83;
+                    font-size:24px;
+                    font-weight:800;
+                "
+            >
+                —
+            </div>
 
-                <div
-                    class="portfolio-orb"
-                    aria-hidden="true"
+            <div
+                id="value-increase-percent"
+                style="
+                    margin-top:6px;
+                    color:#48ff83;
+                    font-size:17px;
+                    font-weight:700;
+                "
+            >
+                —
+            </div>
+
+        </div>
+
+        <div
+            class="portfolio-orb"
+            aria-hidden="true"
+        >
+            <span class="orb-ring orb-ring-one"></span>
+            <span class="orb-ring orb-ring-two"></span>
+
+            <span class="orb-wave">
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+
+    </article>
+
+    <!-- INVESTOR-ID -->
+
+    <article class="news-card">
+
+        <div class="news-left">
+
+            <div
+                class="news-icon"
+                aria-hidden="true"
+            >
+                ◇
+            </div>
+
+            <div class="news-copy">
+
+                <strong class="news-title">
+                    Investor-ID
+                </strong>
+
+                <span
+                    class="news-update"
+                    id="investor-id"
                 >
-                    <span class="orb-ring orb-ring-one"></span>
-                    <span class="orb-ring orb-ring-two"></span>
-
-                    <span class="orb-wave">
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                    </span>
-                </div>
-
-            </article>
-
-            <!-- INVESTOR-ID -->
-
-            <article class="news-card">
-
-                <div class="news-left">
-
-                    <div
-                        class="news-icon"
-                        aria-hidden="true"
-                    >
-                        ◇
-                    </div>
-
-                    <div class="news-copy">
-
-                        <strong class="news-title">
-                            Investor-ID
-                        </strong>
-
-                        <span
-                            class="news-update"
-                            id="investor-id"
-                        >
-                            —
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div class="news-right">
-
-                    <span class="news-badge">
-                        VERIFIZIERT
-                    </span>
-
-                </div>
-
-            </article>
-
-            <!-- TOKENBESTAND UND STATUS -->
-
-            <div class="dashboard-row">
-
-                <article class="card token-card">
-
-                    <div class="card-icon token-icon">
-                        ◒
-                    </div>
-
-                    <span class="card-eyebrow">
-                        Tokenbestand
-                    </span>
-
-                    <strong
-                        class="small-card-value"
-                        id="token-balance"
-                    >
-                        —
-                    </strong>
-
-                    <span class="positive-badge">
-                        NeonVersum Token
-                    </span>
-
-                    <div
-                        class="token-chart"
-                        aria-hidden="true"
-                    >
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-
-                </article>
-
-                <article class="card holder-card">
-
-                    <div class="card-icon holder-icon">
-                        ◈
-                    </div>
-
-                    <span class="card-eyebrow">
-                        Investor-Status
-                    </span>
-
-                    <strong
-                        class="holder-rank"
-                        id="investor-status"
-                    >
-                        —
-                    </strong>
-
-                    <span class="holder-position">
-                        NeonVersum Investor
-                    </span>
-
-                    <div
-                        class="holder-emblem"
-                        aria-hidden="true"
-                    >
-                        <span class="emblem-core">
-                            NV
-                        </span>
-                    </div>
-
-                </article>
+                    —
+                </span>
 
             </div>
 
-            <!-- REFERRAL -->
+        </div>
 
-            <article class="card phase-card">
+        <div class="news-right">
 
-                <div class="phase-main">
+            <span class="news-badge">
+                VERIFIZIERT
+            </span>
 
-                    <span class="card-eyebrow">
-                        Persönlicher Referral-Code
-                    </span>
+        </div>
 
-                    <strong
-                        class="phase-title"
-                        id="referral-code"
-                    >
-                        —
-                    </strong>
+    </article>
 
-                    <span class="phase-date">
-                        Für persönliche Einladungen
-                    </span>
+    <!-- TOKENBESTAND UND TOKENPREIS -->
 
-                </div>
+    <div class="dashboard-row">
 
-                <div class="phase-status">
+        <article class="card token-card">
 
-                    <span class="phase-status-label">
-                        Status
-                    </span>
+            <div class="card-icon token-icon">
+                ◒
+            </div>
 
-                    <strong class="phase-countdown">
-                        Aktiv
-                    </strong>
+            <span class="card-eyebrow">
+                Tokenbestand
+            </span>
 
-                </div>
-
-            </article>
-
-            <a
-                href="mission-control.html"
-                class="mission-control-link"
+            <strong
+                class="small-card-value"
+                id="token-balance"
             >
-                <span class="mission-control-icon">
-                    ◉
-                </span>
+                —
+            </strong>
 
-                <span>
-                    Zurück zur Mission Control
-                </span>
-            </a>
+            <span class="positive-badge">
+                NV Token
+            </span>
 
-        </section>
+            <div
+                class="token-chart"
+                aria-hidden="true"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </article>
+
+        <article class="card holder-card">
+
+            <div class="card-icon holder-icon">
+                €
+            </div>
+
+            <span class="card-eyebrow">
+                Aktueller Tokenpreis
+            </span>
+
+            <strong
+                class="holder-rank"
+                id="current-token-price"
+            >
+                —
+            </strong>
+
+            <span class="holder-position">
+                Aktive Phase
+            </span>
+
+            <div
+                class="holder-emblem"
+                aria-hidden="true"
+            >
+                <span class="emblem-core">
+                    NV
+                </span>
+            </div>
+
+        </article>
+
+    </div>
+
+    <!-- INVESTMENT UND STATUS -->
+
+    <div class="dashboard-row">
+
+        <article class="card token-card">
+
+            <div class="card-icon token-icon">
+                €
+            </div>
+
+            <span class="card-eyebrow">
+                Investierter Betrag
+            </span>
+
+            <strong
+                class="small-card-value"
+                id="invested-amount"
+            >
+                —
+            </strong>
+
+            <span class="positive-badge">
+                Gesamteinzahlung
+            </span>
+
+        </article>
+
+        <article class="card holder-card">
+
+            <div class="card-icon holder-icon">
+                ◈
+            </div>
+
+            <span class="card-eyebrow">
+                Investor-Status
+            </span>
+
+            <strong
+                class="holder-rank"
+                id="investor-status"
+            >
+                —
+            </strong>
+
+            <span class="holder-position">
+                NeonVersum Investor
+            </span>
+
+            <div
+                class="holder-emblem"
+                aria-hidden="true"
+            >
+                <span class="emblem-core">
+                    NV
+                </span>
+            </div>
+
+        </article>
+
+    </div>
+
+    <!-- REFERRAL -->
+
+    <article class="card phase-card">
+
+        <div class="phase-main">
+
+            <span class="card-eyebrow">
+                Persönlicher Referral-Code
+            </span>
+
+            <strong
+                class="phase-title"
+                id="referral-code"
+            >
+                —
+            </strong>
+
+            <span class="phase-date">
+                Für persönliche Einladungen
+            </span>
+
+        </div>
+
+        <div class="phase-status">
+
+            <span class="phase-status-label">
+                Status
+            </span>
+
+            <strong class="phase-countdown">
+                Aktiv
+            </strong>
+
+        </div>
+
+    </article>
+
+    <!-- KAUFHISTORIE -->
+
+    <article class="card">
+
+        <span class="card-eyebrow">
+            Meine Käufe
+        </span>
+
+        <p
+            style="
+                margin:18px 0 0;
+                color:#9ba6c9;
+                font-size:16px;
+                line-height:1.6;
+            "
+        >
+            Deine einzelnen Tokenkäufe mit Datum, Phase,
+            Preis und Betrag werden hier angezeigt.
+        </p>
+
+        <div
+            style="
+                margin-top:22px;
+                padding:18px;
+                border:1px solid rgba(255,255,255,0.10);
+                border-radius:18px;
+                color:#9ba6c9;
+                text-align:center;
+            "
+        >
+            Kaufhistorie wird im nächsten Schritt verbunden.
+        </div>
+
+    </article>
+
+    <a
+        href="mission-control.html"
+        class="mission-control-link"
+    >
+        <span class="mission-control-icon">
+            ◉
+        </span>
+
+        <span>
+            Zurück zur Mission Control
+        </span>
+    </a>
+
+</section>
 
     </main>
 
