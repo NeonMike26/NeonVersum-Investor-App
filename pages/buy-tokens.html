@@ -36,7 +36,11 @@ async function loadTokenPhase() {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }) + " €";
-
+    
+    document.getElementById(
+        "current-phase-name"
+    ).textContent =
+        result.phase.x_studio_phasenname;
 }
 
 loadTokenPhase();
