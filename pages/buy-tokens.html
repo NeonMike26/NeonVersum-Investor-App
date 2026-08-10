@@ -29,9 +29,13 @@ async function loadTokenPhase() {
     if (!result.success) return;
 
     document.getElementById(
-        "current-token-price"
-    ).textContent =
-        result.phase.x_studio_preis_eur + " €";
+    "current-token-price"
+).textContent =
+    Number(result.phase.x_studio_preis_eur)
+        .toLocaleString("de-AT", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + " €";
 
 }
 
