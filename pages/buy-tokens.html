@@ -721,6 +721,62 @@ function calculatePurchase() {
     const totalAmount =
         investmentAmount + processingFee;
 
+    const targetFactor =
+        Number(
+            tokenPhase.x_studio_ziel_faktor || 0
+        );
+
+    const targetValue =
+        investmentAmount * targetFactor;
+
+    document.getElementById(
+        "summary-tokens"
+    ).textContent =
+        formatTokens(tokenAmount);
+
+    document.getElementById(
+        "summary-investment"
+    ).textContent =
+        paymentMethod === "EUR"
+            ? formatEUR(investmentAmount)
+            : formatUSDC(investmentAmount);
+
+    document.getElementById(
+        "summary-fee"
+    ).textContent =
+        paymentMethod === "EUR"
+            ? formatEUR(processingFee)
+            : formatUSDC(processingFee);
+
+    document.getElementById(
+        "summary-total"
+    ).textContent =
+        paymentMethod === "EUR"
+            ? formatEUR(totalAmount)
+            : formatUSDC(totalAmount);
+
+    document.getElementById(
+        "summary-target-value"
+    ).textContent =
+        paymentMethod === "EUR"
+            ? formatEUR(targetValue)
+            : formatUSDC(targetValue);
+
+    document.getElementById(
+        "summary-target-meta"
+    ).textContent =
+        targetFactor > 0
+            ? `${targetFactor}x bis ${tokenPhase.x_studio_zielzeitpunkt || "Zielzeitpunkt offen"}`
+            : "Kein Ziel-Faktor hinterlegt";
+
+}
+
+    const processingFee =
+        investmentAmount * PROCESSING_FEE_RATE;
+
+    const totalAmount =
+        investmentAmount + processingFee;
+
     document.getElementById(
         "summary-tokens"
     ).textContent =
