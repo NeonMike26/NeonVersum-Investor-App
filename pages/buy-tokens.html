@@ -771,40 +771,7 @@ function calculatePurchase() {
 
 }
 
-    const processingFee =
-        investmentAmount * PROCESSING_FEE_RATE;
-
-    const totalAmount =
-        investmentAmount + processingFee;
-
-    document.getElementById(
-        "summary-tokens"
-    ).textContent =
-        formatTokens(tokenAmount);
-
-    document.getElementById(
-        "summary-investment"
-    ).textContent =
-        paymentMethod === "EUR"
-            ? formatEUR(investmentAmount)
-            : formatUSDC(investmentAmount);
-
-    document.getElementById(
-        "summary-fee"
-    ).textContent =
-        paymentMethod === "EUR"
-            ? formatEUR(processingFee)
-            : formatUSDC(processingFee);
-
-    document.getElementById(
-        "summary-total"
-    ).textContent =
-        paymentMethod === "EUR"
-            ? formatEUR(totalAmount)
-            : formatUSDC(totalAmount);
-
-}
-
+    
 
 function updatePaymentInfo() {
 
