@@ -6,15 +6,278 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Token kaufen | NeonVersum</title>
 
-<link
-    rel="stylesheet"
-    href="../css/dashboard.css?v=112">
-    
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css?v=112"
+    >
 </head>
+
+<body>
+
+<main
+    style="
+        max-width:700px;
+        margin:60px auto;
+        padding:30px;
+        color:white;
+        font-family:Arial,sans-serif;
+    "
+>
+
+    <h1>
+        💎 Token kaufen
+    </h1>
+
+    <p
+        style="
+            color:#9ba6c9;
+            font-size:18px;
+        "
+    >
+        Kaufe zusätzliche NeonVersum Token
+        zum aktuellen Phasenpreis.
+    </p>
+
+
+    <!-- AKTUELLER TOKENPREIS -->
+
+    <div
+        style="
+            margin-top:30px;
+            padding:24px;
+            border:1px solid rgba(194,92,255,0.45);
+            border-radius:22px;
+            background:rgba(10,12,30,0.88);
+        "
+    >
+
+        <span
+            style="
+                display:block;
+                color:#9ba6c9;
+                font-size:14px;
+                font-weight:700;
+                text-transform:uppercase;
+                letter-spacing:1px;
+            "
+        >
+            Aktueller Tokenpreis
+        </span>
+
+        <strong
+            id="current-token-price"
+            style="
+                display:block;
+                margin-top:10px;
+                color:white;
+                font-size:42px;
+            "
+        >
+            3,00 €
+        </strong>
+
+        <div
+            style="
+                margin-top:12px;
+                color:#9ba6c9;
+                font-size:16px;
+            "
+        >
+            USDC:
+
+            <strong
+                id="current-token-price-usdc"
+                style="
+                    color:#ffffff;
+                "
+            >
+                —
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOKENPHASE -->
+
+    <div
+        style="
+            margin-top:24px;
+            padding:24px;
+            border:1px solid rgba(143,77,255,.35);
+            border-radius:22px;
+            background:rgba(10,12,30,0.88);
+        "
+    >
+
+        <span
+            style="
+                display:block;
+                color:#9ba6c9;
+                font-size:14px;
+                font-weight:700;
+                text-transform:uppercase;
+                letter-spacing:1px;
+            "
+        >
+            Tokenphase
+        </span>
+
+        <h2
+            id="current-phase-name"
+            style="
+                margin:16px 0 0;
+                color:#c25cff;
+                font-size:34px;
+            "
+        >
+            PreLaunch
+        </h2>
+
+        <span
+            style="
+                display:block;
+                margin-top:8px;
+                color:#9ba6c9;
+                font-size:15px;
+            "
+        >
+            Aktuell aktive öffentliche Phase
+        </span>
+
+    </div>
+
+
+    <!-- ZAHLUNGSART -->
+
+    <div
+        style="
+            margin-top:24px;
+            padding:24px;
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:22px;
+            background:rgba(10,12,30,.88);
+        "
+    >
+
+        <span
+            style="
+                display:block;
+                color:#9ba6c9;
+                font-size:14px;
+                font-weight:700;
+                text-transform:uppercase;
+                letter-spacing:1px;
+                margin-bottom:18px;
+            "
+        >
+            Zahlungsart wählen
+        </span>
+
+        <label
+            style="
+                display:block;
+                margin-bottom:14px;
+                cursor:pointer;
+            "
+        >
+            <input
+                type="radio"
+                name="payment-method"
+                value="EUR"
+            >
+
+            EUR
+        </label>
+
+        <label
+            style="
+                display:block;
+                cursor:pointer;
+            "
+        >
+            <input
+                type="radio"
+                name="payment-method"
+                value="USDC"
+            >
+
+            USDC
+        </label>
+
+    </div>
+
+
+    <!-- BERECHNUNG -->
+
+    <div
+        style="
+            margin-top:24px;
+            padding:24px;
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:22px;
+            background:rgba(10,12,30,.88);
+        "
+    >
+
+        <label
+            style="
+                display:block;
+                color:#9ba6c9;
+                margin-bottom:16px;
+                font-weight:700;
+            "
+        >
+            Berechnung
+        </label>
+
+        <label
+            style="
+                display:block;
+                margin-bottom:12px;
+            "
+        >
+            <input
+                type="radio"
+                name="buy-mode"
+                checked
+            >
+
+            Betrag in EUR
+        </label>
+
+        <label
+            style="
+                display:block;
+            "
+        >
+            <input
+                type="radio"
+                name="buy-mode"
+            >
+
+            Anzahl Token
+        </label>
+
+    </div>
+
+
+    <hr
+        style="
+            margin:30px 0;
+            border:0;
+            border-top:1px solid rgba(255,255,255,.15);
+        "
+    >
+
+</main>
+
 
 <script>
 
@@ -56,258 +319,6 @@ async function loadTokenPhase() {
 loadTokenPhase();
 
 </script>
-    
-<body>
-
-<main
-    style="
-        max-width:700px;
-        margin:60px auto;
-        padding:30px;
-        color:white;
-        font-family:Arial,sans-serif;
-    "
->
-
-    <h1>
-        💎 Token kaufen
-    </h1>
-
-    <p
-    style="
-        color:#9ba6c9;
-        font-size:18px;
-    "
->
-    Kaufe zusätzliche NeonVersum Token
-    zum aktuellen Phasenpreis.
-</p>
-
-<div
-    style="
-        margin-top:30px;
-        padding:24px;
-        border:1px solid rgba(194,92,255,0.45);
-        border-radius:22px;
-        background:rgba(10,12,30,0.88);
-    "
->
-    <span
-        style="
-            display:block;
-            color:#9ba6c9;
-            font-size:14px;
-            font-weight:700;
-            text-transform:uppercase;
-            letter-spacing:1px;
-        "
-    >
-        Aktueller Tokenpreis
-    </span>
-
-    <strong
-        id="current-token-price"
-        style="
-            display:block;
-            margin-top:10px;
-            color:white;
-            font-size:42px;
-        "
-    >
-        3,00 €
-    </strong>
-</div>
-
-    </strong>
-</div>
-
-</div>
-
-<div
-    style="
-        margin-top:12px;
-        color:#9ba6c9;
-        font-size:16px;
-    "
->
-    USDC:
-    <strong
-        id="current-token-price-usdc"
-        style="color:#ffffff;"
-    >
-        —
-    </strong>
-</div>
-
-<div
-    style="
-        margin-top:24px;
-        padding:24px;
-        border:1px solid rgba(143,77,255,.35);
-        border-radius:22px;
-        background:rgba(10,12,30,0.88);
-    "
->
-
-<div
-    style="
-        margin-top:24px;
-        padding:24px;
-        border:1px solid rgba(143,77,255,.35);
-        border-radius:22px;
-        background:rgba(10,12,30,0.88);
-    "
->
-    <span
-        style="
-            display:block;
-            color:#9ba6c9;
-            font-size:14px;
-            font-weight:700;
-            text-transform:uppercase;
-            letter-spacing:1px;
-        "
-    >
-        Tokenphase
-    </span>
-
-    <strong
-        style="
-            display:block;
-            margin-top:10px;
-            color:#c25cff;
-            font-size:34px;
-        "
-    >
-        <h2 id="current-phase-name">PreLaunch</h2>
-    </strong>
-
-    <span
-        style="
-            display:block;
-            margin-top:8px;
-            color:#9ba6c9;
-            font-size:15px;
-        "
-    >
-        Aktuell aktive öffentliche Phase
-    </span>
-</div>
-
-    <div
-    style="
-        margin-top:24px;
-        padding:24px;
-        border:1px solid rgba(255,255,255,.12);
-        border-radius:22px;
-        background:rgba(10,12,30,.88);
-    "
->
-
-    <div
-    style="
-        margin-top:24px;
-        padding:24px;
-        border:1px solid rgba(255,255,255,.12);
-        border-radius:22px;
-        background:rgba(10,12,30,.88);
-    "
->
-
-    <span
-        style="
-            display:block;
-            color:#9ba6c9;
-            font-size:14px;
-            font-weight:700;
-            text-transform:uppercase;
-            letter-spacing:1px;
-            margin-bottom:18px;
-        "
-    >
-        Zahlungsart wählen
-    </span>
-
-    <label
-        style="
-            display:block;
-            margin-bottom:14px;
-            cursor:pointer;
-        "
-    >
-        <input
-            type="radio"
-            name="payment-method"
-            value="EUR"
-        >
-        EUR
-    </label>
-
-    <label
-        style="
-            display:block;
-            cursor:pointer;
-        "
-    >
-        <input
-            type="radio"
-            name="payment-method"
-            value="USDC"
-        >
-        USDC
-    </label>
-
-</div>
-
-<div
-    style="
-        margin-top:24px;
-        padding:24px;
-        border:1px solid rgba(255,255,255,.12);
-        border-radius:22px;
-        background:rgba(10,12,30,.88);
-    "
->
-
-    <label
-        style="
-            display:block;
-            color:#9ba6c9;
-            margin-bottom:16px;
-            font-weight:700;
-        "
-    >
-        Berechnung
-    </label>
-
-    <label style="display:block;margin-bottom:12px;">
-        <input
-            type="radio"
-            name="buy-mode"
-            checked
-        >
-        Betrag in EUR
-    </label>
-
-    <label style="display:block;">
-        <input
-            type="radio"
-            name="buy-mode"
-        >
-        Anzahl Token
-    </label>
-
-</div>
-    
-    <hr
-        style="
-            margin:30px 0;
-            border:0;
-            border-top:1px solid rgba(255,255,255,.15);
-        "
-    >
-
-</main>
 
 </body>
 
