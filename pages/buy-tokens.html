@@ -26,21 +26,31 @@ async function loadTokenPhase() {
 
     const result = await response.json();
 
-    if (!result.success) return;
+    if (!result.success || !result.phase) return;
 
     document.getElementById(
-    "current-token-price"
-).textContent =
-    Number(result.phase.x_studio_preis_eur)
-        .toLocaleString("de-AT", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }) + " €";
-    
+        "current-token-price"
+    ).textContent =
+        Number(result.phase.x_studio_preis_eur)
+            .toLocaleString("de-AT", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + " €";
+
+    document.getElementById(
+        "current-token-price-usdc"
+    ).textContent =
+        Number(result.phase.x_studio_preis_usdc)
+            .toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + " USDC";
+
     document.getElementById(
         "current-phase-name"
     ).textContent =
         result.phase.x_studio_phasenname;
+
 }
 
 loadTokenPhase();
