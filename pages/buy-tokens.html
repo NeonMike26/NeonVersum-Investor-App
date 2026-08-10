@@ -21,7 +21,7 @@
 
 <main
     style="
-        max-width:700px;
+        max-width:760px;
         margin:60px auto;
         padding:30px;
         color:white;
@@ -37,82 +37,23 @@
         style="
             color:#9ba6c9;
             font-size:18px;
+            line-height:1.6;
         "
     >
         Kaufe zusätzliche NeonVersum Token
-        zum aktuellen Phasenpreis.
+        zum aktuell gültigen Phasenpreis.
     </p>
-
-
-    <!-- AKTUELLER TOKENPREIS -->
-
-    <div
-        style="
-            margin-top:30px;
-            padding:24px;
-            border:1px solid rgba(194,92,255,0.45);
-            border-radius:22px;
-            background:rgba(10,12,30,0.88);
-        "
-    >
-
-        <span
-            style="
-                display:block;
-                color:#9ba6c9;
-                font-size:14px;
-                font-weight:700;
-                text-transform:uppercase;
-                letter-spacing:1px;
-            "
-        >
-            Aktueller Tokenpreis
-        </span>
-
-        <strong
-            id="current-token-price"
-            style="
-                display:block;
-                margin-top:10px;
-                color:white;
-                font-size:42px;
-            "
-        >
-            3,00 €
-        </strong>
-
-        <div
-            style="
-                margin-top:12px;
-                color:#9ba6c9;
-                font-size:16px;
-            "
-        >
-            USDC:
-
-            <strong
-                id="current-token-price-usdc"
-                style="
-                    color:#ffffff;
-                "
-            >
-                —
-            </strong>
-
-        </div>
-
-    </div>
 
 
     <!-- TOKENPHASE -->
 
-    <div
+    <section
         style="
-            margin-top:24px;
+            margin-top:30px;
             padding:24px;
             border:1px solid rgba(143,77,255,.35);
             border-radius:22px;
-            background:rgba(10,12,30,0.88);
+            background:rgba(10,12,30,.88);
         "
     >
 
@@ -126,37 +67,120 @@
                 letter-spacing:1px;
             "
         >
-            Tokenphase
+            Aktuelle Tokenphase
         </span>
 
         <h2
             id="current-phase-name"
             style="
-                margin:16px 0 0;
+                margin:12px 0 0;
                 color:#c25cff;
                 font-size:34px;
             "
         >
-            PreLaunch
+            Wird geladen...
         </h2>
+
+        <p
+            id="phase-description"
+            style="
+                margin:10px 0 0;
+                color:#9ba6c9;
+                line-height:1.5;
+            "
+        ></p>
+
+    </section>
+
+
+    <!-- PREISE -->
+
+    <section
+        style="
+            margin-top:24px;
+            padding:24px;
+            border:1px solid rgba(194,92,255,.45);
+            border-radius:22px;
+            background:rgba(10,12,30,.88);
+        "
+    >
 
         <span
             style="
                 display:block;
-                margin-top:8px;
                 color:#9ba6c9;
-                font-size:15px;
+                font-size:14px;
+                font-weight:700;
+                text-transform:uppercase;
+                letter-spacing:1px;
+                margin-bottom:18px;
             "
         >
-            Aktuell aktive öffentliche Phase
+            Aktueller Tokenpreis
         </span>
 
-    </div>
+        <div
+            style="
+                display:grid;
+                grid-template-columns:repeat(2,minmax(0,1fr));
+                gap:16px;
+            "
+        >
+
+            <div>
+                <span
+                    style="
+                        display:block;
+                        color:#9ba6c9;
+                        font-size:14px;
+                    "
+                >
+                    EUR
+                </span>
+
+                <strong
+                    id="current-token-price-eur"
+                    style="
+                        display:block;
+                        margin-top:8px;
+                        font-size:32px;
+                    "
+                >
+                    —
+                </strong>
+            </div>
+
+            <div>
+                <span
+                    style="
+                        display:block;
+                        color:#9ba6c9;
+                        font-size:14px;
+                    "
+                >
+                    USDC
+                </span>
+
+                <strong
+                    id="current-token-price-usdc"
+                    style="
+                        display:block;
+                        margin-top:8px;
+                        font-size:32px;
+                    "
+                >
+                    —
+                </strong>
+            </div>
+
+        </div>
+
+    </section>
 
 
     <!-- ZAHLUNGSART -->
 
-    <div
+    <section
         style="
             margin-top:24px;
             padding:24px;
@@ -191,8 +215,8 @@
                 type="radio"
                 name="payment-method"
                 value="EUR"
+                checked
             >
-
             EUR
         </label>
 
@@ -207,16 +231,15 @@
                 name="payment-method"
                 value="USDC"
             >
-
             USDC
         </label>
 
-    </div>
+    </section>
 
 
-    <!-- BERECHNUNG -->
+    <!-- KAUFMODUS -->
 
-    <div
+    <section
         style="
             margin-top:24px;
             padding:24px;
@@ -226,60 +249,237 @@
         "
     >
 
-        <label
+        <span
             style="
                 display:block;
                 color:#9ba6c9;
-                margin-bottom:16px;
+                font-size:14px;
+                font-weight:700;
+                text-transform:uppercase;
+                letter-spacing:1px;
+                margin-bottom:18px;
+            "
+        >
+            Wie möchtest du kaufen?
+        </span>
+
+        <label
+            style="
+                display:block;
+                margin-bottom:14px;
+                cursor:pointer;
+            "
+        >
+            <input
+                type="radio"
+                name="buy-mode"
+                value="amount"
+                checked
+            >
+            Ich möchte einen Betrag investieren
+        </label>
+
+        <label
+            style="
+                display:block;
+                cursor:pointer;
+            "
+        >
+            <input
+                type="radio"
+                name="buy-mode"
+                value="tokens"
+            >
+            Ich möchte eine bestimmte Anzahl Token kaufen
+        </label>
+
+    </section>
+
+
+    <!-- EINGABE -->
+
+    <section
+        style="
+            margin-top:24px;
+            padding:24px;
+            border:1px solid rgba(37,221,255,.25);
+            border-radius:22px;
+            background:rgba(10,12,30,.88);
+        "
+    >
+
+        <label
+            id="purchase-input-label"
+            for="purchase-input"
+            style="
+                display:block;
+                color:#9ba6c9;
+                margin-bottom:12px;
                 font-weight:700;
             "
         >
-            Berechnung
+            Investitionsbetrag in EUR
         </label>
 
-        <label
+        <input
+            id="purchase-input"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="z. B. 1000"
             style="
-                display:block;
-                margin-bottom:12px;
+                width:100%;
+                padding:18px;
+                border-radius:14px;
+                border:1px solid rgba(255,255,255,.15);
+                background:#ffffff;
+                color:#050713;
+                font-size:20px;
             "
         >
-            <input
-                type="radio"
-                name="buy-mode"
-                checked
-            >
 
-            Betrag in EUR
-        </label>
-
-        <label
-            style="
-                display:block;
-            "
-        >
-            <input
-                type="radio"
-                name="buy-mode"
-            >
-
-            Anzahl Token
-        </label>
-
-    </div>
+    </section>
 
 
-    <hr
+    <!-- BERECHNUNG -->
+
+    <section
         style="
-            margin:30px 0;
-            border:0;
-            border-top:1px solid rgba(255,255,255,.15);
+            margin-top:24px;
+            padding:24px;
+            border:1px solid rgba(72,255,131,.35);
+            border-radius:22px;
+            background:rgba(10,12,30,.88);
         "
     >
+
+        <span
+            style="
+                display:block;
+                color:#9ba6c9;
+                font-size:14px;
+                font-weight:700;
+                text-transform:uppercase;
+                letter-spacing:1px;
+                margin-bottom:18px;
+            "
+        >
+            Kaufübersicht
+        </span>
+
+        <p>
+            Du erhältst:
+            <strong id="summary-tokens">0 Token</strong>
+        </p>
+
+        <p>
+            Investitionsbetrag:
+            <strong id="summary-investment">0,00 €</strong>
+        </p>
+
+        <p>
+            Bearbeitungsgebühr (3,5 %):
+            <strong id="summary-fee">0,00 €</strong>
+        </p>
+
+        <p
+            style="
+                margin-top:18px;
+                font-size:20px;
+            "
+        >
+            Gesamt zu zahlen:
+            <strong id="summary-total">0,00 €</strong>
+        </p>
+
+    </section>
+
+
+    <!-- ZAHLUNGSINFORMATIONEN -->
+
+    <section
+        id="payment-info"
+        style="
+            margin-top:24px;
+            padding:24px;
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:22px;
+            background:rgba(10,12,30,.88);
+        "
+    >
+
+        <span
+            style="
+                display:block;
+                color:#9ba6c9;
+                font-size:14px;
+                font-weight:700;
+                text-transform:uppercase;
+                letter-spacing:1px;
+                margin-bottom:18px;
+            "
+        >
+            Zahlungsinformationen
+        </span>
+
+        <div id="payment-info-content"></div>
+
+    </section>
+
+
+    <!-- BUTTON -->
+
+    <button
+        id="submit-purchase"
+        type="button"
+        style="
+            width:100%;
+            margin-top:24px;
+            padding:18px;
+            border:none;
+            border-radius:16px;
+            background:#c25cff;
+            color:white;
+            font-size:18px;
+            font-weight:800;
+            cursor:pointer;
+        "
+    >
+        Kaufanfrage absenden
+    </button>
+
+
+    <a
+        href="mission-control.html"
+        style="
+            display:block;
+            margin-top:24px;
+            color:#9ba6c9;
+            text-align:center;
+            text-decoration:none;
+        "
+    >
+        ← Zurück zur Mission Control
+    </a>
 
 </main>
 
 
 <script>
+
+const PROCESSING_FEE_RATE = 0.035;
+
+let tokenPhase = null;
+
+const paymentInfoContent =
+    document.getElementById("payment-info-content");
+
+const purchaseInput =
+    document.getElementById("purchase-input");
+
+const purchaseInputLabel =
+    document.getElementById("purchase-input-label");
+
 
 async function loadTokenPhase() {
 
@@ -289,34 +489,320 @@ async function loadTokenPhase() {
 
     const result = await response.json();
 
-    if (!result.success || !result.phase) return;
+    if (!result.success || !result.phase) {
+        return;
+    }
 
-    document.getElementById(
-        "current-token-price"
-    ).textContent =
-        Number(result.phase.x_studio_preis_eur)
-            .toLocaleString("de-AT", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }) + " €";
-
-    document.getElementById(
-        "current-token-price-usdc"
-    ).textContent =
-        Number(result.phase.x_studio_preis_usdc)
-            .toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }) + " USDC";
+    tokenPhase = result.phase;
 
     document.getElementById(
         "current-phase-name"
     ).textContent =
-        result.phase.x_studio_phasenname;
+        tokenPhase.x_studio_phasenname;
+
+    document.getElementById(
+        "current-token-price-eur"
+    ).textContent =
+        formatEUR(
+            tokenPhase.x_studio_preis_eur
+        );
+
+    document.getElementById(
+        "current-token-price-usdc"
+    ).textContent =
+        formatUSDC(
+            tokenPhase.x_studio_preis_usdc
+        );
+
+    document.getElementById(
+        "phase-description"
+    ).textContent =
+        tokenPhase.x_studio_beschreibung || "";
+
+    updatePaymentInfo();
+    calculatePurchase();
+}
+
+
+function getPaymentMethod() {
+
+    return document.querySelector(
+        'input[name="payment-method"]:checked'
+    ).value;
 
 }
 
+
+function getBuyMode() {
+
+    return document.querySelector(
+        'input[name="buy-mode"]:checked'
+    ).value;
+
+}
+
+
+function getCurrentPrice() {
+
+    if (!tokenPhase) return 0;
+
+    return getPaymentMethod() === "EUR"
+        ? Number(tokenPhase.x_studio_preis_eur)
+        : Number(tokenPhase.x_studio_preis_usdc);
+
+}
+
+
+function formatEUR(value) {
+
+    return Number(value || 0)
+        .toLocaleString(
+            "de-AT",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        ) + " €";
+
+}
+
+
+function formatUSDC(value) {
+
+    return Number(value || 0)
+        .toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        ) + " USDC";
+
+}
+
+
+function formatTokens(value) {
+
+    return Number(value || 0)
+        .toLocaleString(
+            "de-AT",
+            {
+                minimumFractionDigits:0,
+                maximumFractionDigits:2
+            }
+        ) + " Token";
+
+}
+
+
+function updateInputLabel() {
+
+    const paymentMethod =
+        getPaymentMethod();
+
+    const buyMode =
+        getBuyMode();
+
+    if (buyMode === "tokens") {
+
+        purchaseInputLabel.textContent =
+            "Gewünschte Tokenanzahl";
+
+        purchaseInput.placeholder =
+            "z. B. 1000";
+
+        return;
+    }
+
+    purchaseInputLabel.textContent =
+        paymentMethod === "EUR"
+            ? "Investitionsbetrag in EUR"
+            : "Investitionsbetrag in USDC";
+
+    purchaseInput.placeholder =
+        paymentMethod === "EUR"
+            ? "z. B. 1000"
+            : "z. B. 1000 USDC";
+
+}
+
+
+function calculatePurchase() {
+
+    if (!tokenPhase) return;
+
+    const inputValue =
+        Number(purchaseInput.value || 0);
+
+    const paymentMethod =
+        getPaymentMethod();
+
+    const buyMode =
+        getBuyMode();
+
+    const tokenPrice =
+        getCurrentPrice();
+
+    let tokenAmount = 0;
+    let investmentAmount = 0;
+
+    if (buyMode === "amount") {
+
+        investmentAmount =
+            inputValue;
+
+        tokenAmount =
+            tokenPrice > 0
+                ? investmentAmount / tokenPrice
+                : 0;
+
+    } else {
+
+        tokenAmount =
+            inputValue;
+
+        investmentAmount =
+            tokenAmount * tokenPrice;
+
+    }
+
+    const processingFee =
+        investmentAmount * PROCESSING_FEE_RATE;
+
+    const totalAmount =
+        investmentAmount + processingFee;
+
+    document.getElementById(
+        "summary-tokens"
+    ).textContent =
+        formatTokens(tokenAmount);
+
+    document.getElementById(
+        "summary-investment"
+    ).textContent =
+        paymentMethod === "EUR"
+            ? formatEUR(investmentAmount)
+            : formatUSDC(investmentAmount);
+
+    document.getElementById(
+        "summary-fee"
+    ).textContent =
+        paymentMethod === "EUR"
+            ? formatEUR(processingFee)
+            : formatUSDC(processingFee);
+
+    document.getElementById(
+        "summary-total"
+    ).textContent =
+        paymentMethod === "EUR"
+            ? formatEUR(totalAmount)
+            : formatUSDC(totalAmount);
+
+}
+
+
+function updatePaymentInfo() {
+
+    const paymentMethod =
+        getPaymentMethod();
+
+    if (paymentMethod === "EUR") {
+
+        paymentInfoContent.innerHTML = `
+            <p><strong>Bank 99</strong><br>
+            AT37 1912 0502 0113 3611</p>
+
+            <p><strong>Revolut</strong><br>
+            LT60 3250 0763 3855 6087</p>
+
+            <p><strong>N26</strong><br>
+            DE43 1001 1001 2993 9299 39</p>
+        `;
+
+        return;
+    }
+
+    paymentInfoContent.innerHTML = `
+        <p>
+            <strong>Ethereum (ERC20)</strong>
+        </p>
+
+        <p>
+            <strong>BNB Chain (BEP20)</strong>
+        </p>
+
+        <p
+            style="
+                word-break:break-all;
+            "
+        >
+            Walletadresse:<br>
+            <strong>
+                0xE5a778C33949Fd436FBB1930470E0c59eBA44E99
+            </strong>
+        </p>
+    `;
+
+}
+
+
+document.querySelectorAll(
+    'input[name="payment-method"]'
+).forEach((element) => {
+
+    element.addEventListener(
+        "change",
+        () => {
+
+            updateInputLabel();
+            updatePaymentInfo();
+            calculatePurchase();
+
+        }
+    );
+
+});
+
+
+document.querySelectorAll(
+    'input[name="buy-mode"]'
+).forEach((element) => {
+
+    element.addEventListener(
+        "change",
+        () => {
+
+            updateInputLabel();
+            calculatePurchase();
+
+        }
+    );
+
+});
+
+
+purchaseInput.addEventListener(
+    "input",
+    calculatePurchase
+);
+
+
+document.getElementById(
+    "submit-purchase"
+).addEventListener(
+    "click",
+    () => {
+
+        alert(
+            "Die Kaufanfrage wird im nächsten Schritt mit Odoo verbunden."
+        );
+
+    }
+);
+
+
 loadTokenPhase();
+updateInputLabel();
 
 </script>
 
