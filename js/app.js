@@ -98,7 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
             "https://neonversum-api.m-fehringer.workers.dev/request-code";
 
         const VERIFY_CODE_API_URL =
-            "https://neonversum-api.m-fehringer.workers.dev/verify-code";
+    "https://neonversum-api.m-fehringer.workers.dev/verify-code";
+
+const INVESTOR_API_URL =
+    "https://neonversum-api.m-fehringer.workers.dev/investor";
 
         const emailInput =
             loginForm.querySelector("#email");
