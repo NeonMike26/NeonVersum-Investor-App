@@ -1011,9 +1011,65 @@ document.getElementById(
             return;
         }
 
-        alert(
-            "Deine Kaufanfrage wurde erfolgreich gespeichert."
-        );
+        const successSection =
+    document.getElementById("purchase-success");
+
+const successSummary =
+    document.getElementById(
+        "purchase-success-summary"
+    );
+
+successSummary.innerHTML = `
+    <p>
+        Phase:
+        <strong>${tokenPhase.x_studio_phasenname}</strong>
+    </p>
+
+    <p>
+        Token:
+        <strong>${formatTokens(tokenAmount)}</strong>
+    </p>
+
+    <p>
+        Investitionsbetrag:
+        <strong>
+            ${
+                paymentMethod === "EUR"
+                    ? formatEUR(investmentAmount)
+                    : formatUSDC(investmentAmount)
+            }
+        </strong>
+    </p>
+
+    <p>
+        Bearbeitungsgebühr:
+        <strong>
+            ${
+                paymentMethod === "EUR"
+                    ? formatEUR(processingFee)
+                    : formatUSDC(processingFee)
+            }
+        </strong>
+    </p>
+
+    <p>
+        Gesamtbetrag:
+        <strong>
+            ${
+                paymentMethod === "EUR"
+                    ? formatEUR(totalAmount)
+                    : formatUSDC(totalAmount)
+            }
+        </strong>
+    </p>
+`;
+
+successSection.hidden = false;
+
+successSection.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+});
 
     }
 );
