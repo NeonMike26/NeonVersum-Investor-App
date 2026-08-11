@@ -1083,7 +1083,10 @@ successSummary.innerHTML = `
 
 successSection.hidden = false;
 
-        document.getElementById(
+successSection.dataset.purchaseId =
+    String(result.created?.[0] || "");
+        
+document.getElementById(
     "submit-purchase"
 ).style.display = "none";
 
