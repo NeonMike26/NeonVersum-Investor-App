@@ -1119,7 +1119,101 @@ successSection.scrollIntoView({
     }
 );
 
+document.getElementById(
+    "cancel-purchase"
+).addEventListener(
+    "click",
+    async () => {
 
+        const confirmed =
+            confirm(
+                "Möchtest du diese Kaufanfrage wirklich stornieren?"
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        const successSection =
+            document.getElementById(
+                "purchase-success"
+            );
+
+        const purchaseId =
+            Number(
+                successSection.dataset.purchaseId || 0
+            );
+
+        const email =
+            sessionStorage.getItem("nvUserEmail") ||
+            localStorage.getItem("nvUserEmail") ||
+            "";
+
+        const investorId =
+            sessionStorage.getItem("nvInvestorId") ||
+            localStorage.getItem("nvInvestorId") ||
+            "";
+
+        if (!purchaseId) {
+            alert(
+                "Die Kaufanfrage konnte nicht eindeutig gefunden werden."
+            );
+            return;
+        }
+
+        try {
+
+            const response =
+                await fetch(
+                    "https://neonversum-api.m-fehringer.workers.dev/cancel-purchase",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+                        body: JSON.stringify({
+                            purchaseId,
+                            email,
+                            investorId
+                        })
+                    }
+                );
+
+            const result =
+                await response.json();
+
+            if (
+                !response.ok ||
+                !result.success
+            ) {
+                throw new Error(
+                    result.message ||
+                    "Die Kaufanfrage konnte nicht storniert werden."
+                );
+            }
+
+            document.getElementById(
+                "purchase-success-status"
+            ).textContent =
+                "Storniert";
+
+            document.getElementById(
+                "cancel-purchase"
+            ).style.display =
+                "none";
+
+        } catch (error) {
+
+            alert(
+                error.message ||
+                "Beim Stornieren ist ein Fehler aufgetreten."
+            );
+
+        }
+    }
+);
+    
 loadTokenPhase();
 updateInputLabel();
 
