@@ -863,10 +863,102 @@ document.getElementById(
     "submit-purchase"
 ).addEventListener(
     "click",
-    () => {
+    async () => {
+
+        if (!tokenPhase) {
+            alert("Tokenphase konnte nicht geladen werden.");
+            return;
+        }
+
+        const inputValue =
+            Number(purchaseInput.value || 0);
+
+        if (inputValue <= 0) {
+            alert("Bitte gib einen gültigen Betrag oder eine Tokenanzahl ein.");
+            return;
+        }
+
+        const paymentMethod =
+            getPaymentMethod();
+
+        const buyMode =
+            getBuyMode();
+
+        const tokenPrice =
+            getCurrentPrice();
+
+        let tokenAmount = 0;
+        let investmentAmount = 0;
+
+        if (buyMode === "amount") {
+
+            investmentAmount =
+                inputValue;
+
+            tokenAmount =
+                investmentAmount / tokenPrice;
+
+        } else {
+
+            tokenAmount =
+                inputValue;
+
+            investmentAmount =
+                tokenAmount * tokenPrice;
+
+        }
+
+        const processingFee =
+            investmentAmount * PROCESSING_FEE_RATE;
+
+        const totalAmount =
+            investmentAmount + processingFee;
+
+        const email =
+            sessionStorage.getItem("nvUserEmail") ||
+            localStorage.getItem("nvUserEmail") ||
+            "";
+
+        const investorId =
+            sessionStorage.getItem("nvInvestorId") ||
+            localStorage.getItem("nvInvestorId") ||
+            "";
+
+        const response = await fetch(
+            "https://neonversum-api.m-fehringer.workers.dev/purchase",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email,
+                    investorId,
+                    phase:
+                        tokenPhase.x_studio_phasenname,
+                    paymentMethod,
+                    investmentAmount,
+                    processingFee,
+                    totalAmount,
+                    tokenAmount,
+                    tokenPrice
+                })
+            }
+        );
+
+        const result =
+            await response.json();
+
+        if (!result.success) {
+            alert(
+                result.message ||
+                "Kaufanfrage konnte nicht gespeichert werden."
+            );
+            return;
+        }
 
         alert(
-            "Die Kaufanfrage wird im nächsten Schritt mit Odoo verbunden."
+            "Deine Kaufanfrage wurde erfolgreich gespeichert."
         );
 
     }
