@@ -389,17 +389,55 @@ storage.setItem(
     "true"
 );
 
-                    sessionStorage.setItem(
-                        "nvRegisteredEmail",
-                        result.contact?.email || email
-                    );
+const investorResponse =
+    await fetch(
+        INVESTOR_API_URL,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type":
+                    "application/json"
+            },
+            body: JSON.stringify({
+                email:
+                    result.contact?.email || email
+            })
+        }
+    );
 
-                    if (result.contact?.id) {
-                        sessionStorage.setItem(
-                            "nvContactId",
-                            String(result.contact.id)
-                        );
-                    }
+const investorResult =
+    await investorResponse.json();
+
+if (!investorResponse.ok) {
+    throw new Error(
+        investorResult.message ||
+        "Investor-Daten konnten nicht geladen werden."
+    );
+}
+
+storage.setItem(
+    "nvUserEmail",
+    investorResult.investor?.email || email
+);
+
+storage.setItem(
+    "nvInvestorId",
+    investorResult.investor?.x_studio_investor_id || ""
+);
+
+storage.setItem(
+    "nvUserName",
+    investorResult.investor?.name || ""
+);
+
+storage.setItem(
+    "nvContactId",
+    String(
+        investorResult.investor?.id ||
+        result.contact?.id ||
+        ""
+    )
+);
 
                     sessionStorage.removeItem(
                         "nvPendingEmail"
