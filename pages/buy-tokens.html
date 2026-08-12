@@ -1552,6 +1552,8 @@ successSection.hidden = false;
 
 successSection.dataset.purchaseId =
     String(result.created?.[0] || "");
+
+await loadPurchaseHistory();
         
 document.getElementById(
     "submit-purchase"
