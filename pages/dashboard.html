@@ -539,6 +539,305 @@ const formatCurrency = (value) => {
             }
         };
 
+const loadPurchaseHistory = async () => {
+
+    const historyList =
+        document.getElementById(
+            "purchase-history-list"
+        );
+
+    if (!historyList) {
+        return;
+    }
+
+    const email =
+        readStoredValue("nvUserEmail") ||
+        readStoredValue("nvRegisteredEmail");
+
+    const investorId =
+        readStoredValue("nvInvestorId");
+
+    if (!email || !investorId) {
+        historyList.innerHTML =
+            "<div style='color:#9ba6c9;text-align:center;'>Kaufhistorie konnte nicht geladen werden.</div>";
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                PURCHASE_HISTORY_API_URL,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body: JSON.stringify({
+                        email,
+                        investorId
+                    })
+                }
+            );
+
+        const result =
+            await response.json();
+
+        if (
+            !response.ok ||
+            !result.success
+        ) {
+            throw new Error(
+                result.message ||
+                "Kaufhistorie konnte nicht geladen werden."
+            );
+        }
+
+        const purchases =
+            Array.isArray(result.purchases)
+                ? result.purchases
+                : [];
+
+        if (purchases.length === 0) {
+
+            historyList.innerHTML =
+                "<div style='padding:18px;border:1px solid rgba(255,255,255,.10);border-radius:18px;color:#9ba6c9;text-align:center;'>Noch keine Kaufanfragen vorhanden.</div>";
+
+            return;
+        }
+
+        historyList.innerHTML =
+            purchases
+                .map((purchase) => {
+
+                    const paymentMethod =
+                        purchase.x_studio_zahlungsart ||
+                        "EUR";
+
+                    const currencyLabel =
+                        paymentMethod === "USDC"
+                            ? " USDC"
+                            : " €";
+
+                    const investment =
+                        Number(
+                            purchase.x_studio_investitionsbetrag ||
+                            0
+                        ).toLocaleString(
+                            "de-AT",
+                            {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }
+                        ) + currencyLabel;
+
+                    const total =
+                        Number(
+                            purchase.x_studio_gesamtbetrag ||
+                            0
+                        ).toLocaleString(
+                            "de-AT",
+                            {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }
+                        ) + currencyLabel;
+
+                    const tokens =
+                        Number(
+                            purchase.x_studio_tokenanzahl ||
+                            0
+                        ).toLocaleString(
+                            "de-AT",
+                            {
+                                maximumFractionDigits: 2
+                            }
+                        );
+
+                    const rawDate =
+                        String(
+                            purchase.x_studio_kaufdatum ||
+                            ""
+                        );
+
+                    let formattedDate =
+                        rawDate || "—";
+
+                    if (rawDate) {
+
+                        const parts =
+                            rawDate.split(" ");
+
+                        const dateParts =
+                            parts[0]?.split("-");
+
+                        if (
+                            dateParts &&
+                            dateParts.length === 3
+                        ) {
+                            formattedDate =
+                                `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
+
+                            if (parts[1]) {
+                                formattedDate +=
+                                    ` · ${parts[1].slice(0, 5)} Uhr`;
+                            }
+                        }
+                    }
+
+                    const status =
+                        purchase.x_studio_status ||
+                        "—";
+
+                    const statusColor =
+                        status === "Storniert"
+                            ? "#ff7676"
+                            : status === "Zahlung ausstehend"
+                                ? "#ffd34d"
+                                : "#48ff83";
+
+                    return `
+                        <div
+                            data-purchase-id="${purchase.id}"
+                            style="
+                                padding:20px;
+                                border:1px solid rgba(255,255,255,.12);
+                                border-radius:18px;
+                                background:rgba(5,7,20,.55);
+                            "
+                        >
+                            <div
+                                style="
+                                    display:flex;
+                                    justify-content:space-between;
+                                    gap:16px;
+                                    align-items:flex-start;
+                                "
+                            >
+                                <div>
+                                    <strong
+                                        style="
+                                            display:block;
+                                            color:white;
+                                            font-size:18px;
+                                        "
+                                    >
+                                        ${purchase.x_studio_phase || "Tokenkauf"}
+                                    </strong>
+
+                                    <span
+                                        style="
+                                            display:block;
+                                            margin-top:6px;
+                                            color:#9ba6c9;
+                                            font-size:14px;
+                                        "
+                                    >
+                                        ${formattedDate}
+                                    </span>
+                                </div>
+
+                                <strong
+                                    style="
+                                        color:${statusColor};
+                                        font-size:14px;
+                                        text-align:right;
+                                    "
+                                >
+                                    ${status}
+                                </strong>
+                            </div>
+
+                            <div
+                                style="
+                                    display:grid;
+                                    grid-template-columns:repeat(2,minmax(0,1fr));
+                                    gap:12px;
+                                    margin-top:18px;
+                                "
+                            >
+                                <div>
+                                    <span style="color:#9ba6c9;font-size:13px;">
+                                        Token
+                                    </span>
+
+                                    <strong
+                                        style="
+                                            display:block;
+                                            margin-top:4px;
+                                            color:white;
+                                        "
+                                    >
+                                        ${tokens}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    <span style="color:#9ba6c9;font-size:13px;">
+                                        Zahlungsart
+                                    </span>
+
+                                    <strong
+                                        style="
+                                            display:block;
+                                            margin-top:4px;
+                                            color:white;
+                                        "
+                                    >
+                                        ${paymentMethod}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    <span style="color:#9ba6c9;font-size:13px;">
+                                        Investition
+                                    </span>
+
+                                    <strong
+                                        style="
+                                            display:block;
+                                            margin-top:4px;
+                                            color:white;
+                                        "
+                                    >
+                                        ${investment}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    <span style="color:#9ba6c9;font-size:13px;">
+                                        Gesamtbetrag
+                                    </span>
+
+                                    <strong
+                                        style="
+                                            display:block;
+                                            margin-top:4px;
+                                            color:white;
+                                        "
+                                    >
+                                        ${total}
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                })
+                .join("");
+
+    } catch (error) {
+
+        console.error(
+            "Kaufhistorie-Fehler:",
+            error
+        );
+
+        historyList.innerHTML =
+            "<div style='padding:18px;border:1px solid rgba(255,118,118,.25);border-radius:18px;color:#ff7676;text-align:center;'>Kaufhistorie konnte nicht geladen werden.</div>";
+    }
+};
+        
         const loadInvestorDashboard = async () => {
             const email =
     readStoredValue("nvUserEmail") ||
