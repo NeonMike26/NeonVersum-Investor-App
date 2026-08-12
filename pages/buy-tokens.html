@@ -1053,8 +1053,34 @@ async function loadPurchaseHistory() {
                                     >
                                         ${total}
                                     </strong>
-                                </div>
+                                                                </div>
                             </div>
+
+                            ${
+                                status === "Zahlung ausstehend"
+                                    ? `
+                                        <button
+                                            type="button"
+                                            class="cancel-history-purchase"
+                                            data-purchase-id="${purchase.id}"
+                                            style="
+                                                width:100%;
+                                                margin-top:20px;
+                                                padding:14px 18px;
+                                                border:1px solid rgba(255,90,90,.55);
+                                                border-radius:14px;
+                                                background:rgba(255,90,90,.08);
+                                                color:#ff7676;
+                                                font-weight:800;
+                                                cursor:pointer;
+                                            "
+                                        >
+                                            Anfrage stornieren
+                                        </button>
+                                    `
+                                    : ""
+                            }
+
                         </div>
                     `;
                 })
