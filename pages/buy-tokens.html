@@ -1205,6 +1205,63 @@ if (purchases.length === 0) {
         );
     });
 
+    historyList
+    .querySelectorAll(
+        ".hide-history-purchase"
+    )
+    .forEach((button) => {
+
+        button.addEventListener(
+            "click",
+            async () => {
+
+                const confirmed =
+                    confirm(
+                        "Möchtest du diese stornierte Kaufanfrage aus deiner Übersicht entfernen?"
+                    );
+
+                if (!confirmed) {
+                    return;
+                }
+
+                const purchaseId =
+                    String(
+                        button.dataset.purchaseId || ""
+                    );
+
+                if (!purchaseId) {
+                    return;
+                }
+
+                const hiddenPurchaseIds =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "nvHiddenPurchaseIds"
+                        ) || "[]"
+                    );
+
+                if (
+                    !hiddenPurchaseIds.includes(
+                        purchaseId
+                    )
+                ) {
+                    hiddenPurchaseIds.push(
+                        purchaseId
+                    );
+                }
+
+                localStorage.setItem(
+                    "nvHiddenPurchaseIds",
+                    JSON.stringify(
+                        hiddenPurchaseIds
+                    )
+                );
+
+                await loadPurchaseHistory();
+            }
+        );
+    });
+
     } catch (error) {
 
         console.error(
