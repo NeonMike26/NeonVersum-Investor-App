@@ -530,7 +530,8 @@ const formatCurrency = (value) => {
 
         const loadInvestorDashboard = async () => {
             const email =
-                readStoredValue("nvRegisteredEmail");
+    readStoredValue("nvUserEmail") ||
+    readStoredValue("nvRegisteredEmail");
 
             const storedName =
                 readStoredValue("nvUserName");
