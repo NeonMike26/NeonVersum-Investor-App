@@ -682,13 +682,61 @@ const purchaseInputLabel =
 
 async function loadTokenPhase() {
 
-    const response = await fetch(
-        "https://neonversum-api.m-fehringer.workers.dev/token-phase"
-    );
+    let response;
 
-    const result = await response.json();
+    if (friendsCode) {
 
-    if (!result.success || !result.phase) {
+        const email =
+            sessionStorage.getItem("nvUserEmail") ||
+            localStorage.getItem("nvUserEmail") ||
+            sessionStorage.getItem("nvRegisteredEmail") ||
+            localStorage.getItem("nvRegisteredEmail") ||
+            "";
+
+        response = await fetch(
+            FRIENDS_PHASE_API_URL,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+                body: JSON.stringify({
+                    friendsCode,
+                    email
+                })
+            }
+        );
+
+    } else {
+
+        response = await fetch(
+            "https://neonversum-api.m-fehringer.workers.dev/token-phase"
+        );
+
+    }
+
+    const result =
+        await response.json();
+
+    if (
+        !response.ok ||
+        !result.success ||
+        !result.phase
+    ) {
+
+        document.getElementById(
+            "current-phase-name"
+        ).textContent =
+            friendsCode
+                ? "Friendslink ungültig"
+                : "Tokenphase nicht verfügbar";
+
+        alert(
+            result.message ||
+            "Tokenphase konnte nicht geladen werden."
+        );
+
         return;
     }
 
@@ -721,7 +769,6 @@ async function loadTokenPhase() {
     updatePaymentInfo();
     calculatePurchase();
 }
-
 
 function getPaymentMethod() {
 
