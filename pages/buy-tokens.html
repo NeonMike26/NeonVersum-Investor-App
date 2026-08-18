@@ -660,6 +660,14 @@ const PROCESSING_FEE_RATE = 0.035;
 const PURCHASE_HISTORY_API_URL =
     "https://neonversum-api.m-fehringer.workers.dev/purchase-history";
 
+const FRIENDS_PHASE_API_URL =
+    "https://neonversum-api.m-fehringer.workers.dev/friends-phase";
+
+const friendsCode =
+    new URLSearchParams(
+        window.location.search
+    ).get("friends")?.trim() || "";
+
 let tokenPhase = null;
 
 const paymentInfoContent =
