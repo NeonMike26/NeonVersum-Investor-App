@@ -594,12 +594,26 @@ const loadPurchaseHistory = async () => {
             );
         }
 
-        const purchases =
-            Array.isArray(result.purchases)
-                ? result.purchases
-                : [];
+        const hiddenPurchaseIds =
+    JSON.parse(
+        localStorage.getItem(
+            "nvHiddenPurchaseIds"
+        ) || "[]"
+    );
 
-        if (purchases.length === 0) {
+const purchases =
+    (
+        Array.isArray(result.purchases)
+            ? result.purchases
+            : []
+    ).filter(
+        (purchase) =>
+            !hiddenPurchaseIds.includes(
+                String(purchase.id)
+            )
+    );
+
+if (purchases.length === 0) {
 
             historyList.innerHTML =
                 "<div style='padding:18px;border:1px solid rgba(255,255,255,.10);border-radius:18px;color:#9ba6c9;text-align:center;'>Noch keine Kaufanfragen vorhanden.</div>";
