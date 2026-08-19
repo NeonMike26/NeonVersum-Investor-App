@@ -2548,6 +2548,99 @@ document
         );
 
     });
+
+document.getElementById(
+    "masters-purchases-list"
+).addEventListener(
+    "click",
+    async (event) => {
+
+        const button =
+            event.target.closest(
+                ".masters-transfer-tokens"
+            );
+
+        if (!button) {
+            return;
+        }
+
+        const purchaseId =
+            Number(
+                button.dataset.id || 0
+            );
+
+        if (!purchaseId) {
+            return;
+        }
+
+        const confirmed =
+            confirm(
+                "Sollen die Token dieser bezahlten Kaufanfrage jetzt dem Investor gutgeschrieben werden?"
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        button.disabled = true;
+
+        button.textContent =
+            "Token werden übertragen...";
+
+        try {
+
+            const response =
+                await fetch(
+                    MASTERS_TRANSFER_TOKENS_API,
+                    {
+                        method:"POST",
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+                        body:JSON.stringify({
+                            purchaseId,
+                            email:
+                                mastersEmail,
+                            investorId:
+                                mastersInvestorId,
+                            contactId:
+                                mastersContactId
+                        })
+                    }
+                );
+
+            const result =
+                await response.json();
+
+            if (
+                !response.ok ||
+                !result.success
+            ) {
+                throw new Error(
+                    result.message ||
+                    "Token konnten nicht übertragen werden."
+                );
+            }
+
+            await loadMastersPurchases();
+
+        } catch (error) {
+
+            alert(
+                error.message ||
+                "Token konnten nicht übertragen werden."
+            );
+
+            button.disabled = false;
+
+            button.textContent =
+                "🚀 Token übertragen";
+
+        }
+
+    }
+);
     
 loadFriendsLinks();
 loadMastersPurchases();
