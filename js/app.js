@@ -439,6 +439,13 @@ storage.setItem(
     )
 );
 
+storage.setItem(
+    "nvMastersAccess",
+    investorResult.investor?.x_studio_masters_zugang === true
+        ? "true"
+        : "false"
+);
+                    
                     sessionStorage.removeItem(
                         "nvPendingEmail"
                     );
