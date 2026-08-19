@@ -684,45 +684,7 @@ setText(
     )
 );
        
-if (purchases.length === 0) {
 
-            historyList.innerHTML =
-                "<div style='padding:18px;border:1px solid rgba(255,255,255,.10);border-radius:18px;color:#9ba6c9;text-align:center;'>Noch keine Kaufanfragen vorhanden.</div>";
-
-            return;
-        }
-
-        historyList.innerHTML =
-            purchases
-                .map((purchase) => {
-
-                    const paymentMethod =
-                        purchase.x_studio_zahlungsart ||
-                        "EUR";
-
-                    const currencyLabel =
-                        paymentMethod === "USDC"
-                            ? " USDC"
-                            : " €";
-
-                    const investment =
-                        Number(
-                            purchase.x_studio_investitionsbetrag ||
-                            0
-                        ).toLocaleString(
-                            "de-AT",
-                            {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2
-                            }
-                        ) + currencyLabel;
-
-                    const total =
-                        Number(
-                            purchase.x_studio_gesamtbetrag ||
-                            0
-                        ).toLocaleString(
-                            "de-AT",
                             {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2
