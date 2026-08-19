@@ -50,6 +50,32 @@ if (!isLoggedIn) {
 >
     Abmelden
 </button>
+
+<a
+    id="masters-satellite"
+    href="masters.html"
+    hidden
+    style="
+        position:fixed;
+        top:20px;
+        left:20px;
+        z-index:2147483647;
+        padding:12px 22px;
+        background:rgba(10,10,20,0.95);
+        color:#ffffff;
+        border:1px solid rgba(72,255,131,.45);
+        border-radius:999px;
+        font-size:14px;
+        font-weight:600;
+        text-decoration:none;
+        cursor:pointer;
+        pointer-events:auto;
+        isolation:isolate;
+        box-shadow:0 0 18px rgba(72,255,131,.16);
+    "
+>
+    🌍 Masters
+</a>
     
 <main class="mission-control">
 
@@ -79,52 +105,7 @@ if (!isLoggedIn) {
     <span class="orbit-label">Token kaufen</span>
 </a>
 
-<a
-    id="masters-satellite"
-    href="masters.html"
-    hidden
-    style="
-        position:fixed;
-        top:32px;
-        left:16px;
-        z-index:1000;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        gap:8px;
-        color:white;
-        text-decoration:none;
-        font-weight:700;
-    "
->
-    <span
-        style="
-            width:64px;
-            height:64px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border-radius:50%;
-            font-size:46px;
-            background:rgba(10,12,30,.88);
-            border:1px solid rgba(72,255,131,.45);
-            box-shadow:
-                0 0 20px rgba(72,255,131,.18),
-                0 0 40px rgba(37,221,255,.10);
-        "
-    >
-        🌍
-    </span>
 
-    <span
-        style="
-            font-size:13px;
-            letter-spacing:.5px;
-        "
-    >
-        Masters
-    </span>
-</a>
         
     </div>
 
