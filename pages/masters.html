@@ -471,6 +471,180 @@ body {
     margin-top:24px;
 }
 
+.purchase-stats-grid {
+    display:grid;
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+    gap:12px;
+    margin-top:24px;
+}
+
+.purchase-stat {
+    padding:18px;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:17px;
+    background:rgba(5,7,20,.50);
+}
+
+.purchase-stat-value {
+    display:block;
+    margin-top:9px;
+    font-size:25px;
+    font-weight:800;
+}
+
+.purchase-pending {
+    color:#ffd34d;
+}
+
+.purchase-paid {
+    color:#25ddff;
+}
+
+.purchase-transferred {
+    color:#48ff83;
+}
+
+.purchase-cancelled {
+    color:#ff7676;
+}
+
+.purchase-filter-bar {
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-top:24px;
+}
+
+.purchase-filter {
+    padding:9px 14px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:999px;
+    background:rgba(255,255,255,.035);
+    color:#9ba6c9;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.purchase-filter.active {
+    border-color:rgba(194,92,255,.55);
+    background:rgba(194,92,255,.12);
+    color:#ffffff;
+}
+
+.masters-purchases-list {
+    display:grid;
+    gap:16px;
+    margin-top:22px;
+}
+
+.purchase-card {
+    padding:22px;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:20px;
+    background:rgba(5,7,20,.52);
+}
+
+.purchase-card-top {
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:18px;
+}
+
+.purchase-investor {
+    font-size:18px;
+    font-weight:800;
+}
+
+.purchase-investor-meta {
+    margin-top:5px;
+    color:#9ba6c9;
+    font-size:13px;
+}
+
+.purchase-status {
+    flex:none;
+    padding:7px 11px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:800;
+    text-align:center;
+}
+
+.purchase-status-pending {
+    color:#ffd34d;
+    border:1px solid rgba(255,211,77,.28);
+    background:rgba(255,211,77,.07);
+}
+
+.purchase-status-paid {
+    color:#25ddff;
+    border:1px solid rgba(37,221,255,.28);
+    background:rgba(37,221,255,.07);
+}
+
+.purchase-status-transferred {
+    color:#48ff83;
+    border:1px solid rgba(72,255,131,.28);
+    background:rgba(72,255,131,.07);
+}
+
+.purchase-status-cancelled {
+    color:#ff7676;
+    border:1px solid rgba(255,118,118,.28);
+    background:rgba(255,118,118,.07);
+}
+
+.purchase-details-grid {
+    display:grid;
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+    gap:10px;
+    margin-top:18px;
+}
+
+.purchase-detail {
+    padding:12px;
+    border-radius:12px;
+    background:rgba(255,255,255,.035);
+}
+
+.purchase-detail-label {
+    display:block;
+    color:#6f7899;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+}
+
+.purchase-detail-value {
+    display:block;
+    margin-top:6px;
+    color:#ffffff;
+    font-size:14px;
+    word-break:break-word;
+}
+
+.confirm-payment-button {
+    width:100%;
+    margin-top:18px;
+    padding:14px 18px;
+    border:1px solid rgba(72,255,131,.38);
+    border-radius:14px;
+    background:rgba(72,255,131,.08);
+    color:#48ff83;
+    font-size:14px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.confirm-payment-button:disabled {
+    opacity:.5;
+    cursor:wait;
+}
+    
 @media (max-width:800px) {
 
     .masters-shell {
