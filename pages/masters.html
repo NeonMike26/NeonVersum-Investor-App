@@ -775,6 +775,169 @@ body {
 
     </section>
 
+<section
+    class="panel"
+    style="margin-top:24px;"
+>
+
+    <div class="section-heading">
+
+        <div>
+            <h2 class="panel-title">
+                💳 Kaufanfragen
+            </h2>
+
+            <p class="panel-subtitle">
+                Zentrale Übersicht aller Token-Kaufanfragen.
+            </p>
+        </div>
+
+        <span
+            id="purchase-total-count"
+            class="section-count"
+        >
+            0
+        </span>
+
+    </div>
+
+
+    <section
+        class="purchase-stats-grid"
+    >
+
+        <div class="purchase-stat">
+
+            <span class="stat-label">
+                Zahlung ausstehend
+            </span>
+
+            <strong
+                id="purchase-stat-pending"
+                class="purchase-stat-value purchase-pending"
+            >
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="purchase-stat">
+
+            <span class="stat-label">
+                Zahlung eingegangen
+            </span>
+
+            <strong
+                id="purchase-stat-paid"
+                class="purchase-stat-value purchase-paid"
+            >
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="purchase-stat">
+
+            <span class="stat-label">
+                Token übertragen
+            </span>
+
+            <strong
+                id="purchase-stat-transferred"
+                class="purchase-stat-value purchase-transferred"
+            >
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="purchase-stat">
+
+            <span class="stat-label">
+                Storniert
+            </span>
+
+            <strong
+                id="purchase-stat-cancelled"
+                class="purchase-stat-value purchase-cancelled"
+            >
+                —
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <div
+        class="purchase-filter-bar"
+    >
+
+        <button
+            type="button"
+            class="purchase-filter active"
+            data-filter="open"
+        >
+            Offen
+        </button>
+
+        <button
+            type="button"
+            class="purchase-filter"
+            data-filter="all"
+        >
+            Alle
+        </button>
+
+        <button
+            type="button"
+            class="purchase-filter"
+            data-filter="Zahlung ausstehend"
+        >
+            Ausstehend
+        </button>
+
+        <button
+            type="button"
+            class="purchase-filter"
+            data-filter="Zahlung eingegangen"
+        >
+            Eingegangen
+        </button>
+
+        <button
+            type="button"
+            class="purchase-filter"
+            data-filter="Token übertragen"
+        >
+            Übertragen
+        </button>
+
+        <button
+            type="button"
+            class="purchase-filter"
+            data-filter="Storniert"
+        >
+            Storniert
+        </button>
+
+    </div>
+
+
+    <div
+        id="masters-purchases-list"
+        class="masters-purchases-list"
+    >
+        <div class="loading">
+            Kaufanfragen werden geladen...
+        </div>
+    </div>
+
+</section>
+    
 </main>
 
 
