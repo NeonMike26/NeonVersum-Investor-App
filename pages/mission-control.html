@@ -81,12 +81,49 @@ if (!isLoggedIn) {
 
 <a
     id="masters-satellite"
-    class="orbit-item orbit-item-5"
     href="masters.html"
     hidden
+    style="
+        position:fixed;
+        top:28px;
+        left:28px;
+        z-index:1000;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:8px;
+        color:white;
+        text-decoration:none;
+        font-weight:700;
+    "
 >
-    <span class="orbit-dot"></span>
-    <span class="orbit-label">Masters</span>
+    <span
+        style="
+            width:64px;
+            height:64px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:50%;
+            font-size:46px;
+            background:rgba(10,12,30,.88);
+            border:1px solid rgba(72,255,131,.45);
+            box-shadow:
+                0 0 20px rgba(72,255,131,.18),
+                0 0 40px rgba(37,221,255,.10);
+        "
+    >
+        🌍
+    </span>
+
+    <span
+        style="
+            font-size:13px;
+            letter-spacing:.5px;
+        "
+    >
+        Masters
+    </span>
 </a>
         
     </div>
