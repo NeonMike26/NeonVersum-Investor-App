@@ -1974,7 +1974,578 @@ document.getElementById(
     }
 );
 
+let mastersPurchases = [];
+let mastersPurchaseFilter = "open";
 
+
+function formatPurchaseMoney(
+    value,
+    paymentMethod
+) {
+
+    return paymentMethod === "USDC"
+        ? Number(value || 0)
+            .toLocaleString(
+                "en-US",
+                {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                }
+            ) + " USDC"
+        : Number(value || 0)
+            .toLocaleString(
+                "de-AT",
+                {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                }
+            ) + " €";
+
+}
+
+
+function formatPurchaseTokens(value) {
+
+    return Number(value || 0)
+        .toLocaleString(
+            "de-AT",
+            {
+                minimumFractionDigits:0,
+                maximumFractionDigits:2
+            }
+        ) + " Token";
+
+}
+
+
+function getPurchaseStatusClass(status) {
+
+    if (status === "Zahlung ausstehend") {
+        return "purchase-status-pending";
+    }
+
+    if (status === "Zahlung eingegangen") {
+        return "purchase-status-paid";
+    }
+
+    if (status === "Token übertragen") {
+        return "purchase-status-transferred";
+    }
+
+    return "purchase-status-cancelled";
+
+}
+
+
+function renderMastersPurchases() {
+
+    const list =
+        document.getElementById(
+            "masters-purchases-list"
+        );
+
+    const pending =
+        mastersPurchases.filter(
+            purchase =>
+                purchase.x_studio_status ===
+                "Zahlung ausstehend"
+        );
+
+    const paid =
+        mastersPurchases.filter(
+            purchase =>
+                purchase.x_studio_status ===
+                "Zahlung eingegangen"
+        );
+
+    const transferred =
+        mastersPurchases.filter(
+            purchase =>
+                purchase.x_studio_status ===
+                "Token übertragen"
+        );
+
+    const cancelled =
+        mastersPurchases.filter(
+            purchase =>
+                purchase.x_studio_status ===
+                "Storniert"
+        );
+
+
+    document.getElementById(
+        "purchase-stat-pending"
+    ).textContent =
+        String(pending.length);
+
+    document.getElementById(
+        "purchase-stat-paid"
+    ).textContent =
+        String(paid.length);
+
+    document.getElementById(
+        "purchase-stat-transferred"
+    ).textContent =
+        String(transferred.length);
+
+    document.getElementById(
+        "purchase-stat-cancelled"
+    ).textContent =
+        String(cancelled.length);
+
+    document.getElementById(
+        "purchase-total-count"
+    ).textContent =
+        String(mastersPurchases.length);
+
+
+    let visiblePurchases =
+        mastersPurchases;
+
+    if (mastersPurchaseFilter === "open") {
+
+        visiblePurchases =
+            mastersPurchases.filter(
+                purchase =>
+                    purchase.x_studio_status ===
+                        "Zahlung ausstehend" ||
+                    purchase.x_studio_status ===
+                        "Zahlung eingegangen"
+            );
+
+    } else if (
+        mastersPurchaseFilter !== "all"
+    ) {
+
+        visiblePurchases =
+            mastersPurchases.filter(
+                purchase =>
+                    purchase.x_studio_status ===
+                    mastersPurchaseFilter
+            );
+
+    }
+
+
+    if (visiblePurchases.length === 0) {
+
+        list.innerHTML = `
+            <div class="empty-state">
+                Für diesen Filter gibt es aktuell
+                keine Kaufanfragen.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    list.innerHTML =
+        visiblePurchases
+            .map((purchase) => {
+
+                const paymentMethod =
+                    purchase.x_studio_zahlungsart ||
+                    "EUR";
+
+                const status =
+                    purchase.x_studio_status ||
+                    "—";
+
+                const email =
+                    escapeHTML(
+                        purchase.x_studio_investor_e_mail ||
+                        "Unbekannter Investor"
+                    );
+
+                const investorId =
+                    escapeHTML(
+                        purchase.x_studio_investor_id ||
+                        "—"
+                    );
+
+                const phase =
+                    escapeHTML(
+                        purchase.x_studio_phase ||
+                        "—"
+                    );
+
+                const date =
+                    escapeHTML(
+                        formatOdooDate(
+                            purchase.x_studio_kaufdatum
+                        )
+                    );
+
+                const investment =
+                    formatPurchaseMoney(
+                        purchase.x_studio_investitionsbetrag,
+                        paymentMethod
+                    );
+
+                const fee =
+                    formatPurchaseMoney(
+                        purchase.x_studio_bearbeitungsgebuhr,
+                        paymentMethod
+                    );
+
+                const total =
+                    formatPurchaseMoney(
+                        purchase.x_studio_gesamtbetrag,
+                        paymentMethod
+                    );
+
+                const tokenPrice =
+                    formatPurchaseMoney(
+                        purchase.x_studio_tokenpreis,
+                        paymentMethod
+                    );
+
+                const tokens =
+                    formatPurchaseTokens(
+                        purchase.x_studio_tokenanzahl
+                    );
+
+                const statusClass =
+                    getPurchaseStatusClass(
+                        status
+                    );
+
+
+                return `
+                    <article class="purchase-card">
+
+                        <div class="purchase-card-top">
+
+                            <div>
+
+                                <div class="purchase-investor">
+                                    ${email}
+                                </div>
+
+                                <div class="purchase-investor-meta">
+                                    Investor-ID:
+                                    ${investorId}
+                                    · Kaufanfrage #${purchase.id}
+                                    · ${date}
+                                </div>
+
+                            </div>
+
+                            <span
+                                class="
+                                    purchase-status
+                                    ${statusClass}
+                                "
+                            >
+                                ${escapeHTML(status)}
+                            </span>
+
+                        </div>
+
+
+                        <div class="purchase-details-grid">
+
+                            <div class="purchase-detail">
+                                <span class="purchase-detail-label">
+                                    Phase
+                                </span>
+                                <strong class="purchase-detail-value">
+                                    ${phase}
+                                </strong>
+                            </div>
+
+                            <div class="purchase-detail">
+                                <span class="purchase-detail-label">
+                                    Zahlungsart
+                                </span>
+                                <strong class="purchase-detail-value">
+                                    ${escapeHTML(paymentMethod)}
+                                </strong>
+                            </div>
+
+                            <div class="purchase-detail">
+                                <span class="purchase-detail-label">
+                                    Investition
+                                </span>
+                                <strong class="purchase-detail-value">
+                                    ${investment}
+                                </strong>
+                            </div>
+
+                            <div class="purchase-detail">
+                                <span class="purchase-detail-label">
+                                    Bearbeitungsgebühr
+                                </span>
+                                <strong class="purchase-detail-value">
+                                    ${fee}
+                                </strong>
+                            </div>
+
+                            <div class="purchase-detail">
+                                <span class="purchase-detail-label">
+                                    Gesamtbetrag
+                                </span>
+                                <strong class="purchase-detail-value">
+                                    ${total}
+                                </strong>
+                            </div>
+
+                            <div class="purchase-detail">
+                                <span class="purchase-detail-label">
+                                    Tokenpreis
+                                </span>
+                                <strong class="purchase-detail-value">
+                                    ${tokenPrice}
+                                </strong>
+                            </div>
+
+                            <div class="purchase-detail">
+                                <span class="purchase-detail-label">
+                                    Tokenanzahl
+                                </span>
+                                <strong class="purchase-detail-value">
+                                    ${tokens}
+                                </strong>
+                            </div>
+
+                            <div class="purchase-detail">
+                                <span class="purchase-detail-label">
+                                    Datum
+                                </span>
+                                <strong class="purchase-detail-value">
+                                    ${date}
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        ${
+                            status === "Zahlung ausstehend"
+                                ? `
+                                    <button
+                                        type="button"
+                                        class="
+                                            confirm-payment-button
+                                            masters-confirm-payment
+                                        "
+                                        data-id="${purchase.id}"
+                                    >
+                                        ✓ Zahlung bestätigen
+                                    </button>
+                                `
+                                : ""
+                        }
+
+                    </article>
+                `;
+
+            })
+            .join("");
+
+
+    document
+        .querySelectorAll(
+            ".masters-confirm-payment"
+        )
+        .forEach((button) => {
+
+            button.addEventListener(
+                "click",
+                async () => {
+
+                    const purchaseId =
+                        Number(
+                            button.dataset.id ||
+                            0
+                        );
+
+                    if (!purchaseId) {
+                        return;
+                    }
+
+                    const confirmed =
+                        confirm(
+                            "Ist die Zahlung für diese Kaufanfrage tatsächlich eingegangen?"
+                        );
+
+                    if (!confirmed) {
+                        return;
+                    }
+
+                    button.disabled = true;
+
+                    button.textContent =
+                        "Zahlung wird bestätigt...";
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                MASTERS_CONFIRM_PAYMENT_API,
+                                {
+                                    method:"POST",
+                                    headers:{
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+                                    body:JSON.stringify({
+                                        purchaseId,
+                                        email:
+                                            mastersEmail,
+                                        investorId:
+                                            mastersInvestorId,
+                                        contactId:
+                                            mastersContactId
+                                    })
+                                }
+                            );
+
+                        const result =
+                            await response.json();
+
+                        if (
+                            !response.ok ||
+                            !result.success
+                        ) {
+
+                            throw new Error(
+                                result.message ||
+                                "Zahlung konnte nicht bestätigt werden."
+                            );
+
+                        }
+
+                        await loadMastersPurchases();
+
+                    } catch (error) {
+
+                        alert(
+                            error.message ||
+                            "Zahlung konnte nicht bestätigt werden."
+                        );
+
+                        button.disabled = false;
+
+                        button.textContent =
+                            "✓ Zahlung bestätigen";
+
+                    }
+
+                }
+            );
+
+        });
+
+}
+
+
+async function loadMastersPurchases() {
+
+    const list =
+        document.getElementById(
+            "masters-purchases-list"
+        );
+
+    try {
+
+        const response =
+            await fetch(
+                MASTERS_PURCHASES_API,
+                {
+                    method:"POST",
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body:JSON.stringify({
+                        email:
+                            mastersEmail,
+                        investorId:
+                            mastersInvestorId,
+                        contactId:
+                            mastersContactId
+                    })
+                }
+            );
+
+        const result =
+            await response.json();
+
+        if (
+            !response.ok ||
+            !result.success
+        ) {
+
+            throw new Error(
+                result.message ||
+                "Kaufanfragen konnten nicht geladen werden."
+            );
+
+        }
+
+        mastersPurchases =
+            Array.isArray(result.purchases)
+                ? result.purchases
+                : [];
+
+        renderMastersPurchases();
+
+    } catch (error) {
+
+        console.error(
+            "Masters Kaufanfragen:",
+            error
+        );
+
+        list.innerHTML = `
+            <div class="empty-state">
+                Kaufanfragen konnten nicht geladen werden.
+            </div>
+        `;
+
+    }
+
+}
+
+
+document
+    .querySelectorAll(
+        ".purchase-filter"
+    )
+    .forEach((button) => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                document
+                    .querySelectorAll(
+                        ".purchase-filter"
+                    )
+                    .forEach(
+                        item =>
+                            item.classList.remove(
+                                "active"
+                            )
+                    );
+
+                button.classList.add(
+                    "active"
+                );
+
+                mastersPurchaseFilter =
+                    button.dataset.filter ||
+                    "open";
+
+                renderMastersPurchases();
+
+            }
+        );
+
+    });
+    
 loadFriendsLinks();
 
 </script>
