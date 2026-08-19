@@ -643,6 +643,47 @@ const purchases =
             )
     );
 
+const portfolioTargetValue =
+    purchases
+        .filter(
+            (purchase) =>
+                purchase.x_studio_status ===
+                "Token übertragen"
+        )
+        .reduce(
+            (sum, purchase) => {
+
+                const investment =
+                    Number(
+                        purchase.x_studio_investitionsbetrag ||
+                        0
+                    );
+
+                const targetFactor =
+                    Number(
+                        purchase.x_studio_ziel_faktor_1 ||
+                        0
+                    );
+
+                return (
+                    sum +
+                    (
+                        investment *
+                        targetFactor
+                    )
+                );
+
+            },
+            0
+        );
+
+setText(
+    "portfolio-target-value",
+    formatCurrency(
+        portfolioTargetValue
+    )
+);
+        
 if (purchases.length === 0) {
 
             historyList.innerHTML =
