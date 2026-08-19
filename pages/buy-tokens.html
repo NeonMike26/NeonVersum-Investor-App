@@ -445,51 +445,67 @@
 
         <!-- KAUFHISTORIE -->
 
-    <section
+<details
+    style="
+        margin-top:24px;
+        padding:24px;
+        border:1px solid rgba(194,92,255,.35);
+        border-radius:22px;
+        background:rgba(10,12,30,.88);
+    "
+>
+    <summary
         style="
-            margin-top:24px;
-            padding:24px;
-            border:1px solid rgba(194,92,255,.35);
-            border-radius:22px;
-            background:rgba(10,12,30,.88);
+            cursor:pointer;
+            list-style:none;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:16px;
+            color:#9ba6c9;
+            font-size:14px;
+            font-weight:700;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            user-select:none;
         "
     >
-
-        <span
-            style="
-                display:block;
-                color:#9ba6c9;
-                font-size:14px;
-                font-weight:700;
-                text-transform:uppercase;
-                letter-spacing:1px;
-                margin-bottom:18px;
-            "
-        >
+        <span>
             Meine Käufe
         </span>
 
-        <div
-            id="purchase-history-list"
+        <span
             style="
-                display:grid;
-                gap:16px;
+                color:#48ff83;
+                font-size:22px;
             "
         >
-            <div
-                style="
-                    padding:18px;
-                    border:1px solid rgba(255,255,255,.10);
-                    border-radius:18px;
-                    color:#9ba6c9;
-                    text-align:center;
-                "
-            >
-                Kaufhistorie wird geladen...
-            </div>
-        </div>
+            ⌄
+        </span>
+    </summary>
 
-    </section>
+    <div
+        id="purchase-history-list"
+        style="
+            margin-top:18px;
+            display:grid;
+            gap:16px;
+        "
+    >
+        <div
+            style="
+                padding:18px;
+                border:1px solid rgba(255,255,255,.10);
+                border-radius:18px;
+                color:#9ba6c9;
+                text-align:center;
+            "
+        >
+            Kaufhistorie wird geladen...
+        </div>
+    </div>
+
+</details>
 
     <!-- ZAHLUNGSINFORMATIONEN -->
 
