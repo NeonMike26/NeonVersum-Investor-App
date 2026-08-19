@@ -140,6 +140,20 @@ if (logoutButton) {
     });
 }
 
+const mastersSatellite =
+    document.getElementById("masters-satellite");
+
+const mastersAccess =
+    sessionStorage.getItem("nvMastersAccess") ||
+    localStorage.getItem("nvMastersAccess");
+
+if (
+    mastersSatellite &&
+    mastersAccess === "true"
+) {
+    mastersSatellite.hidden = false;
+}
+    
 const welcomeMessage =
     document.getElementById("welcome-message");
 
