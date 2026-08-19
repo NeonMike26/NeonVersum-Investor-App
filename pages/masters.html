@@ -30,55 +30,1565 @@ if (mastersAccess !== "true") {
 
 <title>Masters | NeonVersum</title>
 
-<link rel="stylesheet" href="../css/app.css?v=40">
+<link
+    rel="stylesheet"
+    href="../css/app.css?v=40"
+>
+
+<style>
+
+* {
+    box-sizing:border-box;
+}
+
+body {
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,sans-serif;
+    color:#ffffff;
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(37,221,255,.10),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(194,92,255,.14),
+            transparent 34%
+        ),
+        #050714;
+}
+
+.masters-shell {
+    width:min(1180px, calc(100% - 32px));
+    margin:0 auto;
+    padding:100px 0 60px;
+}
+
+.masters-topbar {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+    min-height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:14px 20px;
+    background:rgba(5,7,20,.88);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+}
+
+.topbar-link,
+.topbar-button {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:42px;
+    padding:10px 18px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.topbar-link {
+    color:#ffffff;
+    border:1px solid rgba(72,255,131,.40);
+    background:rgba(72,255,131,.06);
+}
+
+.topbar-button {
+    color:#ffffff;
+    border:1px solid rgba(255,255,255,.25);
+    background:rgba(10,10,20,.95);
+    cursor:pointer;
+}
+
+.masters-hero {
+    padding:34px;
+    border:1px solid rgba(194,92,255,.35);
+    border-radius:28px;
+    background:rgba(10,12,30,.82);
+    box-shadow:
+        0 20px 80px rgba(0,0,0,.28),
+        0 0 50px rgba(194,92,255,.05);
+}
+
+.masters-kicker {
+    color:#48ff83;
+    font-size:13px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:1.4px;
+}
+
+.masters-title {
+    margin:12px 0 0;
+    font-size:clamp(38px, 7vw, 64px);
+    line-height:1;
+}
+
+.masters-subtitle {
+    max-width:720px;
+    margin:18px 0 0;
+    color:#9ba6c9;
+    font-size:18px;
+    line-height:1.6;
+}
+
+.masters-user {
+    margin-top:18px;
+    color:#6f7899;
+    font-size:14px;
+}
+
+.stats-grid {
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:16px;
+    margin-top:24px;
+}
+
+.stat-card {
+    padding:22px;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:20px;
+    background:rgba(10,12,30,.75);
+}
+
+.stat-label {
+    display:block;
+    color:#9ba6c9;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+}
+
+.stat-value {
+    display:block;
+    margin-top:10px;
+    font-size:30px;
+    font-weight:800;
+}
+
+.masters-grid {
+    display:grid;
+    grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+    gap:24px;
+    margin-top:24px;
+    align-items:start;
+}
+
+.panel {
+    padding:28px;
+    border:1px solid rgba(255,255,255,.11);
+    border-radius:24px;
+    background:rgba(10,12,30,.82);
+}
+
+.panel-title {
+    margin:0;
+    font-size:24px;
+}
+
+.panel-subtitle {
+    margin:10px 0 0;
+    color:#9ba6c9;
+    line-height:1.5;
+}
+
+.form-group {
+    margin-top:20px;
+}
+
+.form-label {
+    display:block;
+    margin-bottom:9px;
+    color:#9ba6c9;
+    font-size:14px;
+    font-weight:700;
+}
+
+.form-input {
+    width:100%;
+    padding:15px 16px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:14px;
+    background:#ffffff;
+    color:#050714;
+    font-size:16px;
+    outline:none;
+}
+
+.form-input:focus {
+    border-color:#c25cff;
+    box-shadow:0 0 0 3px rgba(194,92,255,.12);
+}
+
+.primary-button {
+    width:100%;
+    margin-top:22px;
+    padding:16px 20px;
+    border:0;
+    border-radius:15px;
+    background:#c25cff;
+    color:#ffffff;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.primary-button:disabled {
+    opacity:.55;
+    cursor:wait;
+}
+
+.message {
+    display:none;
+    margin-top:18px;
+    padding:14px 16px;
+    border-radius:14px;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.message.success {
+    display:block;
+    color:#48ff83;
+    border:1px solid rgba(72,255,131,.30);
+    background:rgba(72,255,131,.06);
+}
+
+.message.error {
+    display:block;
+    color:#ff7676;
+    border:1px solid rgba(255,118,118,.30);
+    background:rgba(255,118,118,.06);
+}
+
+.created-link-box {
+    display:none;
+    margin-top:18px;
+    padding:18px;
+    border:1px solid rgba(72,255,131,.30);
+    border-radius:16px;
+    background:rgba(72,255,131,.05);
+}
+
+.created-link-box.visible {
+    display:block;
+}
+
+.created-link-label {
+    display:block;
+    margin-bottom:8px;
+    color:#48ff83;
+    font-size:13px;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+.created-link {
+    display:block;
+    padding:12px;
+    border-radius:12px;
+    background:rgba(5,7,20,.70);
+    color:#ffffff;
+    font-size:13px;
+    line-height:1.5;
+    word-break:break-all;
+}
+
+.copy-main-button {
+    width:100%;
+    margin-top:12px;
+    padding:13px 16px;
+    border:1px solid rgba(72,255,131,.35);
+    border-radius:13px;
+    background:rgba(72,255,131,.08);
+    color:#48ff83;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.section-heading {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+}
+
+.section-count {
+    min-width:34px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(194,92,255,.15);
+    color:#c25cff;
+    text-align:center;
+    font-size:13px;
+    font-weight:800;
+}
+
+.links-list {
+    display:grid;
+    gap:14px;
+    margin-top:20px;
+}
+
+.link-card {
+    padding:18px;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:18px;
+    background:rgba(5,7,20,.52);
+}
+
+.link-card-header {
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    align-items:flex-start;
+}
+
+.link-name {
+    font-size:17px;
+    font-weight:800;
+}
+
+.link-email {
+    margin-top:5px;
+    color:#9ba6c9;
+    font-size:13px;
+    word-break:break-all;
+}
+
+.status-badge {
+    flex:none;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.status-active {
+    color:#48ff83;
+    background:rgba(72,255,131,.10);
+    border:1px solid rgba(72,255,131,.25);
+}
+
+.status-confirmed {
+    color:#25ddff;
+    background:rgba(37,221,255,.08);
+    border:1px solid rgba(37,221,255,.25);
+}
+
+.link-code {
+    margin-top:14px;
+    padding:11px 12px;
+    border-radius:11px;
+    background:rgba(255,255,255,.04);
+    color:#9ba6c9;
+    font-family:monospace;
+    font-size:12px;
+    word-break:break-all;
+}
+
+.card-actions {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:14px;
+}
+
+.action-button {
+    padding:11px 12px;
+    border-radius:12px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.copy-button {
+    border:1px solid rgba(37,221,255,.28);
+    background:rgba(37,221,255,.06);
+    color:#25ddff;
+}
+
+.delete-button {
+    border:1px solid rgba(255,118,118,.30);
+    background:rgba(255,118,118,.06);
+    color:#ff7676;
+}
+
+.confirm-meta {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin-top:14px;
+}
+
+.meta-box {
+    padding:11px;
+    border-radius:11px;
+    background:rgba(255,255,255,.035);
+}
+
+.meta-label {
+    display:block;
+    color:#6f7899;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
+
+.meta-value {
+    display:block;
+    margin-top:5px;
+    color:#ffffff;
+    font-size:13px;
+}
+
+.empty-state {
+    padding:22px;
+    border:1px dashed rgba(255,255,255,.12);
+    border-radius:16px;
+    color:#6f7899;
+    text-align:center;
+    line-height:1.5;
+}
+
+.loading {
+    color:#9ba6c9;
+    text-align:center;
+    padding:20px;
+}
+
+.confirmed-panel {
+    margin-top:24px;
+}
+
+@media (max-width:800px) {
+
+    .masters-shell {
+        width:min(100% - 20px, 1180px);
+        padding-top:90px;
+    }
+
+    .masters-topbar {
+        padding:12px 10px;
+    }
+
+    .topbar-link,
+    .topbar-button {
+        padding:10px 13px;
+        font-size:13px;
+    }
+
+    .masters-hero,
+    .panel {
+        padding:20px;
+        border-radius:20px;
+    }
+
+    .stats-grid {
+        grid-template-columns:1fr;
+    }
+
+    .masters-grid {
+        grid-template-columns:1fr;
+    }
+
+    .card-actions {
+        grid-template-columns:1fr;
+    }
+
+    .confirm-meta {
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-<main
-    style="
-        max-width:900px;
-        margin:60px auto;
-        padding:30px;
-        color:white;
-        font-family:Arial,sans-serif;
-    "
->
+<header class="masters-topbar">
 
     <a
+        class="topbar-link"
         href="mission-control.html"
-        style="
-            display:inline-block;
-            margin-bottom:30px;
-            color:#9ba6c9;
-            text-decoration:none;
-        "
     >
-        ← Zurück zur Mission Control
+        ← Mission Control
     </a>
 
-    <h1
-        style="
-            margin:0;
-            font-size:42px;
-        "
+    <button
+        id="masters-logout"
+        class="topbar-button"
+        type="button"
     >
-        🌍 Masters
-    </h1>
+        Abmelden
+    </button>
 
-    <p
-        style="
-            margin-top:16px;
-            color:#9ba6c9;
-            font-size:18px;
-            line-height:1.6;
-        "
-    >
-        NeonVersum Executive Control
-    </p>
+</header>
+
+<main class="masters-shell">
+
+    <section class="masters-hero">
+
+        <span class="masters-kicker">
+            Executive Control
+        </span>
+
+        <h1 class="masters-title">
+            🌍 Masters
+        </h1>
+
+        <p class="masters-subtitle">
+            Zentrale Verwaltung für persönliche Friendslinks
+            und exklusive NeonVersum Zugänge.
+        </p>
+
+        <div
+            id="masters-user"
+            class="masters-user"
+        ></div>
+
+    </section>
+
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+            <span class="stat-label">
+                Aktive Friendslinks
+            </span>
+
+            <strong
+                id="stat-active"
+                class="stat-value"
+            >
+                —
+            </strong>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-label">
+                Bereits bestätigt
+            </span>
+
+            <strong
+                id="stat-confirmed"
+                class="stat-value"
+            >
+                —
+            </strong>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-label">
+                Gesamt
+            </span>
+
+            <strong
+                id="stat-total"
+                class="stat-value"
+            >
+                —
+            </strong>
+        </div>
+
+    </section>
+
+
+    <section class="masters-grid">
+
+        <section class="panel">
+
+            <h2 class="panel-title">
+                Friendslink erstellen
+            </h2>
+
+            <p class="panel-subtitle">
+                Name und E-Mail eintragen. Der persönliche
+                Friends-Code wird automatisch erzeugt.
+            </p>
+
+            <form id="friends-form">
+
+                <div class="form-group">
+
+                    <label
+                        class="form-label"
+                        for="friends-name"
+                    >
+                        Friends Name
+                    </label>
+
+                    <input
+                        id="friends-name"
+                        class="form-input"
+                        type="text"
+                        autocomplete="name"
+                        placeholder="z. B. Max Mustermann"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label
+                        class="form-label"
+                        for="friends-email"
+                    >
+                        Friends E-Mail
+                    </label>
+
+                    <input
+                        id="friends-email"
+                        class="form-input"
+                        type="email"
+                        autocomplete="email"
+                        placeholder="max@example.com"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    id="create-friends-link"
+                    class="primary-button"
+                    type="submit"
+                >
+                    Friendslink erstellen
+                </button>
+
+            </form>
+
+            <div
+                id="friends-message"
+                class="message"
+            ></div>
+
+            <div
+                id="created-link-box"
+                class="created-link-box"
+            >
+
+                <span class="created-link-label">
+                    Persönlicher Friendslink
+                </span>
+
+                <span
+                    id="created-link"
+                    class="created-link"
+                ></span>
+
+                <button
+                    id="copy-created-link"
+                    class="copy-main-button"
+                    type="button"
+                >
+                    Link kopieren
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="panel">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2 class="panel-title">
+                        Aktive Links
+                    </h2>
+
+                    <p class="panel-subtitle">
+                        Noch nicht verwendete persönliche Friendslinks.
+                    </p>
+                </div>
+
+                <span
+                    id="active-count"
+                    class="section-count"
+                >
+                    0
+                </span>
+
+            </div>
+
+            <div
+                id="active-links"
+                class="links-list"
+            >
+                <div class="loading">
+                    Friendslinks werden geladen...
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+
+
+    <section class="panel confirmed-panel">
+
+        <div class="section-heading">
+
+            <div>
+                <h2 class="panel-title">
+                    Bereits bestätigt
+                </h2>
+
+                <p class="panel-subtitle">
+                    Friendslinks, über die bereits eine
+                    Kaufanfrage erstellt wurde.
+                </p>
+            </div>
+
+            <span
+                id="confirmed-count"
+                class="section-count"
+            >
+                0
+            </span>
+
+        </div>
+
+        <div
+            id="confirmed-links"
+            class="links-list"
+        >
+            <div class="loading">
+                Bestätigte Friendslinks werden geladen...
+            </div>
+        </div>
+
+    </section>
 
 </main>
+
+
+<script>
+
+const API_BASE =
+    "https://neonversum-api.m-fehringer.workers.dev";
+
+const MASTERS_FRIENDS_LIST_API =
+    `${API_BASE}/masters-friends-links`;
+
+const MASTERS_FRIENDS_CREATE_API =
+    `${API_BASE}/masters-friends-create`;
+
+const MASTERS_FRIENDS_DELETE_API =
+    `${API_BASE}/masters-friends-delete`;
+
+const APP_BASE =
+    "https://neonmike26.github.io/NeonVersum-Investor-App/pages";
+
+const mastersEmail =
+    sessionStorage.getItem("nvUserEmail") ||
+    localStorage.getItem("nvUserEmail") ||
+    "";
+
+const mastersInvestorId =
+    sessionStorage.getItem("nvInvestorId") ||
+    localStorage.getItem("nvInvestorId") ||
+    "";
+
+const mastersName =
+    sessionStorage.getItem("nvUserName") ||
+    localStorage.getItem("nvUserName") ||
+    "";
+
+const mastersContactId =
+    sessionStorage.getItem("nvContactId") ||
+    localStorage.getItem("nvContactId") ||
+    "";
+
+
+const mastersUser =
+    document.getElementById("masters-user");
+
+if (mastersUser) {
+
+    mastersUser.textContent =
+        mastersName
+            ? `Angemeldet als ${mastersName}`
+            : "Masters-Zugang aktiv";
+
+}
+
+
+document.getElementById(
+    "masters-logout"
+).addEventListener(
+    "click",
+    () => {
+
+        sessionStorage.clear();
+        localStorage.clear();
+
+        window.location.replace(
+            "login.html"
+        );
+
+    }
+);
+
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+function formatOdooDate(value) {
+
+    if (!value) {
+        return "—";
+    }
+
+    const raw =
+        String(value);
+
+    const parts =
+        raw.split(" ");
+
+    const dateParts =
+        parts[0]?.split("-");
+
+    if (
+        !dateParts ||
+        dateParts.length !== 3
+    ) {
+        return raw;
+    }
+
+    let formatted =
+        `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
+
+    if (parts[1]) {
+
+        formatted +=
+            ` · ${parts[1].slice(0,5)} Uhr`;
+
+    }
+
+    return formatted;
+
+}
+
+
+function createFriendsURL(code) {
+
+    return (
+        `${APP_BASE}/buy-tokens.html?friends=` +
+        encodeURIComponent(code)
+    );
+
+}
+
+
+async function copyText(text) {
+
+    await navigator.clipboard.writeText(
+        text
+    );
+
+}
+
+
+function setMessage(
+    text,
+    type = ""
+) {
+
+    const message =
+        document.getElementById(
+            "friends-message"
+        );
+
+    message.className =
+        "message";
+
+    message.textContent =
+        text || "";
+
+    if (type) {
+        message.classList.add(type);
+    }
+
+}
+
+
+async function loadFriendsLinks() {
+
+    const activeList =
+        document.getElementById(
+            "active-links"
+        );
+
+    const confirmedList =
+        document.getElementById(
+            "confirmed-links"
+        );
+
+    try {
+
+        const response =
+            await fetch(
+                MASTERS_FRIENDS_LIST_API,
+                {
+                    method:"POST",
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body:JSON.stringify({
+                        email:
+                            mastersEmail,
+                        investorId:
+                            mastersInvestorId,
+                        contactId:
+                            mastersContactId
+                    })
+                }
+            );
+
+        const result =
+            await response.json();
+
+        if (
+            !response.ok ||
+            !result.success
+        ) {
+
+            throw new Error(
+                result.message ||
+                "Friendslinks konnten nicht geladen werden."
+            );
+
+        }
+
+        const links =
+            Array.isArray(result.links)
+                ? result.links
+                : [];
+
+        const active =
+            links.filter(
+                (item) =>
+                    item.x_studio_status ===
+                    "Aktiv"
+            );
+
+        const confirmed =
+            links.filter(
+                (item) =>
+                    item.x_studio_status !==
+                    "Aktiv"
+            );
+
+        document.getElementById(
+            "stat-active"
+        ).textContent =
+            String(active.length);
+
+        document.getElementById(
+            "stat-confirmed"
+        ).textContent =
+            String(confirmed.length);
+
+        document.getElementById(
+            "stat-total"
+        ).textContent =
+            String(links.length);
+
+        document.getElementById(
+            "active-count"
+        ).textContent =
+            String(active.length);
+
+        document.getElementById(
+            "confirmed-count"
+        ).textContent =
+            String(confirmed.length);
+
+
+        if (active.length === 0) {
+
+            activeList.innerHTML = `
+                <div class="empty-state">
+                    Aktuell gibt es keine aktiven Friendslinks.
+                </div>
+            `;
+
+        } else {
+
+            activeList.innerHTML =
+                active
+                    .map((item) => {
+
+                        const name =
+                            escapeHTML(
+                                item.x_studio_friends_name ||
+                                "Friend"
+                            );
+
+                        const email =
+                            escapeHTML(
+                                item.x_studio_friends_e_mail ||
+                                ""
+                            );
+
+                        const code =
+                            escapeHTML(
+                                item.x_studio_friends_code ||
+                                ""
+                            );
+
+                        const url =
+                            createFriendsURL(
+                                item.x_studio_friends_code ||
+                                ""
+                            );
+
+                        return `
+                            <article class="link-card">
+
+                                <div class="link-card-header">
+
+                                    <div>
+                                        <div class="link-name">
+                                            ${name}
+                                        </div>
+
+                                        <div class="link-email">
+                                            ${email}
+                                        </div>
+                                    </div>
+
+                                    <span
+                                        class="
+                                            status-badge
+                                            status-active
+                                        "
+                                    >
+                                        Aktiv
+                                    </span>
+
+                                </div>
+
+                                <div class="link-code">
+                                    ${code}
+                                </div>
+
+                                <div class="card-actions">
+
+                                    <button
+                                        type="button"
+                                        class="
+                                            action-button
+                                            copy-button
+                                            copy-friends-link
+                                        "
+                                        data-url="${escapeHTML(url)}"
+                                    >
+                                        Link kopieren
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="
+                                            action-button
+                                            delete-button
+                                            delete-friends-link
+                                        "
+                                        data-id="${item.id}"
+                                        data-name="${name}"
+                                    >
+                                        Löschen
+                                    </button>
+
+                                </div>
+
+                            </article>
+                        `;
+
+                    })
+                    .join("");
+
+        }
+
+
+        if (confirmed.length === 0) {
+
+            confirmedList.innerHTML = `
+                <div class="empty-state">
+                    Noch kein Friendslink wurde bestätigt.
+                </div>
+            `;
+
+        } else {
+
+            confirmedList.innerHTML =
+                confirmed
+                    .map((item) => {
+
+                        const name =
+                            escapeHTML(
+                                item.x_studio_friends_name ||
+                                "Friend"
+                            );
+
+                        const email =
+                            escapeHTML(
+                                item.x_studio_friends_e_mail ||
+                                ""
+                            );
+
+                        return `
+                            <article class="link-card">
+
+                                <div class="link-card-header">
+
+                                    <div>
+                                        <div class="link-name">
+                                            ${name}
+                                        </div>
+
+                                        <div class="link-email">
+                                            ${email}
+                                        </div>
+                                    </div>
+
+                                    <span
+                                        class="
+                                            status-badge
+                                            status-confirmed
+                                        "
+                                    >
+                                        Bestätigt
+                                    </span>
+
+                                </div>
+
+                                <div class="confirm-meta">
+
+                                    <div class="meta-box">
+
+                                        <span class="meta-label">
+                                            Bestätigt am
+                                        </span>
+
+                                        <strong class="meta-value">
+                                            ${escapeHTML(
+                                                formatOdooDate(
+                                                    item.x_studio_bestaetigt_am
+                                                )
+                                            )}
+                                        </strong>
+
+                                    </div>
+
+                                    <div class="meta-box">
+
+                                        <span class="meta-label">
+                                            Kaufanfrage ID
+                                        </span>
+
+                                        <strong class="meta-value">
+                                            ${
+                                                Number(
+                                                    item.x_studio_kaufanfrage_id ||
+                                                    0
+                                                ) || "—"
+                                            }
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+                        `;
+
+                    })
+                    .join("");
+
+        }
+
+
+        document
+            .querySelectorAll(
+                ".copy-friends-link"
+            )
+            .forEach((button) => {
+
+                button.addEventListener(
+                    "click",
+                    async () => {
+
+                        try {
+
+                            await copyText(
+                                button.dataset.url ||
+                                ""
+                            );
+
+                            const oldText =
+                                button.textContent;
+
+                            button.textContent =
+                                "Kopiert ✓";
+
+                            window.setTimeout(
+                                () => {
+                                    button.textContent =
+                                        oldText;
+                                },
+                                1500
+                            );
+
+                        } catch {
+
+                            alert(
+                                "Der Link konnte nicht kopiert werden."
+                            );
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+        document
+            .querySelectorAll(
+                ".delete-friends-link"
+            )
+            .forEach((button) => {
+
+                button.addEventListener(
+                    "click",
+                    async () => {
+
+                        const id =
+                            Number(
+                                button.dataset.id ||
+                                0
+                            );
+
+                        if (!id) {
+                            return;
+                        }
+
+                        const confirmedDelete =
+                            confirm(
+                                `Aktiven Friendslink für ${button.dataset.name || "diese Person"} wirklich löschen?`
+                            );
+
+                        if (!confirmedDelete) {
+                            return;
+                        }
+
+                        button.disabled = true;
+                        button.textContent =
+                            "Wird gelöscht...";
+
+                        try {
+
+                            const response =
+                                await fetch(
+                                    MASTERS_FRIENDS_DELETE_API,
+                                    {
+                                        method:"POST",
+                                        headers:{
+                                            "Content-Type":
+                                                "application/json"
+                                        },
+                                        body:JSON.stringify({
+                                            linkId:id,
+                                            email:
+                                                mastersEmail,
+                                            investorId:
+                                                mastersInvestorId,
+                                            contactId:
+                                                mastersContactId
+                                        })
+                                    }
+                                );
+
+                            const result =
+                                await response.json();
+
+                            if (
+                                !response.ok ||
+                                !result.success
+                            ) {
+
+                                throw new Error(
+                                    result.message ||
+                                    "Friendslink konnte nicht gelöscht werden."
+                                );
+
+                            }
+
+                            await loadFriendsLinks();
+
+                        } catch (error) {
+
+                            alert(
+                                error.message ||
+                                "Friendslink konnte nicht gelöscht werden."
+                            );
+
+                            button.disabled = false;
+                            button.textContent =
+                                "Löschen";
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+    } catch (error) {
+
+        console.error(
+            "Masters Friendslinks:",
+            error
+        );
+
+        activeList.innerHTML = `
+            <div class="empty-state">
+                Friendslinks konnten nicht geladen werden.
+            </div>
+        `;
+
+        confirmedList.innerHTML = `
+            <div class="empty-state">
+                Daten konnten nicht geladen werden.
+            </div>
+        `;
+
+    }
+
+}
+
+
+document.getElementById(
+    "friends-form"
+).addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById(
+                "friends-name"
+            ).value.trim();
+
+        const email =
+            document.getElementById(
+                "friends-email"
+            ).value
+                .trim()
+                .toLowerCase();
+
+        if (!name || !email) {
+
+            setMessage(
+                "Bitte Name und E-Mail-Adresse eingeben.",
+                "error"
+            );
+
+            return;
+        }
+
+        const button =
+            document.getElementById(
+                "create-friends-link"
+            );
+
+        button.disabled = true;
+        button.textContent =
+            "Friendslink wird erstellt...";
+
+        setMessage("");
+
+        try {
+
+            const response =
+                await fetch(
+                    MASTERS_FRIENDS_CREATE_API,
+                    {
+                        method:"POST",
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+                        body:JSON.stringify({
+                            friendsName:name,
+                            friendsEmail:email,
+                            email:
+                                mastersEmail,
+                            investorId:
+                                mastersInvestorId,
+                            contactId:
+                                mastersContactId
+                        })
+                    }
+                );
+
+            const result =
+                await response.json();
+
+            if (
+                !response.ok ||
+                !result.success
+            ) {
+
+                throw new Error(
+                    result.message ||
+                    "Friendslink konnte nicht erstellt werden."
+                );
+
+            }
+
+            const createdURL =
+                result.url ||
+                createFriendsURL(
+                    result.code ||
+                    ""
+                );
+
+            document.getElementById(
+                "created-link"
+            ).textContent =
+                createdURL;
+
+            const createdBox =
+                document.getElementById(
+                    "created-link-box"
+                );
+
+            createdBox.classList.add(
+                "visible"
+            );
+
+            createdBox.dataset.url =
+                createdURL;
+
+            setMessage(
+                "Friendslink wurde erfolgreich erstellt.",
+                "success"
+            );
+
+            document.getElementById(
+                "friends-name"
+            ).value = "";
+
+            document.getElementById(
+                "friends-email"
+            ).value = "";
+
+            await loadFriendsLinks();
+
+        } catch (error) {
+
+            setMessage(
+                error.message ||
+                "Friendslink konnte nicht erstellt werden.",
+                "error"
+            );
+
+        } finally {
+
+            button.disabled = false;
+            button.textContent =
+                "Friendslink erstellen";
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "copy-created-link"
+).addEventListener(
+    "click",
+    async () => {
+
+        const box =
+            document.getElementById(
+                "created-link-box"
+            );
+
+        const url =
+            box.dataset.url ||
+            "";
+
+        if (!url) {
+            return;
+        }
+
+        try {
+
+            await copyText(url);
+
+            const button =
+                document.getElementById(
+                    "copy-created-link"
+                );
+
+            button.textContent =
+                "Link kopiert ✓";
+
+            window.setTimeout(
+                () => {
+                    button.textContent =
+                        "Link kopieren";
+                },
+                1500
+            );
+
+        } catch {
+
+            alert(
+                "Der Link konnte nicht kopiert werden."
+            );
+
+        }
+
+    }
+);
+
+
+loadFriendsLinks();
+
+</script>
 
 </body>
 
