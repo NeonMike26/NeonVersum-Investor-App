@@ -2325,21 +2325,34 @@ function renderMastersPurchases() {
 
 
                         ${
-                            status === "Zahlung ausstehend"
-                                ? `
-                                    <button
-                                        type="button"
-                                        class="
-                                            confirm-payment-button
-                                            masters-confirm-payment
-                                        "
-                                        data-id="${purchase.id}"
-                                    >
-                                        ✓ Zahlung bestätigen
-                                    </button>
-                                `
-                                : ""
-                        }
+    status === "Zahlung ausstehend"
+        ? `
+            <button
+                type="button"
+                class="
+                    confirm-payment-button
+                    masters-confirm-payment
+                "
+                data-id="${purchase.id}"
+            >
+                ✓ Zahlung bestätigen
+            </button>
+        `
+        : status === "Zahlung eingegangen"
+            ? `
+                <button
+                    type="button"
+                    class="
+                        confirm-payment-button
+                        masters-transfer-tokens
+                    "
+                    data-id="${purchase.id}"
+                >
+                    🚀 Token übertragen
+                </button>
+            `
+            : ""
+}
 
                     </article>
                 `;
