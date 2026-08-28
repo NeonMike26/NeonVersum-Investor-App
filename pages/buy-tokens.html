@@ -652,6 +652,125 @@
 </a>
     
 </section>
+
+<!-- RISIKO-DISCLAIMER -->
+<section
+    id="risk-disclaimer"
+    hidden
+    style="
+        margin-top:28px;
+        padding:22px;
+        border:1px solid rgba(255,190,80,.45);
+        border-radius:18px;
+        background:rgba(255,190,80,.06);
+    "
+>
+    <div
+        style="
+            font-size:18px;
+            font-weight:800;
+            color:#ffd27a;
+            margin-bottom:14px;
+        "
+    >
+        Wichtiger Risiko- und Rechtshinweis
+    </div>
+
+    <div
+        style="
+            color:#cbd3ee;
+            line-height:1.65;
+            font-size:14px;
+        "
+    >
+        <p>
+            Der Erwerb von NeonVersum Token ist mit erheblichen
+            unternehmerischen und wirtschaftlichen Risiken verbunden.
+            NeonVersum befindet sich im Aufbau. Es besteht keine Garantie,
+            dass geplante Umsätze, Unternehmensziele, Tokenwerte oder
+            wirtschaftliche Ergebnisse erreicht werden.
+        </p>
+
+        <p>
+            Angegebene Zielwerte, Szenarien oder Multiplikatoren wie
+            beispielsweise 10x oder 30x stellen ausschließlich
+            Zielvorstellungen beziehungsweise Berechnungsmodelle dar.
+            Sie sind keine Zusage und keine Garantie für eine zukünftige
+            Wertentwicklung oder Rendite.
+        </p>
+
+        <p>
+            NeonVersum strebt an, Voraussetzungen für eine mögliche
+            Handelbarkeit beziehungsweise ein Listing des Tokens ungefähr
+            ab dem 01.05.2029 zu schaffen. Ein Listing oder eine
+            Handelbarkeit zu diesem Zeitpunkt kann jedoch nicht garantiert
+            werden. Eine Umsetzung kann sich verzögern oder aufgrund
+            wirtschaftlicher, technischer, rechtlicher oder regulatorischer
+            Entwicklungen auch vollständig ausbleiben.
+        </p>
+
+        <p>
+            Es besteht keine Garantie für einen liquiden Markt oder dafür,
+            dass Token später jederzeit verkauft oder übertragen werden
+            können. Der Wert einer Beteiligung beziehungsweise eines Tokens
+            kann erheblich schwanken. Ein teilweiser oder vollständiger
+            Verlust des eingesetzten Kapitals ist möglich.
+        </p>
+
+        <p>
+            Die Investitionsentscheidung erfolgt eigenverantwortlich.
+            Es sollte ausschließlich Kapital eingesetzt werden, dessen
+            vollständiger Verlust wirtschaftlich verkraftbar wäre.
+        </p>
+    </div>
+
+    <label
+        style="
+            display:flex;
+            align-items:flex-start;
+            gap:12px;
+            margin-top:20px;
+            padding:16px;
+            border-radius:14px;
+            background:rgba(255,255,255,.04);
+            cursor:pointer;
+        "
+    >
+        <input
+            id="risk-disclaimer-checkbox"
+            type="checkbox"
+            style="
+                margin-top:3px;
+                width:20px;
+                height:20px;
+                flex:0 0 auto;
+                cursor:pointer;
+            "
+        >
+
+        <span
+            style="
+                color:#ffffff;
+                font-size:14px;
+                line-height:1.5;
+                font-weight:700;
+            "
+        >
+            Ich habe den Risiko- und Rechtshinweis vollständig gelesen,
+            verstanden und zur Kenntnis genommen.
+        </span>
+    </label>
+
+    <div
+        style="
+            margin-top:12px;
+            color:#7f8baa;
+            font-size:11px;
+        "
+    >
+        Disclaimer-Version: NV-RISK-2026-01
+    </div>
+</section>
     
     <!-- BUTTON -->
 
@@ -700,6 +819,17 @@ const PURCHASE_HISTORY_API_URL =
 
 const FRIENDS_PHASE_API_URL =
     "https://neonversum-api.m-fehringer.workers.dev/friends-phase";
+
+const INVESTOR_API_URL =
+    "https://neonversum-api.m-fehringer.workers.dev/investor";
+
+const RISK_DISCLAIMER_API_URL =
+    "https://neonversum-api.m-fehringer.workers.dev/accept-risk-disclaimer";
+
+const RISK_DISCLAIMER_VERSION =
+    "NV-RISK-2026-01";
+
+let riskDisclaimerAccepted = false;    
 
 const friendsCode =
     new URLSearchParams(
