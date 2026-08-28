@@ -847,7 +847,104 @@ const purchaseInput =
 const purchaseInputLabel =
     document.getElementById("purchase-input-label");
 
-    
+    async function loadRiskDisclaimerStatus() {
+
+    const disclaimerSection =
+        document.getElementById(
+            "risk-disclaimer"
+        );
+
+    const disclaimerCheckbox =
+        document.getElementById(
+            "risk-disclaimer-checkbox"
+        );
+
+    const submitButton =
+        document.getElementById(
+            "submit-purchase"
+        );
+
+    const email =
+        sessionStorage.getItem("nvUserEmail") ||
+        localStorage.getItem("nvUserEmail") ||
+        sessionStorage.getItem("nvRegisteredEmail") ||
+        localStorage.getItem("nvRegisteredEmail") ||
+        "";
+
+    riskDisclaimerAccepted = false;
+
+    submitButton.disabled = true;
+
+    if (!email) {
+        disclaimerSection.hidden = false;
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                INVESTOR_API_URL,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body: JSON.stringify({
+                        email
+                    })
+                }
+            );
+
+        const result =
+            await response.json();
+
+        if (
+            !response.ok ||
+            !result.success ||
+            !result.investor
+        ) {
+            throw new Error(
+                "Disclaimer-Status konnte nicht geladen werden."
+            );
+        }
+
+        const investor =
+            result.investor;
+
+        const currentVersionAccepted =
+            investor.x_studio_risiko_disclaimer_bestatigt === true &&
+            investor.x_studio_risiko_disclaimer_version ===
+                RISK_DISCLAIMER_VERSION;
+
+        riskDisclaimerAccepted =
+            currentVersionAccepted;
+
+        if (currentVersionAccepted) {
+
+            disclaimerSection.hidden = true;
+            submitButton.disabled = false;
+
+            return;
+        }
+
+        disclaimerSection.hidden = false;
+        disclaimerCheckbox.checked = false;
+        submitButton.disabled = true;
+
+    } catch (error) {
+
+        console.error(
+            "Disclaimer-Status-Fehler:",
+            error
+        );
+
+        disclaimerSection.hidden = false;
+        disclaimerCheckbox.checked = false;
+        submitButton.disabled = true;
+    }
+}
 
 async function loadTokenPhase() {
 
